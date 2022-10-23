@@ -1,7 +1,5 @@
 package src;
 
-import src.Account;
-
-class Customer{
+class Customer extends Account {
     private String address;
 }

@@ -1,3 +1,5 @@
+package src;
+
 class Appointment {
     int date;
     int year;

@@ -1,3 +1,5 @@
+package src;
+
 class Vehicle {
 
     private final String vin;
@@ -8,6 +10,5 @@ class Vehicle {
     private int mileage;
     private int listingPrice;
     private String status;
-    
 
 }
