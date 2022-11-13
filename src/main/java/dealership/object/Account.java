@@ -1,11 +1,11 @@
-package src;
+package dealership.object;
 
 abstract class Account{
+
     private String email;
     private String password;
     private String name;
     private String phoneNum;
-    
 
     public Account(String email, String password, String name, String phoneNum) {
         this.email = email;

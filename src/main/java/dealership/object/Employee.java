@@ -1,4 +1,4 @@
-package src;
+package dealership.object;
 
 class Employee extends Account {
     private String role;
