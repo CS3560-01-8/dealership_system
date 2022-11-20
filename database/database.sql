@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: localhost    Database: cardealership
+-- Host: localhost    Database: dealership
 -- ------------------------------------------------------
 -- Server version	8.0.31
 
@@ -38,6 +38,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES ('amiquelet7@bloglovin.com','Alexandrina','Miquelet','225-670-1525','0o6I3MJ'),('bpengelleya@mlb.com','Bianca','Pengelley','651-839-6997','iDkPFZX'),('bringe4@naver.com','Briney','Ringe','731-844-3027','3YgQYcyKU'),('gbaser9@sciencedirect.com','Giustino','Baser','551-498-8776','QS2xBhFaJ8Dn'),('gschimonek8@sfgate.com','Gerek','Schimonek','531-230-9716','TXXFD0cv6'),('hzoellner0@nhs.uk','Honoria','Zoellner','324-838-5523','PiDam5Jd'),('igodfery6@fema.gov','Isa','Godfery','455-319-2622','6eaF2BPg76l9'),('ljimmesb@geocities.jp','Latrena','Jimmes','988-302-8866','wMuHiBIKIo1'),('lmccoveney5@ibm.com','Lydon','McCoveney','531-497-0113','WXSJcNaOOs'),('mdewerkd@soundcloud.com','Millicent','de Werk','912-199-3055','P8Ih9oXx'),('sclurowc@google.it','Sybille','Clurow','728-591-8087','zkzTn0pICk'),('vcluitt3@unc.edu','Valle','Cluitt','507-808-2690','cjnnRc'),('wgammett1@eepurl.com','Willem','Gammett','221-124-5271','QvrIEVezzd8Q'),('wkayese@pinterest.com','Wheeler','Kayes','224-827-4461','Jq29nvSOIX'),('wosharkey2@ucsd.edu','Webb','O\'Sharkey','401-940-8713','h1b57dytIZi7');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,16 +50,13 @@ DROP TABLE IF EXISTS `appointment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `appointment` (
-  `employ_email` varchar(45) NOT NULL,
   `customer_email` varchar(45) NOT NULL,
   `vin` varchar(45) NOT NULL,
   `date` varchar(45) DEFAULT NULL,
   `time` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`employ_email`,`customer_email`,`vin`),
-  KEY `vin_idx` (`vin`),
+  KEY `vin_idx` (`vin`) /*!80000 INVISIBLE */,
   KEY `customer_email_idx` (`customer_email`),
   CONSTRAINT `customer_email` FOREIGN KEY (`customer_email`) REFERENCES `customer` (`customer_email`),
-  CONSTRAINT `employee_email` FOREIGN KEY (`employ_email`) REFERENCES `employee` (`employee_email`),
   CONSTRAINT `vin` FOREIGN KEY (`vin`) REFERENCES `vehicle` (`vin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -202,6 +200,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
+INSERT INTO `vehicle` VALUES ('1C3CCBABXCN987184','Audi',2002,'A4',NULL,NULL,20613.4,NULL),('1C4RDHEG8EC068407','Audi',2007,'RS 4',NULL,NULL,49950.9,NULL),('1C6RD7GP5CS629292','Jaguar',1992,'XJ Series',NULL,NULL,38680.8,NULL),('1G6AE5SX9D0240878','Volvo',1997,'960',NULL,NULL,13089.8,NULL),('1G6AY5SX4E0097069','Pontiac',2004,'GTO',NULL,NULL,49389.4,NULL),('1G6DA1ED1B0844523','Nissan',2007,'Altima',NULL,NULL,47583.6,NULL),('3D7TP2CT7BG253573','Mitsubishi',1985,'Starion',NULL,NULL,19826,NULL),('3GTXKYEJ0AG530152','GMC',1994,'3500',NULL,NULL,41155,NULL),('3VW1K7AJ6CM378711','Volkswagen',2009,'Jetta',NULL,NULL,39858.3,NULL),('5TFBY5F17BX617484','GMC',1996,'Rally Wagon G3500',NULL,NULL,44037.2,NULL),('JN1AZ4EH3CM440956','Mazda',1986,'RX-7',NULL,NULL,45439.1,NULL),('WAUDF58E85A177360','Saturn',2010,'Outlook',NULL,NULL,17131.9,NULL),('WAUEF78E17A862576','Ford',1986,'Aerostar',NULL,NULL,11730,NULL),('WAUFFBFL6BA466936','BMW',2007,'M5',NULL,NULL,22002.8,NULL),('WAUJT54B23N389667','Oldsmobile',2000,'Bravada',NULL,NULL,34028,NULL),('WAUNF98P46A768655','Lamborghini',2001,'Diablo',NULL,NULL,12689.9,NULL),('WBA1J9C56FV948604','Mitsubishi',2002,'Galant',NULL,NULL,32598.3,NULL),('WBAAV33451F570190','Ford',2008,'Ranger',NULL,NULL,23485.2,NULL),('WP0CA2A87AS916044','Chevrolet',1994,'Impala SS',NULL,NULL,12944.5,NULL),('YV4952CF8B1048814','Chevrolet',2002,'Avalanche 1500',NULL,NULL,37656.1,NULL);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -214,4 +213,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-12 21:30:04
+-- Dump completed on 2022-11-19 18:56:25
