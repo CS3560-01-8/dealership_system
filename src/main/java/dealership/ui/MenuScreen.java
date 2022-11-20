@@ -120,9 +120,9 @@ public class MenuScreen extends javax.swing.JFrame {
 
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
         // TODO add your handling code here:
-        CreateAccount makeAccount = new CreateAccount();
-        makeAccount.getPreviousFrameLocation(this.getLocationOnScreen());
-        makeAccount.setVisible(true);
+        LoginScreen login = new LoginScreen();
+        login.getPreviousFrameLocation(this.getLocationOnScreen());
+        login.setVisible(true);
         dispose();
     }//GEN-LAST:event_signInButtonActionPerformed
 
