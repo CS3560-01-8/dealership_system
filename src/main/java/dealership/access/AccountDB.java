@@ -3,6 +3,9 @@ package dealership.access;
 import dealership.db.DatabaseConnector;
 import dealership.object.Customer;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class AccountDB {
 
     public static void write(Customer account) {
@@ -14,4 +17,20 @@ public class AccountDB {
                 account.getEmail(), account.getAddress()));
     }
 
+    public static boolean checkEmail(String email) {
+        String query = "SELECT customer_email FROM customer";
+        ResultSet res = DatabaseConnector.executeQuery(query);
+        try {
+            while(res.next()){
+                if(email.equals(res.getString("customer_email")))
+                {
+                    System.out.println("Email found!");
+                    return true;
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

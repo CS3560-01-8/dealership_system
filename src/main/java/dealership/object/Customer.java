@@ -1,6 +1,7 @@
 package dealership.object;
 
 import dealership.access.AccountDB;
+import dealership.db.DatabaseConnector;
 
 public class Customer extends Account {
     private String address;
@@ -20,6 +21,9 @@ public class Customer extends Account {
     }
 
     public static boolean exists(String email) {
-        return false;
+        if(AccountDB.checkEmail(email))
+            return true;
+        else
+            return false;
     }
 }
