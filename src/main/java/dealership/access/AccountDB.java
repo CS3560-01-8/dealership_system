@@ -18,17 +18,14 @@ public class AccountDB {
     }
 
     public static boolean checkEmail(String email) {
-        String query = "SELECT customer_email FROM customer";
-        ResultSet res = DatabaseConnector.executeQuery(query);
+        String query = "SELECT 1 FROM customer WHERE customer_email = '" + email + "'";
         try {
-            while(res.next()){
-                if(email.equals(res.getString("customer_email")))
-                {
-                    System.out.println("Email found!");
-                    return true;
-                }
+            ResultSet res = DatabaseConnector.executeQuery(query);
+            if (res.next()) {
+                System.out.println("Email found!");
+                return true;
             }
-        }catch (SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
         return false;
