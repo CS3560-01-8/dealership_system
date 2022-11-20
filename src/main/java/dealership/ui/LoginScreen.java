@@ -5,6 +5,7 @@
 package dealership.ui;
 
 import java.awt.Point;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,36 +13,17 @@ import java.awt.Point;
  */
 public class LoginScreen extends javax.swing.JFrame {
 
-    // user email
-    private String userEmail;
-    // user password
-    private char[] userPassword;
     
     /**
      * Creates new form LoginScreen
      */
     public LoginScreen() {
         initComponents();
-        userEmail = "";
-        userPassword = new char[20];
     }
     
     // Gets previous frame's location on screen
     public void getPreviousFrameLocation(Point previous) {
         this.setLocation(previous);
-    }
-    
-    // check if password is present
-    private boolean checkPasswordPresent() {
-        int blanks = 0;
-        for (int i = 0; i < userPassword.length; i++) {
-            if (userPassword[i] == 0)
-                blanks++;
-        }
-        if (blanks == userPassword.length)
-            return false;
-        else
-            return true;
     }
 
     /**
@@ -67,7 +49,6 @@ public class LoginScreen extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         createAccountButton = new javax.swing.JButton();
         optionalLabel = new javax.swing.JLabel();
-        warningLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,11 +72,6 @@ public class LoginScreen extends javax.swing.JFrame {
         userInputPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 6, 55, -1));
 
         emailInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        emailInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 209, -1));
 
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -104,11 +80,6 @@ public class LoginScreen extends javax.swing.JFrame {
         userInputPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 44, -1, -1));
 
         passwordInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        passwordInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 44, 209, -1));
 
         loginButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -166,12 +137,6 @@ public class LoginScreen extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 170, 40));
 
-        warningLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        warningLabel.setForeground(new java.awt.Color(255, 51, 51));
-        warningLabel.setText("Please enter a");
-        warningLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel1.add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 320, 30));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,31 +152,15 @@ public class LoginScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void emailInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputActionPerformed
-        // TODO add your handling code here:
-        userEmail = emailInput.getText();
-    }//GEN-LAST:event_emailInputActionPerformed
-
-    private void passwordInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordInputActionPerformed
-        // TODO add your handling code here:
-        userPassword = passwordInput.getPassword();
-    }//GEN-LAST:event_passwordInputActionPerformed
-
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        boolean passwordPresent = checkPasswordPresent();
-        if (userEmail.equals("") && (passwordPresent == false)) {
-            warningLabel.setText("Press ENTER \nin each input box to register input");
-            warningLabel.setVisible(true);
+        if (emailInput.getText().equals("") && String.valueOf(passwordInput.getPassword()).equals("")) 
+            JOptionPane.showMessageDialog(this, "Please enter an email and password.", "Missing information", JOptionPane.ERROR_MESSAGE);
+        else if (emailInput.getText().equals("") && !String.valueOf(passwordInput.getPassword()).equals("")) {
+            JOptionPane.showMessageDialog(this, "Please enter email.", "Missing information", JOptionPane.ERROR_MESSAGE);
         }
-        else if (userEmail.equals("") && (passwordPresent == true)) {
-            warningLabel.setText("Please enter an email");
-            warningLabel.setVisible(true);
-        }
-        else if ((passwordPresent == false) && (!userEmail.equals(""))) {
-            warningLabel.setText("Please enter a password");
-            warningLabel.setVisible(true);
-        }
+        else if (!emailInput.getText().equals("") && String.valueOf(passwordInput.getPassword()).equals("")) 
+            JOptionPane.showMessageDialog(this, "Please enter password.", "Missing information", JOptionPane.ERROR_MESSAGE);
         else {
 
         }
@@ -283,6 +232,5 @@ public class LoginScreen extends javax.swing.JFrame {
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel userInputPanel;
-    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

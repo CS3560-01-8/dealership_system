@@ -5,8 +5,8 @@
 package dealership.ui;
 
 import dealership.controller.AccountHandler;
-
 import java.awt.Point;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +26,89 @@ public class CreateAccount extends javax.swing.JFrame {
     public void getPreviousFrameLocation(Point previous) {
         this.setLocation(previous);
     }
+    
+    // Find missing information and create message dialog box
+    private void checkForMissingInfo() {
+        boolean anyMissing = false;
+        String message = "Please enter ";
+        String[] missing = new String[7];
+        int index = 0;
+        if (emailInput.getText().equals("")) {
+            missing[index] = "email";
+            index++;
+            anyMissing = true;
+        }
+        if (String.valueOf(passwordInput.getPassword()).equals("")) {
+            missing[index] = "password";
+            index++;
+            anyMissing = true;
+        }
+        if (firstNameInput.getText().equals("")) {
+            missing[index] = "first name";
+            index++;
+            anyMissing = true;
+        }
+        if (lastNameInput.getText().equals("")) {
+            missing[index] = "last name";
+            index++;
+            anyMissing = true;
+        }
+        if (phoneInput.getText().equals("")) {
+            missing[index] = "phone number";
+            index++;
+            anyMissing = true;
+        }
+        if (streetInput.getText().equals("")) {
+            missing[index] = "street";
+            index++;
+            anyMissing = true;
+        }
+        if (zipInput.getText().equals("")) {
+            missing[index] = "zip code";
+            index++;
+            anyMissing = true;
+        }
+        if (!anyMissing) {
+            AccountHandler.createCustomerAccount(emailInput.getText(),
+                String.valueOf(passwordInput.getPassword()),
+                firstNameInput.getText(),
+                lastNameInput.getText(),
+                phoneInput.getText(),
+                streetInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText());
+        } else {
+            if (missing[missing.length - 1] == null) {
+                String firstLetter = missing[0].substring(0,1);
+                switch (firstLetter) {
+                    case "a":
+                    case "e":
+                    case "i":
+                    case "o":
+                    case "u":
+                        message = message + "an ";
+                        break;
+                    default:
+                        message = message + "a ";
+                }
+                if (missing[1] == null)
+                    message = message + missing[0] + ".";
+                else if (missing[2] == null)
+                    message = message + missing[0] + " and " + missing[1] + ".";
+                else {
+                    int i = 0;
+                    while (missing[i] != null) {
+                        if (missing[i + 1] == null)
+                            message = message + "and " + missing[i] + ".";
+                        else
+                            message = message + missing[i] + ", ";
+                        i++;
+                    }
+                }
+            } else {
+                message = message + "information into the boxes.";
+            }
+            JOptionPane.showMessageDialog(this, message, "Missing information", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,6 +118,7 @@ public class CreateAccount extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         jPanel1 = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         createAccountLabel = new javax.swing.JLabel();
@@ -54,7 +138,7 @@ public class CreateAccount extends javax.swing.JFrame {
         stateInput = new javax.swing.JComboBox<>();
         streetLabel = new javax.swing.JLabel();
         stateLabel = new javax.swing.JLabel();
-        addressInput = new javax.swing.JTextField();
+        streetInput = new javax.swing.JTextField();
         addressLabel = new javax.swing.JLabel();
         makeAccountButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -137,8 +221,8 @@ public class CreateAccount extends javax.swing.JFrame {
         stateLabel.setText("State");
         userInputPanel.add(stateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
-        addressInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userInputPanel.add(addressInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 209, -1));
+        streetInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userInputPanel.add(streetInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 209, -1));
 
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addressLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -166,6 +250,7 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 170, 47));
 
         jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 470, 320));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,14 +267,7 @@ public class CreateAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void makeAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeAccountButtonActionPerformed
-        if (AccountHandler.createCustomerAccount(emailInput.getText(),
-                String.valueOf(passwordInput.getPassword()),
-                firstNameInput.getText(),
-                lastNameInput.getText(),
-                phoneInput.getText(),
-                addressInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText())) {
-            System.out.println("Account created");
-        }
+        checkForMissingInfo();
     }//GEN-LAST:event_makeAccountButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -201,7 +279,6 @@ public class CreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField addressInput;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel createAccountLabel;
@@ -219,6 +296,7 @@ public class CreateAccount extends javax.swing.JFrame {
     private javax.swing.JLabel phoneLabel;
     private javax.swing.JComboBox<String> stateInput;
     private javax.swing.JLabel stateLabel;
+    private javax.swing.JTextField streetInput;
     private javax.swing.JLabel streetLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel userInputPanel;
