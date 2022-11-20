@@ -2,15 +2,17 @@ package dealership.object;
 
 abstract class Account{
 
-    private String email;
-    private String password;
-    private String name;
-    private String phoneNum;
+    private final String email;
+    private final String password;
+    private final String firstName;
+    private final String lastName;
+    private final String phoneNum;
 
-    public Account(String email, String password, String name, String phoneNum) {
+    public Account(String email, String password, String firstName, String lastName, String phoneNum) {
         this.email = email;
         this.password = password;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNum = phoneNum;
     }
 
@@ -18,8 +20,16 @@ abstract class Account{
         return email;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     public String getName() {
-        return name;
+        return firstName + " " + lastName;
     }
 
     public String getPhoneNum() {
@@ -30,7 +40,7 @@ abstract class Account{
         return password;
     }
 
-    public void setEmail(String email) {
+    /*public void setEmail(String email) {
         this.email = email;
     }
 
@@ -44,5 +54,5 @@ abstract class Account{
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
-    }
+    }*/
 }

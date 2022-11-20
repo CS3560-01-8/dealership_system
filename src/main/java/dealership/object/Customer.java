@@ -1,11 +1,14 @@
 package dealership.object;
 
-class Customer extends Account {
+import dealership.access.AccountDB;
+
+public class Customer extends Account {
     private String address;
 
-    public Customer(String email, String password, String name, String phoneNum, String address) {
-        super(email, password, name, phoneNum);
+    public Customer(String email, String password, String firstName, String lastName, String phoneNum, String address) {
+        super(email, password, firstName, lastName, phoneNum);
         this.address = address;
+        AccountDB.write(this);
     }
 
     public String getAddress() {
@@ -14,5 +17,9 @@ class Customer extends Account {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public static boolean exists(String email) {
+        return false;
     }
 }

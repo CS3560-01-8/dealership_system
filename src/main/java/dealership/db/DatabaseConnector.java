@@ -27,6 +27,16 @@ public class DatabaseConnector {
         return result;
     }
 
+    public static void executeInsert(String query) {
+        try {
+            System.out.println(query);
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

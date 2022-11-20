@@ -4,6 +4,8 @@
  */
 package dealership.ui;
 
+import dealership.controller.AccountHandler;
+
 import java.awt.Point;
 
 /**
@@ -12,37 +14,19 @@ import java.awt.Point;
  */
 public class CreateAccount extends javax.swing.JFrame {
 
-    // user email and password
-    private String userEmail = "";
-    private char[] userPassword;
     
     /**
      * Creates new form CreateAccount
      */
     public CreateAccount() {
         initComponents();
-        userPassword = new char[20];
-        warningLabel.setVisible(false);
     }
     
     // Gets previous frame's location on screen
     public void getPreviousFrameLocation(Point previous) {
         this.setLocation(previous);
     }
-    
-    // check if password is present
-    private boolean checkPasswordPresent() {
-        int blanks = 0;
-        for (int i = 0; i < userPassword.length; i++) {
-            if (userPassword[i] == 0)
-                blanks++;
-        }
-        if (blanks == userPassword.length)
-            return false;
-        else
-            return true;
-    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +35,6 @@ public class CreateAccount extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jPanel1 = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         createAccountLabel = new javax.swing.JLabel();
@@ -75,7 +58,6 @@ public class CreateAccount extends javax.swing.JFrame {
         addressLabel = new javax.swing.JLabel();
         makeAccountButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        warningLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,11 +81,6 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 55, -1));
 
         emailInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        emailInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 209, -1));
 
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -112,11 +89,6 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         passwordInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        passwordInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 209, -1));
 
         firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -125,11 +97,6 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
 
         firstNameInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        firstNameInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstNameInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(firstNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 209, -1));
 
         zipLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -138,11 +105,6 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(zipLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, -1, -1));
 
         lastNameInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lastNameInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastNameInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(lastNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 209, -1));
 
         lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -151,11 +113,6 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         phoneInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        phoneInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(phoneInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 209, -1));
 
         phoneLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -164,20 +121,10 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(phoneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         zipInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        zipInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zipInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(zipInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 70, -1));
 
         stateInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         stateInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CA", "AL", "AK", "AZ", "AR", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" }));
-        stateInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stateInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(stateInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
         streetLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -191,11 +138,6 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(stateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         addressInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addressInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressInputActionPerformed(evt);
-            }
-        });
         userInputPanel.add(addressInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 209, -1));
 
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -224,13 +166,6 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 170, 47));
 
         jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 470, 320));
-
-        warningLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        warningLabel.setForeground(new java.awt.Color(255, 51, 51));
-        warningLabel.setText("Please enter a");
-        warningLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel1.add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 100, 180));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,59 +181,16 @@ public class CreateAccount extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void emailInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputActionPerformed
-        // TODO add your handling code here:
-        userEmail = emailInput.getText();
-    }//GEN-LAST:event_emailInputActionPerformed
-
     private void makeAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeAccountButtonActionPerformed
-        // TODO add your handling code here:
-        boolean passwordPresent = checkPasswordPresent();
-        if (userEmail.equals("") && (passwordPresent == false)) {
-            warningLabel.setText("Press ENTER \nin each input box to register input");
-            warningLabel.setVisible(true);
-        } 
-        else if (userEmail.equals("") && (passwordPresent == true)) {
-            warningLabel.setText("Please enter an email");
-            warningLabel.setVisible(true);
-        }
-        else if ((passwordPresent == false) && (!userEmail.equals(""))) {
-            warningLabel.setText("Please enter a password");
-            warningLabel.setVisible(true);
-        }
-        else {
-            
+        if (AccountHandler.createCustomerAccount(emailInput.getText(),
+                String.valueOf(passwordInput.getPassword()),
+                firstNameInput.getText(),
+                lastNameInput.getText(),
+                phoneInput.getText(),
+                addressInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText())) {
+            System.out.println("Account created");
         }
     }//GEN-LAST:event_makeAccountButtonActionPerformed
-
-    private void passwordInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordInputActionPerformed
-        // TODO add your handling code here:
-        userPassword = passwordInput.getPassword();
-    }//GEN-LAST:event_passwordInputActionPerformed
-
-    private void firstNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_firstNameInputActionPerformed
-
-    private void lastNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lastNameInputActionPerformed
-
-    private void phoneInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_phoneInputActionPerformed
-
-    private void zipInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zipInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_zipInputActionPerformed
-
-    private void stateInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stateInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_stateInputActionPerformed
-
-    private void addressInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addressInputActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
@@ -307,41 +199,6 @@ public class CreateAccount extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateAccount().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressInput;
@@ -365,7 +222,6 @@ public class CreateAccount extends javax.swing.JFrame {
     private javax.swing.JLabel streetLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel userInputPanel;
-    private javax.swing.JLabel warningLabel;
     private javax.swing.JTextField zipInput;
     private javax.swing.JLabel zipLabel;
     // End of variables declaration//GEN-END:variables
