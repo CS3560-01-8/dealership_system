@@ -21,13 +21,26 @@ public class CreateAccount extends javax.swing.JFrame {
      */
     public CreateAccount() {
         initComponents();
-        userPassword = new char[1];
+        userPassword = new char[20];
         warningLabel.setVisible(false);
     }
     
     // Gets previous frame's location on screen
     public void getPreviousFrameLocation(Point previous) {
         this.setLocation(previous);
+    }
+    
+    // check if password is present
+    private boolean checkPasswordPresent() {
+        int blanks = 0;
+        for (int i = 0; i < userPassword.length; i++) {
+            if (userPassword[i] == 0)
+                blanks++;
+        }
+        if (blanks == userPassword.length)
+            return false;
+        else
+            return true;
     }
     
     /**
@@ -47,113 +60,176 @@ public class CreateAccount extends javax.swing.JFrame {
         emailInput = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
         passwordInput = new javax.swing.JPasswordField();
+        firstNameLabel = new javax.swing.JLabel();
+        firstNameInput = new javax.swing.JTextField();
+        zipLabel = new javax.swing.JLabel();
+        lastNameInput = new javax.swing.JTextField();
+        lastNameLabel = new javax.swing.JLabel();
+        phoneInput = new javax.swing.JTextField();
+        phoneLabel = new javax.swing.JLabel();
+        zipInput = new javax.swing.JTextField();
+        stateInput = new javax.swing.JComboBox<>();
+        streetLabel = new javax.swing.JLabel();
+        stateLabel = new javax.swing.JLabel();
+        addressInput = new javax.swing.JTextField();
+        addressLabel = new javax.swing.JLabel();
         makeAccountButton = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         cancelButton = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        loginButton = new javax.swing.JButton();
-        optionalLabel = new javax.swing.JLabel();
         warningLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 400));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Car Dealership");
-        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 15, 205, 49));
+        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 205, 49));
 
         createAccountLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         createAccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         createAccountLabel.setText("Create Account");
-        jPanel1.add(createAccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 168, 41));
+        jPanel1.add(createAccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 168, 41));
 
         userInputPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         emailLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         emailLabel.setText("Email");
-        userInputPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 6, 55, -1));
+        userInputPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 55, -1));
 
+        emailInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         emailInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailInputActionPerformed(evt);
             }
         });
-        userInputPanel.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 209, -1));
+        userInputPanel.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 209, -1));
 
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         passwordLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         passwordLabel.setText("Password");
-        userInputPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 44, -1, -1));
+        userInputPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
+        passwordInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         passwordInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordInputActionPerformed(evt);
             }
         });
-        userInputPanel.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 44, 209, -1));
+        userInputPanel.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 209, -1));
+
+        firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        firstNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        firstNameLabel.setText("First Name");
+        userInputPanel.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
+
+        firstNameInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        firstNameInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstNameInputActionPerformed(evt);
+            }
+        });
+        userInputPanel.add(firstNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 209, -1));
+
+        zipLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        zipLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        zipLabel.setText("ZIP");
+        userInputPanel.add(zipLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, -1, -1));
+
+        lastNameInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lastNameInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastNameInputActionPerformed(evt);
+            }
+        });
+        userInputPanel.add(lastNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 209, -1));
+
+        lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lastNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lastNameLabel.setText("Last Name");
+        userInputPanel.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        phoneInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        phoneInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneInputActionPerformed(evt);
+            }
+        });
+        userInputPanel.add(phoneInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 209, -1));
+
+        phoneLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        phoneLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        phoneLabel.setText("Phone #");
+        userInputPanel.add(phoneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+
+        zipInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        zipInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zipInputActionPerformed(evt);
+            }
+        });
+        userInputPanel.add(zipInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 70, -1));
+
+        stateInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        stateInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CA", "AL", "AK", "AZ", "AR", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" }));
+        stateInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stateInputActionPerformed(evt);
+            }
+        });
+        userInputPanel.add(stateInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+
+        streetLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        streetLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        streetLabel.setText("Street");
+        userInputPanel.add(streetLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+
+        stateLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        stateLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        stateLabel.setText("State");
+        userInputPanel.add(stateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
+
+        addressInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addressInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addressInputActionPerformed(evt);
+            }
+        });
+        userInputPanel.add(addressInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 209, -1));
+
+        addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addressLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        addressLabel.setText("Address");
+        userInputPanel.add(addressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
 
         makeAccountButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         makeAccountButton.setText("Create Account");
+        makeAccountButton.setToolTipText("Create account");
         makeAccountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 makeAccountButtonActionPerformed(evt);
             }
         });
-        userInputPanel.add(makeAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 198, 47));
+        userInputPanel.add(makeAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 170, 47));
 
-        jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 440, 140));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 255, 10));
-
-        cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cancelButton.setText("Cancel");
+        cancelButton.setToolTipText("Go back to login");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        userInputPanel.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 170, 47));
 
-        loginButton.setText("Login");
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
-            }
-        });
-
-        optionalLabel.setText("Or");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
-                .addComponent(optionalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginButton)
-                    .addComponent(optionalLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
+        jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 470, 320));
 
         warningLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         warningLabel.setForeground(new java.awt.Color(255, 51, 51));
         warningLabel.setText("Please enter a");
         warningLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel1.add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 320, 30));
+        jPanel1.add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 100, 180));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,15 +253,16 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void makeAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeAccountButtonActionPerformed
         // TODO add your handling code here:
-        if (userEmail.equals("") && (userPassword.length == 1)) {
+        boolean passwordPresent = checkPasswordPresent();
+        if (userEmail.equals("") && (passwordPresent == false)) {
             warningLabel.setText("Press ENTER \nin each input box to register input");
             warningLabel.setVisible(true);
         } 
-        else if (userEmail.equals("") && (userPassword.length != 1)) {
+        else if (userEmail.equals("") && (passwordPresent == true)) {
             warningLabel.setText("Please enter an email");
             warningLabel.setVisible(true);
         }
-        else if ((userPassword.length == 1) && (!userEmail.equals(""))) {
+        else if ((passwordPresent == false) && (!userEmail.equals(""))) {
             warningLabel.setText("Please enter a password");
             warningLabel.setVisible(true);
         }
@@ -199,15 +276,35 @@ public class CreateAccount extends javax.swing.JFrame {
         userPassword = passwordInput.getPassword();
     }//GEN-LAST:event_passwordInputActionPerformed
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+    private void firstNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_loginButtonActionPerformed
+    }//GEN-LAST:event_firstNameInputActionPerformed
+
+    private void lastNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastNameInputActionPerformed
+
+    private void phoneInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneInputActionPerformed
+
+    private void zipInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zipInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_zipInputActionPerformed
+
+    private void stateInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stateInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stateInputActionPerformed
+
+    private void addressInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressInputActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        MenuScreen menu = new MenuScreen();
-        menu.getPreviousFrameLocation(this.getLocationOnScreen());
-        menu.setVisible(true);
+        LoginScreen login = new LoginScreen();
+        login.getPreviousFrameLocation(this.getLocationOnScreen());
+        login.setVisible(true);
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -247,20 +344,29 @@ public class CreateAccount extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addressInput;
+    private javax.swing.JLabel addressLabel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel createAccountLabel;
     private javax.swing.JTextField emailInput;
     private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField firstNameInput;
+    private javax.swing.JLabel firstNameLabel;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton loginButton;
+    private javax.swing.JTextField lastNameInput;
+    private javax.swing.JLabel lastNameLabel;
     private javax.swing.JButton makeAccountButton;
-    private javax.swing.JLabel optionalLabel;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JTextField phoneInput;
+    private javax.swing.JLabel phoneLabel;
+    private javax.swing.JComboBox<String> stateInput;
+    private javax.swing.JLabel stateLabel;
+    private javax.swing.JLabel streetLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel userInputPanel;
     private javax.swing.JLabel warningLabel;
+    private javax.swing.JTextField zipInput;
+    private javax.swing.JLabel zipLabel;
     // End of variables declaration//GEN-END:variables
 }
