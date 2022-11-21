@@ -39,9 +39,9 @@ public class MenuScreen extends javax.swing.JFrame {
         signInButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         InventorySearchMenu = new javax.swing.JMenu();
+        basicSearchOption = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 400));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -96,7 +96,16 @@ public class MenuScreen extends javax.swing.JFrame {
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(308, 36));
 
-        InventorySearchMenu.setText("File");
+        InventorySearchMenu.setText("Car Search");
+
+        basicSearchOption.setText("Search");
+        basicSearchOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                basicSearchOptionActionPerformed(evt);
+            }
+        });
+        InventorySearchMenu.add(basicSearchOption);
+
         jMenuBar1.add(InventorySearchMenu);
 
         setJMenuBar(jMenuBar1);
@@ -125,6 +134,11 @@ public class MenuScreen extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_signInButtonActionPerformed
+
+    private void basicSearchOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_basicSearchOptionActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_basicSearchOptionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,6 +177,7 @@ public class MenuScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu InventorySearchMenu;
+    private javax.swing.JMenuItem basicSearchOption;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
