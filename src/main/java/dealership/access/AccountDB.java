@@ -30,4 +30,18 @@ public class AccountDB {
         }
         return false;
     }
+
+    public static boolean checkPass(String email, String password){
+        String query = "SELECT 1 FROM account WHERE email = '" + email + "' AND password = '" + password + "'";
+        try {
+            ResultSet res = DatabaseConnector.executeQuery(query);
+            if (res.next()) {
+                System.out.println("account authenticated!");
+                return true;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
