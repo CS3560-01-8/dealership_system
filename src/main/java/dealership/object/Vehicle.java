@@ -1,17 +1,21 @@
 package dealership.object;
 
-class Vehicle {
+import dealership.access.VehicleDB;
+
+import java.util.ArrayList;
+
+public class Vehicle {
 
     private final String vin;
     private final String make;
     private final String model;
-    private int year;
-    private String condition;
-    private int mileage;
-    private int listingPrice;
-    private String status;
+    private final int year;
+    private final String condition;
+    private final int mileage;
+    private final int listingPrice;
+    private boolean sold;
 
-    Vehicle(String vin, String make, String model, int year, String condition, int mileage, int listingPrice, String status) {
+    public Vehicle(String vin, String make, String model, int year, String condition, int mileage, int listingPrice, boolean sold) {
         this.vin = vin;
         this.make = make;
         this.model = model;
@@ -19,16 +23,20 @@ class Vehicle {
         this.condition = condition;
         this.mileage = mileage;
         this.listingPrice = listingPrice;
-        this.status = status;
+        this.sold = sold;
+    }
+
+    public static ArrayList<Vehicle> getAvailableVehicles() {
+        return VehicleDB.getAvailableVehicles();
     }
 
     //will return element for displaying in gui
-    void getDisplayElement() {
-
+    public Object[] getRowData() {
+        return new Object[] {year, make, model, mileage, condition, "$" + listingPrice};
     }
 
-    void sell() {
-        status = "sold";
+    public void sell() {
+        sold = true;
     }
 
 }
