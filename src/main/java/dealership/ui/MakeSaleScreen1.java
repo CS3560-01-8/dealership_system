@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class MakeSaleScreen1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form ConfirmCustomerScreen
+     * Creates new form MakeSaleScreen1
      */
     public MakeSaleScreen1() {
         initComponents();
@@ -149,7 +149,10 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
         if (emailInput.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter email.", "Missing information", JOptionPane.ERROR_MESSAGE);
         } else {
-            // next sale screen load here
+            MakeSaleScreen2 employeeSelect = new MakeSaleScreen2();
+            employeeSelect.getPreviousFrameLocation(this.getLocationOnScreen());
+            employeeSelect.setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
