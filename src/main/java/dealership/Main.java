@@ -1,5 +1,8 @@
 package dealership;
 
+import dealership.access.AppointmentDB;
+import dealership.controller.AccountHandler;
+import dealership.controller.AppointmentHandler;
 import dealership.db.DatabaseConnector;
 import dealership.object.Customer;
 import dealership.ui.MenuScreen;
@@ -29,6 +32,9 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }*/
+
+        //test appointment
+        //AppointmentHandler.makeAppointment("bringe4@naver.com", "1C6RD7GP5CS629292", "2022-11-18 01:36:00");
 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
