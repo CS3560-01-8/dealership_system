@@ -138,7 +138,7 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        InventoryScreen inv = new InventoryScreen();
+        MainScreen inv = new MainScreen();
         inv.getPreviousFrameLocation(this.getLocationOnScreen());
         inv.setVisible(true);
         dispose();

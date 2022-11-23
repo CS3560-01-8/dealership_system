@@ -175,9 +175,9 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        MenuScreen menu = new MenuScreen();
-        menu.getPreviousFrameLocation(this.getLocationOnScreen());
-        menu.setVisible(true);
+        MainScreen ms = new MainScreen();
+        ms.getPreviousFrameLocation(this.getLocationOnScreen());
+        ms.setVisible(true);
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
