@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package dealership.ui;
-
+;
 import dealership.controller.AccountHandler;
 import java.awt.Point;
 import javax.swing.JOptionPane;
@@ -69,6 +69,22 @@ public class CreateAccount extends javax.swing.JFrame {
             anyMissing = true;
         }
         if (!anyMissing) {
+            if (AccountHandler.createCustomerAccount(emailInput.getText(),
+                        String.valueOf(passwordInput.getPassword()),
+                        firstNameInput.getText(),
+                        lastNameInput.getText(),
+                        phoneInput.getText(),
+                        streetInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText())) {
+                JOptionPane.showMessageDialog(this, "Your account has been created. You may now log in.",
+                        "Account created!", JOptionPane.INFORMATION_MESSAGE);
+                LoginScreen login = new LoginScreen();
+                login.getPreviousFrameLocation(this.getLocationOnScreen());
+                login.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "An account already exists with that email!",
+                        "Email Taken", JOptionPane.ERROR_MESSAGE);
+            }
             AccountHandler.createCustomerAccount(emailInput.getText(),
                 String.valueOf(passwordInput.getPassword()),
                 firstNameInput.getText(),
