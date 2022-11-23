@@ -3,6 +3,7 @@ package dealership.access;
 import dealership.db.DatabaseConnector;
 import dealership.object.Vehicle;
 
+import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,5 +25,13 @@ public class VehicleDB {
         }
         return vehicles;
     }
+
+   /* public static ArrayList<String> getMakes() {
+        ResultSet res = DatabaseConnector.executeQuery()
+    }
+
+    public static ArrayList<String> getModels(String make) {
+
+    }*/
 
 }

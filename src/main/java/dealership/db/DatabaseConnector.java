@@ -37,6 +37,15 @@ public class DatabaseConnector {
         }
     }
 
+    public static boolean tableContainsRow(String table, String attribute, String value) {
+        try {
+            ResultSet res = DatabaseConnector.executeQuery(String.format("SELECT 1 FROM %s WHERE %s = '%s'", table, attribute, value));
+            return res.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
 }

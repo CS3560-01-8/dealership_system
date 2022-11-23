@@ -18,17 +18,7 @@ public class AccountDB {
     }
 
     public static boolean checkEmail(String email) {
-        String query = "SELECT 1 FROM customer WHERE customer_email = '" + email + "'";
-        try {
-            ResultSet res = DatabaseConnector.executeQuery(query);
-            if (res.next()) {
-                System.out.println("Email found!");
-                return true;
-            }
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-        return false;
+        return DatabaseConnector.tableContainsRow("customer", "customer_email", email);
     }
 
     public static boolean checkPass(String email, String password){

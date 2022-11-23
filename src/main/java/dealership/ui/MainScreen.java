@@ -21,11 +21,26 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+        initInventory();
     }
     
     // Gets previous frame's location on screen
     public void getPreviousFrameLocation(Point previous) {
         this.setLocation(previous);
+    }
+
+    private void initInventory() {
+        jTable.setModel(new DefaultTableModel(new Object[] {"Year", "Make", "Model", "Mileage", "Condition", "Price"}, 0) {
+            @Override
+            //Prevent editing cells of the table
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        VehicleHandler.loadVehiclesInTable((DefaultTableModel) jTable.getModel());
+        jTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTable.getTableHeader().setResizingAllowed(false);
+        jTable.getTableHeader().setReorderingAllowed(false);
     }
 
     /**
