@@ -4,6 +4,7 @@
  */
 package dealership.ui;
 
+import dealership.access.VehicleDB;
 import dealership.controller.VehicleHandler;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class MainScreen extends javax.swing.JFrame {
     public MainScreen() {
         initComponents();
         initInventory();
+        VehicleHandler.loadMakesIntoComboBox(jComboBoxMake);
     }
     
     // Gets previous frame's location on screen
@@ -37,7 +39,7 @@ public class MainScreen extends javax.swing.JFrame {
                 return false;
             }
         });
-        VehicleHandler.loadVehiclesInTable((DefaultTableModel) inventoryTable.getModel());
+        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(), "Any", "Any");
         inventoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         inventoryTable.getTableHeader().setResizingAllowed(false);
         inventoryTable.getTableHeader().setReorderingAllowed(false);
@@ -53,11 +55,16 @@ public class MainScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        titleLabel = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        signInButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         inventoryTable = new javax.swing.JTable();
+        jPanelFilter = new javax.swing.JPanel();
+        jComboBoxMake = new javax.swing.JComboBox<>();
+        jLabelMake = new javax.swing.JLabel();
+        jComboBoxModel = new javax.swing.JComboBox<>();
+        jLabelModel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        signInButton = new javax.swing.JButton();
+        titleLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         searchOption = new javax.swing.JMenu();
         makeFilterOption = new javax.swing.JCheckBoxMenuItem();
@@ -71,9 +78,83 @@ public class MainScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Car Dealership");
+        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(inventoryTable);
+
+        jPanelFilter.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filter Results", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        jComboBoxMake.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxMakeActionPerformed(evt);
+            }
+        });
+
+        jLabelMake.setText("Make");
+
+        jComboBoxModel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any" }));
+        jComboBoxModel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxModelActionPerformed(evt);
+            }
+        });
+
+        jLabelModel.setText("Model");
+
+        javax.swing.GroupLayout jPanelFilterLayout = new javax.swing.GroupLayout(jPanelFilter);
+        jPanelFilter.setLayout(jPanelFilterLayout);
+        jPanelFilterLayout.setHorizontalGroup(
+            jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFilterLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxMake, 0, 100, Short.MAX_VALUE)
+                    .addComponent(jComboBoxModel, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelFilterLayout.createSequentialGroup()
+                        .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelMake)
+                            .addComponent(jLabelModel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelFilterLayout.setVerticalGroup(
+            jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFilterLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelMake)
+                .addGap(4, 4, 4)
+                .addComponent(jComboBoxMake, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelModel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1)
+                .addGap(16, 16, 16))
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+        );
 
         signInButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         signInButton.setText("Sign In");
@@ -88,56 +169,21 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
+                .addContainerGap(123, Short.MAX_VALUE)
                 .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(inventoryTable);
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(168, 168, 168)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                .addGap(17, 17, 17))
-        );
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Car Dealership");
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(178, 36));
 
@@ -213,11 +259,26 @@ public class MainScreen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(192, 192, 192)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(titleLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,6 +321,17 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_priceFilterOptionActionPerformed
 
+    private void jComboBoxMakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMakeActionPerformed
+        VehicleHandler.loadModelsIntoComboBox(jComboBoxModel, String.valueOf(jComboBoxMake.getSelectedItem()));
+        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(),
+                String.valueOf(jComboBoxMake.getSelectedItem()), String.valueOf(jComboBoxModel.getSelectedItem()));
+    }//GEN-LAST:event_jComboBoxMakeActionPerformed
+
+    private void jComboBoxModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModelActionPerformed
+        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(),
+                String.valueOf(jComboBoxMake.getSelectedItem()), String.valueOf(jComboBoxModel.getSelectedItem()));
+    }//GEN-LAST:event_jComboBoxModelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -301,8 +373,13 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem conditionFilterOption;
     private javax.swing.JMenuItem editAppointmentOption;
     private javax.swing.JTable inventoryTable;
+    private javax.swing.JComboBox<String> jComboBoxMake;
+    private javax.swing.JComboBox<String> jComboBoxModel;
+    private javax.swing.JLabel jLabelMake;
+    private javax.swing.JLabel jLabelModel;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelFilter;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JCheckBoxMenuItem makeFilterOption;

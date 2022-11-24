@@ -19,6 +19,8 @@ public class DatabaseConnector {
     public static ResultSet executeQuery(String query) {
         ResultSet result = null;
         try {
+            //For debugging purposes
+            System.out.println("Query: " + query);
             Statement statement = conn.createStatement();
             result = statement.executeQuery(query);
         } catch (SQLException e) {
