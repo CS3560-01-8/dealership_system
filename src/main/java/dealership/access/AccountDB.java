@@ -5,6 +5,7 @@ import dealership.object.Customer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AccountDB {
 
@@ -33,5 +34,18 @@ public class AccountDB {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static ArrayList<String> getEmployeeEmails(){
+        ResultSet res = DatabaseConnector.executeQuery("SELECT employee_email FROM employee");
+        ArrayList<String> employees = new ArrayList<>();
+        try {
+            while (res.next()) {
+                employees.add(res.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employees;
     }
 }

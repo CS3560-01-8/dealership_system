@@ -1,5 +1,6 @@
 package dealership;
 
+import dealership.access.AccountDB;
 import dealership.access.AppointmentDB;
 import dealership.controller.AccountHandler;
 import dealership.controller.AppointmentHandler;
@@ -35,6 +36,9 @@ public class Main {
 
         //test appointment
         //AppointmentHandler.makeAppointment("bringe4@naver.com", "1C6RD7GP5CS629292", "2022-11-18 01:36:00");
+
+        //test getEmployeeEmail
+        //System.out.println(AccountDB.getEmployeeEmails().toString());
 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -1,6 +1,6 @@
 package dealership.object;
 
-class Employee extends Account {
+public class Employee extends Account {
     private String role;
 
     public Employee(String email, String password, String firstName, String lastName, String phoneNum, String role) {
