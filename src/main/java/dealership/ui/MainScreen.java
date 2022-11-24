@@ -30,17 +30,17 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     private void initInventory() {
-        jTable.setModel(new DefaultTableModel(new Object[] {"Year", "Make", "Model", "Mileage", "Condition", "Price"}, 0) {
+        inventoryTable.setModel(new DefaultTableModel(new Object[] {"Year", "Make", "Model", "Mileage", "Condition", "Price"}, 0) {
             @Override
             //Prevent editing cells of the table
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
-        VehicleHandler.loadVehiclesInTable((DefaultTableModel) jTable.getModel());
-        jTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jTable.getTableHeader().setResizingAllowed(false);
-        jTable.getTableHeader().setReorderingAllowed(false);
+        VehicleHandler.loadVehiclesInTable((DefaultTableModel) inventoryTable.getModel());
+        inventoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        inventoryTable.getTableHeader().setResizingAllowed(false);
+        inventoryTable.getTableHeader().setReorderingAllowed(false);
     }
 
     /**
@@ -57,10 +57,17 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         signInButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable = new javax.swing.JTable();
-        searchBar = new javax.swing.JTextField();
-        filterButton = new javax.swing.JButton();
-        searchLabel = new javax.swing.JLabel();
+        inventoryTable = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        searchOption = new javax.swing.JMenu();
+        makeFilterOption = new javax.swing.JCheckBoxMenuItem();
+        yearFilterOption = new javax.swing.JCheckBoxMenuItem();
+        mileageFilterOption = new javax.swing.JCheckBoxMenuItem();
+        conditionFilterOption = new javax.swing.JCheckBoxMenuItem();
+        priceFilterOption = new javax.swing.JCheckBoxMenuItem();
+        appointmentOption = new javax.swing.JMenu();
+        addAppointmentOption = new javax.swing.JMenuItem();
+        editAppointmentOption = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,20 +100,15 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(jTable);
+        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        searchBar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+            },
+            new String [] {
 
-        filterButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        filterButton.setText("Filter");
-        filterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filterButtonActionPerformed(evt);
             }
-        });
-
-        searchLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        searchLabel.setText("Search");
+        ));
+        jScrollPane1.setViewportView(inventoryTable);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -120,14 +122,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(168, 168, 168)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -139,15 +134,80 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterButton)
-                    .addComponent(searchLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                 .addGap(17, 17, 17))
         );
+
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(178, 36));
+
+        searchOption.setText("Inventory Filter");
+        searchOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        makeFilterOption.setText("Make");
+        makeFilterOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeFilterOptionActionPerformed(evt);
+            }
+        });
+        searchOption.add(makeFilterOption);
+
+        yearFilterOption.setText("Year");
+        yearFilterOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yearFilterOptionActionPerformed(evt);
+            }
+        });
+        searchOption.add(yearFilterOption);
+
+        mileageFilterOption.setText("Mileage");
+        mileageFilterOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mileageFilterOptionActionPerformed(evt);
+            }
+        });
+        searchOption.add(mileageFilterOption);
+
+        conditionFilterOption.setText("Condition");
+        conditionFilterOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                conditionFilterOptionActionPerformed(evt);
+            }
+        });
+        searchOption.add(conditionFilterOption);
+
+        priceFilterOption.setText("Price");
+        priceFilterOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceFilterOptionActionPerformed(evt);
+            }
+        });
+        searchOption.add(priceFilterOption);
+
+        jMenuBar1.add(searchOption);
+
+        appointmentOption.setText("Appointment");
+        appointmentOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        addAppointmentOption.setText("Make Appointment");
+        addAppointmentOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAppointmentOptionActionPerformed(evt);
+            }
+        });
+        appointmentOption.add(addAppointmentOption);
+
+        editAppointmentOption.setText("Edit Appointments");
+        editAppointmentOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editAppointmentOptionActionPerformed(evt);
+            }
+        });
+        appointmentOption.add(editAppointmentOption);
+
+        jMenuBar1.add(appointmentOption);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,9 +232,33 @@ public class MainScreen extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_signInButtonActionPerformed
 
-    private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
+    private void addAppointmentOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentOptionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_filterButtonActionPerformed
+    }//GEN-LAST:event_addAppointmentOptionActionPerformed
+
+    private void editAppointmentOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentOptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editAppointmentOptionActionPerformed
+
+    private void makeFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeFilterOptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_makeFilterOptionActionPerformed
+
+    private void yearFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearFilterOptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yearFilterOptionActionPerformed
+
+    private void mileageFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mileageFilterOptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mileageFilterOptionActionPerformed
+
+    private void conditionFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conditionFilterOptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_conditionFilterOptionActionPerformed
+
+    private void priceFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceFilterOptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceFilterOptionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,14 +296,21 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton filterButton;
+    private javax.swing.JMenuItem addAppointmentOption;
+    private javax.swing.JMenu appointmentOption;
+    private javax.swing.JCheckBoxMenuItem conditionFilterOption;
+    private javax.swing.JMenuItem editAppointmentOption;
+    private javax.swing.JTable inventoryTable;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JTextField searchBar;
-    private javax.swing.JLabel searchLabel;
+    private javax.swing.JCheckBoxMenuItem makeFilterOption;
+    private javax.swing.JCheckBoxMenuItem mileageFilterOption;
+    private javax.swing.JCheckBoxMenuItem priceFilterOption;
+    private javax.swing.JMenu searchOption;
     private javax.swing.JButton signInButton;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JCheckBoxMenuItem yearFilterOption;
     // End of variables declaration//GEN-END:variables
 }
