@@ -36,6 +36,7 @@ public class Main {
 
         //test appointment
         //AppointmentHandler.makeAppointment("bringe4@naver.com", "1C6RD7GP5CS629292", "2022-11-18 01:36:00");
+        //System.out.println(AppointmentDB.checkAvailability("hzoellner0@nhs.uk", "WAUDF58E85A177360", "2002-09-04 12:00:00"));
 
         //test getEmployeeEmail
         //System.out.println(AccountDB.getEmployeeEmails().toString());

@@ -26,7 +26,7 @@ public class Appointment {
         return dateTime;
     }
 
-    public static boolean vinExist(String vin){
+    public static boolean vinExist(String vin) {
         return AppointmentDB.checkVin(vin);
     }
 }
