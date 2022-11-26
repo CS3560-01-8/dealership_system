@@ -4,7 +4,7 @@
  */
 package dealership.ui;
 
-import dealership.access.VehicleDB;
+import dealership.controller.AccountHandler;
 import dealership.controller.VehicleHandler;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ import java.awt.Point;
 public class MainScreen extends javax.swing.JFrame {
 
     // sign in status; 1 = signed in, 0 otherwise
-    private int signInStatus = 0;
+    //private int signInStatus = 0;
     
     /**
      * Creates new form MenuScreen
@@ -27,6 +27,9 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         initInventory();
         VehicleHandler.loadMakesIntoComboBox(makeFilterOption);
+        if (AccountHandler.isLoggedIn()) {
+            accountButton.setText("Account");
+        }
     }
     
     // Gets previous frame's location on screen
@@ -47,12 +50,7 @@ public class MainScreen extends javax.swing.JFrame {
         inventoryTable.getTableHeader().setResizingAllowed(false);
         inventoryTable.getTableHeader().setReorderingAllowed(false);
     }
-    
-    // get sign in status
-    public void setSignInStatus(int status) {
-        signInStatus = status;
-        accountButton.setText("Account");
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -245,7 +243,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void accountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButtonActionPerformed
         // TODO add your handling code here:
-        if (signInStatus == 1) {
+        if (AccountHandler.isLoggedIn()) {
             // add edit account screen here
         } else {
             LoginScreen login = new LoginScreen();
@@ -257,7 +255,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void addAppointmentOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentOptionActionPerformed
         // TODO add your handling code here:
-        if (signInStatus == 0)
+        if (!AccountHandler.isLoggedIn())
             JOptionPane.showMessageDialog(this, "Please login to your account.", "No account registered.", JOptionPane.INFORMATION_MESSAGE);
         else {
             MakeAppointmentScreen makeApt = new MakeAppointmentScreen();
@@ -281,41 +279,6 @@ public class MainScreen extends javax.swing.JFrame {
         VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(),
                 String.valueOf(makeFilterOption.getSelectedItem()), String.valueOf(modelFilterOption.getSelectedItem()));
     }//GEN-LAST:event_modelFilterOptionActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainScreen().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountButton;

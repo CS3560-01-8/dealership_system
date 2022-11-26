@@ -3,8 +3,8 @@ package dealership.object;
 public class Employee extends Account {
     private String role;
 
-    public Employee(String email, String password, String firstName, String lastName, String phoneNum, String role) {
-        super(email, password, firstName, lastName, phoneNum);
+    public Employee(String email, String firstName, String lastName, String phoneNum, String role) {
+        super(email, firstName, lastName, phoneNum);
         this.role = role;
     }
 

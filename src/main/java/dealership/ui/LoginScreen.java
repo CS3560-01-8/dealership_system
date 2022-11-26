@@ -4,7 +4,7 @@
  */
 package dealership.ui;
 
-import dealership.access.AccountDB;
+import dealership.controller.AccountHandler;
 
 import java.awt.Point;
 import javax.swing.JOptionPane;
@@ -158,24 +158,22 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        if (emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals(""))
+        if (emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter an email and password.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        else if (emailInput.getText().equals("") && !valueOf(passwordInput.getPassword()).equals("")) {
+        } else if (emailInput.getText().equals("") && !valueOf(passwordInput.getPassword()).equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter email.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        }
-        else if (!emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals(""))
+        } else if (!emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter password.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        else {
-            if(AccountDB.checkPass(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
-                JOptionPane.showMessageDialog(this, "Login success!", "Log In", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (AccountHandler.tryLogin(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
+                JOptionPane.showMessageDialog(this, "Login success!", "Log In", JOptionPane.INFORMATION_MESSAGE);
                 MainScreen ms = new MainScreen();
                 ms.getPreviousFrameLocation(this.getLocationOnScreen());
-                ms.setSignInStatus(1);
                 ms.setVisible(true);
                 dispose();
-            }
-            else
+            } else {
                 JOptionPane.showMessageDialog(this, "Login failed! Please check your email or password", "Log in Failed", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

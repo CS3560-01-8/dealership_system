@@ -77,9 +77,9 @@ public class CreateAccount extends javax.swing.JFrame {
                         streetInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText())) {
                 JOptionPane.showMessageDialog(this, "Your account has been created.",
                         "Account Created", JOptionPane.INFORMATION_MESSAGE);
+                AccountHandler.tryLogin(emailInput.getText(), String.valueOf(passwordInput.getPassword()));
                 MainScreen ms = new MainScreen();
                 ms.getPreviousFrameLocation(this.getLocationOnScreen());
-                ms.setSignInStatus(1);
                 ms.setVisible(true);
                 dispose();
             } else {

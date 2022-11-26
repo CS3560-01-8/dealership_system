@@ -213,7 +213,6 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         MainScreen ms = new MainScreen();
         ms.getPreviousFrameLocation(this.getLocationOnScreen());
-        ms.setSignInStatus(1);
         ms.setVisible(true);
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed

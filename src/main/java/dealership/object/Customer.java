@@ -1,21 +1,17 @@
 package dealership.object;
 
-import dealership.access.AccountDB;
 
 public class Customer extends Account {
-    private String address;
 
-    public Customer(String email, String password, String firstName, String lastName, String phoneNum, String address) {
-        super(email, password, firstName, lastName, phoneNum);
+    private final String address;
+
+    public Customer(String email, String firstName, String lastName, String phoneNum, String address) {
+        super(email, firstName, lastName, phoneNum);
         this.address = address;
-        AccountDB.write(this);
     }
 
     public String getAddress() {
         return address;
     }
 
-    public static boolean exists(String email) {
-        return AccountDB.checkEmail(email);
-    }
 }
