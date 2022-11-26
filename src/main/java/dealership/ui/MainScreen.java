@@ -246,7 +246,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void accountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButtonActionPerformed
         // TODO add your handling code here:
         if (signInStatus == 1) {
-            
+            // add edit account screen here
         } else {
             LoginScreen login = new LoginScreen();
             login.getPreviousFrameLocation(this.getLocationOnScreen());
@@ -260,7 +260,10 @@ public class MainScreen extends javax.swing.JFrame {
         if (signInStatus == 0)
             JOptionPane.showMessageDialog(this, "Please login to your account.", "No account registered.", JOptionPane.INFORMATION_MESSAGE);
         else {
-            
+            MakeAppointmentScreen makeApt = new MakeAppointmentScreen();
+            makeApt.getPreviousFrameLocation(this.getLocationOnScreen());
+            makeApt.setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_addAppointmentOptionActionPerformed
 
