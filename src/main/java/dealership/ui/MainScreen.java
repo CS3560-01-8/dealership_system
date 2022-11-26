@@ -28,7 +28,10 @@ public class MainScreen extends javax.swing.JFrame {
         initInventory();
         VehicleHandler.loadMakesIntoComboBox(makeFilterOption);
         if (AccountHandler.isLoggedIn()) {
+            statusLabel.setText("Hi there, " + AccountHandler.getLoggedInName() + "!");
             accountButton.setText("Account");
+        } else {
+            statusLabel.setText("Not Logged In");
         }
     }
     
@@ -71,6 +74,7 @@ public class MainScreen extends javax.swing.JFrame {
         modelLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         accountButton = new javax.swing.JButton();
+        statusLabel = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         appointmentOption = new javax.swing.JMenu();
@@ -165,21 +169,29 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        statusLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        statusLabel.setText("Not Logged In");
+        statusLabel.setToolTipText("");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
-                .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(statusLabel)
+                    .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
+                .addComponent(statusLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -216,7 +228,7 @@ public class MainScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(69, Short.MAX_VALUE)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(192, 192, 192)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -295,6 +307,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel makeLabel;
     private javax.swing.JComboBox<String> modelFilterOption;
     private javax.swing.JLabel modelLabel;
+    private javax.swing.JLabel statusLabel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

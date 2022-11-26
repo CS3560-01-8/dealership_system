@@ -26,4 +26,8 @@ public class AccountHandler {
         return loggedInAccount != null;
     }
 
+    public static String getLoggedInName() {
+        return loggedInAccount.getName();
+    }
+
 }
