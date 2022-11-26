@@ -52,8 +52,8 @@ DROP TABLE IF EXISTS `appointment`;
 CREATE TABLE `appointment` (
   `customer_email` varchar(45) NOT NULL,
   `vin` varchar(45) NOT NULL,
-  `date` varchar(45) DEFAULT NULL,
-  `time` varchar(45) DEFAULT NULL,
+  `date_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`customer_email`,`vin`),
   KEY `vin_idx` (`vin`) /*!80000 INVISIBLE */,
   KEY `customer_email_idx` (`customer_email`),
   CONSTRAINT `customer_email` FOREIGN KEY (`customer_email`) REFERENCES `customer` (`customer_email`),
@@ -67,6 +67,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
+INSERT INTO `appointment` VALUES ('hzoellner0@nhs.uk','JN1AZ4EH3CM440956','2000-09-04 12:00:00');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,6 +119,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES ('amiquelet7@bloglovin.com','4003 Horner Street'),('hzoellner0@nhs.uk','2703 Arbor Court'),('lmccoveney5@ibm.com','95 West Virginia Avenue');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,6 +144,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES ('hzoellner0@nhs.uk','role2'),('lmccoveney5@ibm.com','role2'),('vcluitt3@unc.edu','role1'),('wkayese@pinterest.com','role1');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +203,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES ('1C3CCBABXCN987184','Audi',2002,'A4','used',121032,20613,0),('1C4RDHEG8EC068407','Audi',2007,'RS 4','used',208654,49951,0),('1C6RD7GP5CS629292','Jaguar',1992,'XJ Series','new',56034,38681,0),('1G6AE5SX9D0240878','Volvo',1997,'960','new',87593,13090,0),('1G6AY5SX4E0097069','Pontiac',2004,'GTO','new',185934,49389,0),('1G6DA1ED1B0844523','Nissan',2007,'Altima','used',93023,47584,0),('3D7TP2CT7BG253573','Mitsubishi',1985,'Starion','new',302293,19826,0),('3GTXKYEJ0AG530152','GMC',1994,'3500','used',69503,41155,0),('3VW1K7AJ6CM378711','Volkswagen',2009,'Jetta','used',50393,39858,0),('JN1AZ4EH3CM440956','Mazda',1986,'RX-7','used',50394,45439,0),('WAUDF58E85A177360','Saturn',2010,'Outlook','used',23240,17132,0),('WAUEF78E17A862576','Ford',1986,'Aerostar','used',149384,11730,0),('WAUFFBFL6BA466936','BMW',2007,'M5','new',194534,22003,0),('WAUJT54B23N389667','Oldsmobile',2000,'Bravada','used',90434,34028,0),('WAUNF98P46A768655','Lamborghini',2001,'Diablo','used',129503,12690,0),('WBA1J9C56FV948604','Mitsubishi',2002,'Galant','used',80934,32598,0),('WBAAV33451F570190','Ford',2008,'Ranger','new',50754,23485,0),('WP0CA2A87AS916044','Chevrolet',1994,'Impala SS','used',230593,12944,0);
+INSERT INTO `vehicle` VALUES ('1C3CCBABXCN987184','Audi',2002,'A4','used',121032,20613,0),('1C4RDHEG8EC068407','Audi',2007,'RS 4','used',208654,49951,0),('1C6RD7GP5CS629292','Jaguar',1992,'XJ Series','new',56034,38681,0),('1G6AE5SX9D0240878','Volvo',1997,'960','new',87593,13090,0),('1G6AY5SX4E0097069','Pontiac',2004,'GTO','new',185934,49389,0),('1G6DA1ED1B0844523','Nissan',2007,'Altima','used',93023,47584,0),('3D7TP2CT7BG253573','Mitsubishi',1985,'Starion','new',302293,19826,0),('3GTXKYEJ0AG530152','GMC',1994,'3500','used',69503,41155,0),('3VW1K7AJ6CM378711','Volkswagen',2009,'Jetta','used',50393,39858,0),('asdasdeqwec','ABC',8888,'XYZ','new',123456,84621,0),('JN1AZ4EH3CM440956','Mazda',1986,'RX-7','used',50394,45439,0),('WAUDF58E85A177360','Saturn',2010,'Outlook','used',23240,17132,0),('WAUEF78E17A862576','Ford',1986,'Aerostar','used',149384,11730,0),('WAUFFBFL6BA466936','BMW',2007,'M5','new',194534,22003,0),('WAUJT54B23N389667','Oldsmobile',2000,'Bravada','used',90434,34028,0),('WAUNF98P46A768655','Lamborghini',2001,'Diablo','used',129503,12690,0),('WBA1J9C56FV948604','Mitsubishi',2002,'Galant','used',80934,32598,0),('WBAAV33451F570190','Ford',2008,'Ranger','new',50754,23485,0),('WP0CA2A87AS916044','Chevrolet',1994,'Impala SS','used',230593,12944,0);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -213,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-22  2:03:29
+-- Dump completed on 2022-11-25 17:18:39
