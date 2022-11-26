@@ -166,10 +166,16 @@ public class LoginScreen extends javax.swing.JFrame {
         else if (!emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals(""))
             JOptionPane.showMessageDialog(this, "Please enter password.", "Missing information", JOptionPane.ERROR_MESSAGE);
         else {
-            if(AccountDB.checkPass(emailInput.getText(), valueOf(passwordInput.getPassword())))
-                JOptionPane.showMessageDialog(this, "Login success!", "log in", JOptionPane.ERROR_MESSAGE);
+            if(AccountDB.checkPass(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
+                JOptionPane.showMessageDialog(this, "Login success!", "Log In", JOptionPane.ERROR_MESSAGE);
+                MainScreen ms = new MainScreen();
+                ms.getPreviousFrameLocation(this.getLocationOnScreen());
+                ms.setSignInStatus(1);
+                ms.setVisible(true);
+                dispose();
+            }
             else
-                JOptionPane.showMessageDialog(this, "Login failed! Please check your email or password", "log in fail", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Login failed! Please check your email or password", "Log in Failed", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

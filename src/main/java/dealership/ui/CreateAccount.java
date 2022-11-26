@@ -27,7 +27,7 @@ public class CreateAccount extends javax.swing.JFrame {
         this.setLocation(previous);
     }
     
-    // Find missing information and create message dialog box
+    // Find missing information and create message dialog box;
     private void checkForMissingInfo() {
         boolean anyMissing = false;
         String message = "Please enter ";
@@ -75,11 +75,12 @@ public class CreateAccount extends javax.swing.JFrame {
                         lastNameInput.getText(),
                         phoneInput.getText(),
                         streetInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText())) {
-                JOptionPane.showMessageDialog(this, "Your account has been created. You may now log in.",
-                        "Account created!", JOptionPane.INFORMATION_MESSAGE);
-                LoginScreen login = new LoginScreen();
-                login.getPreviousFrameLocation(this.getLocationOnScreen());
-                login.setVisible(true);
+                JOptionPane.showMessageDialog(this, "Your account has been created.",
+                        "Account Created", JOptionPane.INFORMATION_MESSAGE);
+                MainScreen ms = new MainScreen();
+                ms.getPreviousFrameLocation(this.getLocationOnScreen());
+                ms.setSignInStatus(1);
+                ms.setVisible(true);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "An account already exists with that email!",

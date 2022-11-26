@@ -17,13 +17,16 @@ import java.awt.Point;
  */
 public class MainScreen extends javax.swing.JFrame {
 
+    // sign in status; 1 = signed in, 0 otherwise
+    private int signInStatus = 0;
+    
     /**
      * Creates new form MenuScreen
      */
     public MainScreen() {
         initComponents();
         initInventory();
-        VehicleHandler.loadMakesIntoComboBox(jComboBoxMake);
+        VehicleHandler.loadMakesIntoComboBox(makeFilterOption);
     }
     
     // Gets previous frame's location on screen
@@ -44,6 +47,12 @@ public class MainScreen extends javax.swing.JFrame {
         inventoryTable.getTableHeader().setResizingAllowed(false);
         inventoryTable.getTableHeader().setReorderingAllowed(false);
     }
+    
+    // get sign in status
+    public void setSignInStatus(int status) {
+        signInStatus = status;
+        accountButton.setText("Account");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,20 +67,14 @@ public class MainScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         inventoryTable = new javax.swing.JTable();
         jPanelFilter = new javax.swing.JPanel();
-        jComboBoxMake = new javax.swing.JComboBox<>();
-        jLabelMake = new javax.swing.JLabel();
-        jComboBoxModel = new javax.swing.JComboBox<>();
-        jLabelModel = new javax.swing.JLabel();
+        makeFilterOption = new javax.swing.JComboBox<>();
+        makeLabel = new javax.swing.JLabel();
+        modelFilterOption = new javax.swing.JComboBox<>();
+        modelLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        signInButton = new javax.swing.JButton();
+        accountButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        searchOption = new javax.swing.JMenu();
-        makeFilterOption = new javax.swing.JCheckBoxMenuItem();
-        yearFilterOption = new javax.swing.JCheckBoxMenuItem();
-        mileageFilterOption = new javax.swing.JCheckBoxMenuItem();
-        conditionFilterOption = new javax.swing.JCheckBoxMenuItem();
-        priceFilterOption = new javax.swing.JCheckBoxMenuItem();
         appointmentOption = new javax.swing.JMenu();
         addAppointmentOption = new javax.swing.JMenuItem();
         editAppointmentOption = new javax.swing.JMenuItem();
@@ -90,22 +93,22 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanelFilter.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filter Results", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        jComboBoxMake.addActionListener(new java.awt.event.ActionListener() {
+        makeFilterOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxMakeActionPerformed(evt);
+                makeFilterOptionActionPerformed(evt);
             }
         });
 
-        jLabelMake.setText("Make");
+        makeLabel.setText("Make");
 
-        jComboBoxModel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any" }));
-        jComboBoxModel.addActionListener(new java.awt.event.ActionListener() {
+        modelFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any" }));
+        modelFilterOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxModelActionPerformed(evt);
+                modelFilterOptionActionPerformed(evt);
             }
         });
 
-        jLabelModel.setText("Model");
+        modelLabel.setText("Model");
 
         javax.swing.GroupLayout jPanelFilterLayout = new javax.swing.GroupLayout(jPanelFilter);
         jPanelFilter.setLayout(jPanelFilterLayout);
@@ -114,12 +117,12 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jPanelFilterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxMake, 0, 100, Short.MAX_VALUE)
-                    .addComponent(jComboBoxModel, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(makeFilterOption, 0, 100, Short.MAX_VALUE)
+                    .addComponent(modelFilterOption, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelFilterLayout.createSequentialGroup()
                         .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelMake)
-                            .addComponent(jLabelModel))
+                            .addComponent(makeLabel)
+                            .addComponent(modelLabel))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -127,14 +130,14 @@ public class MainScreen extends javax.swing.JFrame {
             jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFilterLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelMake)
+                .addComponent(makeLabel)
                 .addGap(4, 4, 4)
-                .addComponent(jComboBoxMake, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelModel)
+                .addComponent(makeFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addComponent(modelLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(modelFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -156,11 +159,11 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
-        signInButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        signInButton.setText("Sign In");
-        signInButton.addActionListener(new java.awt.event.ActionListener() {
+        accountButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        accountButton.setText("Sign In");
+        accountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signInButtonActionPerformed(evt);
+                accountButtonActionPerformed(evt);
             }
         });
 
@@ -170,14 +173,14 @@ public class MainScreen extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(123, Short.MAX_VALUE)
-                .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -186,51 +189,6 @@ public class MainScreen extends javax.swing.JFrame {
         titleLabel.setText("Car Dealership");
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(178, 36));
-
-        searchOption.setText("Inventory Filter");
-        searchOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        makeFilterOption.setText("Make");
-        makeFilterOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                makeFilterOptionActionPerformed(evt);
-            }
-        });
-        searchOption.add(makeFilterOption);
-
-        yearFilterOption.setText("Year");
-        yearFilterOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yearFilterOptionActionPerformed(evt);
-            }
-        });
-        searchOption.add(yearFilterOption);
-
-        mileageFilterOption.setText("Mileage");
-        mileageFilterOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mileageFilterOptionActionPerformed(evt);
-            }
-        });
-        searchOption.add(mileageFilterOption);
-
-        conditionFilterOption.setText("Condition");
-        conditionFilterOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                conditionFilterOptionActionPerformed(evt);
-            }
-        });
-        searchOption.add(conditionFilterOption);
-
-        priceFilterOption.setText("Price");
-        priceFilterOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceFilterOptionActionPerformed(evt);
-            }
-        });
-        searchOption.add(priceFilterOption);
-
-        jMenuBar1.add(searchOption);
 
         appointmentOption.setText("Appointment");
         appointmentOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -285,16 +243,25 @@ public class MainScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
+    private void accountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButtonActionPerformed
         // TODO add your handling code here:
-        LoginScreen login = new LoginScreen();
-        login.getPreviousFrameLocation(this.getLocationOnScreen());
-        login.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_signInButtonActionPerformed
+        if (signInStatus == 1) {
+            
+        } else {
+            LoginScreen login = new LoginScreen();
+            login.getPreviousFrameLocation(this.getLocationOnScreen());
+            login.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_accountButtonActionPerformed
 
     private void addAppointmentOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentOptionActionPerformed
         // TODO add your handling code here:
+        if (signInStatus == 0)
+            JOptionPane.showMessageDialog(this, "Please login to your account.", "No account registered.", JOptionPane.INFORMATION_MESSAGE);
+        else {
+            
+        }
     }//GEN-LAST:event_addAppointmentOptionActionPerformed
 
     private void editAppointmentOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentOptionActionPerformed
@@ -302,35 +269,15 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_editAppointmentOptionActionPerformed
 
     private void makeFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeFilterOptionActionPerformed
-        // TODO add your handling code here:
+        VehicleHandler.loadModelsIntoComboBox(modelFilterOption, String.valueOf(makeFilterOption.getSelectedItem()));
+        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(),
+                String.valueOf(makeFilterOption.getSelectedItem()), String.valueOf(modelFilterOption.getSelectedItem()));
     }//GEN-LAST:event_makeFilterOptionActionPerformed
 
-    private void yearFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearFilterOptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yearFilterOptionActionPerformed
-
-    private void mileageFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mileageFilterOptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mileageFilterOptionActionPerformed
-
-    private void conditionFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conditionFilterOptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_conditionFilterOptionActionPerformed
-
-    private void priceFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceFilterOptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceFilterOptionActionPerformed
-
-    private void jComboBoxMakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMakeActionPerformed
-        VehicleHandler.loadModelsIntoComboBox(jComboBoxModel, String.valueOf(jComboBoxMake.getSelectedItem()));
+    private void modelFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelFilterOptionActionPerformed
         VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(),
-                String.valueOf(jComboBoxMake.getSelectedItem()), String.valueOf(jComboBoxModel.getSelectedItem()));
-    }//GEN-LAST:event_jComboBoxMakeActionPerformed
-
-    private void jComboBoxModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModelActionPerformed
-        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(),
-                String.valueOf(jComboBoxMake.getSelectedItem()), String.valueOf(jComboBoxModel.getSelectedItem()));
-    }//GEN-LAST:event_jComboBoxModelActionPerformed
+                String.valueOf(makeFilterOption.getSelectedItem()), String.valueOf(modelFilterOption.getSelectedItem()));
+    }//GEN-LAST:event_modelFilterOptionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -368,26 +315,20 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton accountButton;
     private javax.swing.JMenuItem addAppointmentOption;
     private javax.swing.JMenu appointmentOption;
-    private javax.swing.JCheckBoxMenuItem conditionFilterOption;
     private javax.swing.JMenuItem editAppointmentOption;
     private javax.swing.JTable inventoryTable;
-    private javax.swing.JComboBox<String> jComboBoxMake;
-    private javax.swing.JComboBox<String> jComboBoxModel;
-    private javax.swing.JLabel jLabelMake;
-    private javax.swing.JLabel jLabelModel;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelFilter;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JCheckBoxMenuItem makeFilterOption;
-    private javax.swing.JCheckBoxMenuItem mileageFilterOption;
-    private javax.swing.JCheckBoxMenuItem priceFilterOption;
-    private javax.swing.JMenu searchOption;
-    private javax.swing.JButton signInButton;
+    private javax.swing.JComboBox<String> makeFilterOption;
+    private javax.swing.JLabel makeLabel;
+    private javax.swing.JComboBox<String> modelFilterOption;
+    private javax.swing.JLabel modelLabel;
     private javax.swing.JLabel titleLabel;
-    private javax.swing.JCheckBoxMenuItem yearFilterOption;
     // End of variables declaration//GEN-END:variables
 }
