@@ -11,7 +11,7 @@ public class Appointment {
         this.customerEmail = customerEmail;
         this.vin = vin;
         this.dateTime = dateTime;
-        AppointmentDB.write(this);
+        //AppointmentDB.write(this);
     }
 
     public String getCustomerEmail() {

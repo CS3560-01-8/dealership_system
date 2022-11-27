@@ -1,5 +1,6 @@
 package dealership.controller;
 
+import dealership.access.AppointmentDB;
 import dealership.object.Appointment;
 
 import java.time.LocalDateTime;
@@ -9,13 +10,11 @@ public class AppointmentHandler {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static boolean makeAppointment(String email, String vin, String dateTIme) {
-        if (!Appointment.vinExist(vin)) {
-            System.out.println("vin does not exist! try again!");
-            return false;
+        if(AppointmentDB.checkAvailability(email,vin,dateTIme)){
+            AppointmentDB.write(new Appointment(email, vin, dateTIme));
+            return true;
         }
-
-        new Appointment(email, vin, dateTIme);
-        return true;
+        return false;
     }
 
     public static String DateTimeToString(LocalDateTime time) {
