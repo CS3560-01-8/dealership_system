@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public class AppointmentDB {
 
-    public static void write(Appointment app) {
+    public static void writeAppointment(Appointment app) {
         DatabaseConnector.executeInsert(String.format(
                 "INSERT INTO `dealership`.`appointment` (`customer_email`, `vin`, `date_time`) VALUES ('%s', '%s', '%s')",
                 app.getCustomerEmail(), app.getVin(), app.getDateTime()));
     }
 
     public static boolean checkVin(String vin) {
-        String query = "SELECT 1 FROM vehicle WHERE vin = '" + vin + "'";
+        String query = "SELECT 1 FROM vehicle WHERE vin = '" + vin + "' AND sold = '0'";
         try {
             ResultSet res = DatabaseConnector.executeQuery(query);
             if (res.next()) {

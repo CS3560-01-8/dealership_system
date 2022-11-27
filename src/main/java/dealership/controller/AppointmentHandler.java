@@ -11,7 +11,7 @@ public class AppointmentHandler {
 
     public static boolean makeAppointment(String email, String vin, String dateTIme) {
         if(AppointmentDB.checkAvailability(email,vin,dateTIme)){
-            AppointmentDB.write(new Appointment(email, vin, dateTIme));
+            AppointmentDB.writeAppointment(new Appointment(email, vin, dateTIme));
             return true;
         }
         return false;
