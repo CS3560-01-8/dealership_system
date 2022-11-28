@@ -3,12 +3,12 @@ package dealership.object;
 public class Sale {
     
     private int id;
-    private double agreedPrice;
-    private double tax;
+    private float agreedPrice;
+    private float tax;
     private String cardNumber;
     private String vin;
 
-    public Sale(int id, double agreedPrice, double tax, String cardNumber, String vin) {
+    public Sale(int id, float agreedPrice, float tax, String cardNumber, String vin) {
         this.id = id;
         this.agreedPrice = agreedPrice;
         this.tax = tax;
@@ -20,11 +20,11 @@ public class Sale {
         return id;
     }
 
-    public double getAgreedPrice() {
+    public float getAgreedPrice() {
         return agreedPrice;
     }
 
-    public double getTax() {
+    public float getTax() {
         return tax;
     }
 

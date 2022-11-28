@@ -62,4 +62,20 @@ public class VehicleDB {
         return results;
     }
 
+    public static boolean checkVin(String vin) {
+        String query = "SELECT 1 FROM vehicle WHERE vin = '" + vin + "' AND sold = '0'";
+        try {
+            ResultSet res = DatabaseConnector.executeQuery(query);
+            if (res.next()) {
+                System.out.println("car found!");
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("car not found!");
+        return false;
+    }
+
+
 }

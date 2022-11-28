@@ -3,6 +3,7 @@ package dealership.controller;
 import dealership.access.AccountDB;
 import dealership.object.Account;
 import dealership.object.Customer;
+import dealership.object.Employee;
 
 public class AccountHandler {
 
@@ -31,5 +32,10 @@ public class AccountHandler {
     }
 
     public static String getLoggedInEmail() { return loggedInAccount.getEmail(); }
+
+    public static boolean isEmployee()
+    {
+        return (loggedInAccount instanceof Employee);
+    }
 
 }

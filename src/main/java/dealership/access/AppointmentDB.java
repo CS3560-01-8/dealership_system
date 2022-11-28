@@ -15,23 +15,8 @@ public class AppointmentDB {
                 app.getCustomerEmail(), app.getVin(), app.getDateTime()));
     }
 
-    public static boolean checkVin(String vin) {
-        String query = "SELECT 1 FROM vehicle WHERE vin = '" + vin + "' AND sold = '0'";
-        try {
-            ResultSet res = DatabaseConnector.executeQuery(query);
-            if (res.next()) {
-                System.out.println("car found!");
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println("car not found!");
-        return false;
-    }
-
     public static boolean checkAvailability(String customerEmail, String vin, String dateTime) {
-        if (!checkVin(vin)) return false;
+        if (!VehicleDB.checkVin(vin)) return false;
         String query1 = "SELECT 1 FROM appointment WHERE date_time = '" + dateTime + "' AND vin = '" + vin + "'";
         String query2 = "SELECT 1 FROM appointment WHERE date_time = '" + dateTime + "' AND customer_email = '" + customerEmail + "'";
         try {

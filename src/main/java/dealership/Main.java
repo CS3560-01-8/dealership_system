@@ -2,14 +2,17 @@ package dealership;
 
 import dealership.access.AccountDB;
 import dealership.access.AppointmentDB;
+import dealership.access.SaleDB;
 import dealership.controller.AccountHandler;
 import dealership.controller.AppointmentHandler;
 import dealership.db.DatabaseConnector;
 import dealership.object.Customer;
+import dealership.object.Sale;
 import dealership.ui.MainScreen;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Main {
 

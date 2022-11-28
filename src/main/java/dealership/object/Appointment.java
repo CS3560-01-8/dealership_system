@@ -1,6 +1,7 @@
 package dealership.object;
 
 import dealership.access.AppointmentDB;
+import dealership.access.VehicleDB;
 
 public class Appointment {
     private String customerEmail;
@@ -27,6 +28,6 @@ public class Appointment {
     }
 
     public static boolean vinExist(String vin) {
-        return AppointmentDB.checkVin(vin);
+        return VehicleDB.checkVin(vin);
     }
 }
