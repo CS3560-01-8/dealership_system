@@ -3,13 +3,11 @@ package dealership.controller;
 import dealership.access.AppointmentDB;
 import dealership.object.Appointment;
 
-import java.time.LocalDateTime;
 import java.time.Year;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class AppointmentHandler {
-    private static HashMap<String, Integer> monthToInt = new HashMap<String, Integer>() {
+    private static final HashMap<String, Integer> monthToInt = new HashMap<String, Integer>() {
         {
             put("January", 1);
             put("February", 2);

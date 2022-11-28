@@ -4,7 +4,6 @@
  */
 package dealership.ui;
 
-import java.awt.List;
 import java.awt.Point;
 import javax.swing.JOptionPane;
 
