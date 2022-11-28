@@ -40,13 +40,20 @@ public class VehicleHandler {
     }
 
     public static void selectVehicle(int index) {
-        selectedIndex = index;
+        if (index >= 0 && index < loadedVehicles.size()) {
+            selectedIndex = index;
+        }
     }
 
-    public static Vehicle getSelectedVehicle() {
-        if (selectedIndex < 0 || selectedIndex >= loadedVehicles.size()) {
-            return null;
-        }
+    public static String getSelectedVehicleVin() {
+        return getSelectedVehicle().getVin();
+    }
+
+    public static String getSelectedVehicleDetails() {
+        return getSelectedVehicle().toString();
+    }
+
+    private static Vehicle getSelectedVehicle() {
         return loadedVehicles.get(selectedIndex);
     }
 

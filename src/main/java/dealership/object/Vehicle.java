@@ -30,9 +30,18 @@ public class Vehicle {
         return VehicleDB.getAvailableVehicles();
     }
 
-    //will return element for displaying in gui
+    public String getVin() {
+        return vin;
+    }
+
+    //for loading into jTable
     public Object[] getRowData() {
         return new Object[] {year, make, model, mileage, condition, "$" + listingPrice};
+    }
+
+    @Override
+    public String toString() {
+        return year + " " + make + " " + model;
     }
 
     public void sell() {
