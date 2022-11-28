@@ -257,7 +257,17 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_modelFilterOptionActionPerformed
 
     private void makeAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeAppointmentButtonActionPerformed
-        // TODO add your handling code here:
+        if (!AccountHandler.isLoggedIn()) {
+            JOptionPane.showMessageDialog(this, "You must log in before scheduling a test drive!", "Not Logged In", JOptionPane.ERROR_MESSAGE);
+        } else if (inventoryTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Please click on a vehicle first.", "No Vehicle Selected!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            VehicleHandler.selectVehicle(inventoryTable.getSelectedRow());
+            MakeAppointmentScreen screen = new MakeAppointmentScreen();
+            screen.getPreviousFrameLocation(this.getLocationOnScreen());
+            screen.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_makeAppointmentButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

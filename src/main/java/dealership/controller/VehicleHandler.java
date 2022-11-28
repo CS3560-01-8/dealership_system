@@ -11,6 +11,7 @@ import java.util.Vector;
 public class VehicleHandler {
 
     private static ArrayList<Vehicle> loadedVehicles;
+    private static int selectedIndex = -1;
 
     public static void loadVehiclesIntoTable(DefaultTableModel tableModel, String make, String model) {
         if (make.equals("Any")) {
@@ -36,6 +37,17 @@ public class VehicleHandler {
         ArrayList<String> models = VehicleDB.getModels(make);
         models.add(0, "Any");
         comboBox.setModel(new DefaultComboBoxModel<>(new Vector<>(models)));
+    }
+
+    public static void selectVehicle(int index) {
+        selectedIndex = index;
+    }
+
+    public static Vehicle getSelectedVehicle() {
+        if (selectedIndex < 0 || selectedIndex >= loadedVehicles.size()) {
+            return null;
+        }
+        return loadedVehicles.get(selectedIndex);
     }
 
 }
