@@ -17,9 +17,6 @@ import java.awt.Point;
  */
 public class MainScreen extends javax.swing.JFrame {
 
-    // sign in status; 1 = signed in, 0 otherwise
-    //private int signInStatus = 0;
-    
     /**
      * Creates new form MenuScreen
      */
@@ -54,7 +51,6 @@ public class MainScreen extends javax.swing.JFrame {
         inventoryTable.getTableHeader().setReorderingAllowed(false);
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,34 +60,25 @@ public class MainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        inventoryTable = new javax.swing.JTable();
+        jTabbedPane = new javax.swing.JTabbedPane();
+        jPanelInventory = new javax.swing.JPanel();
         jPanelFilter = new javax.swing.JPanel();
         makeFilterOption = new javax.swing.JComboBox<>();
         makeLabel = new javax.swing.JLabel();
         modelFilterOption = new javax.swing.JComboBox<>();
         modelLabel = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jScrollPane = new javax.swing.JScrollPane();
+        inventoryTable = new javax.swing.JTable();
+        makeAppointmentButton = new javax.swing.JButton();
         accountButton = new javax.swing.JButton();
         statusLabel = new javax.swing.JLabel();
-        titleLabel = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        appointmentOption = new javax.swing.JMenu();
-        addAppointmentOption = new javax.swing.JMenuItem();
-        editAppointmentOption = new javax.swing.JMenuItem();
+        jPanelAppointments = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("🚗 Car Dealership");
 
-        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(inventoryTable);
+        jTabbedPane.setName(""); // NOI18N
+        jTabbedPane.setOpaque(true);
 
         jPanelFilter.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filter Results", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -119,7 +106,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jPanelFilterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(makeFilterOption, 0, 100, Short.MAX_VALUE)
+                    .addComponent(makeFilterOption, 0, 95, Short.MAX_VALUE)
                     .addComponent(modelFilterOption, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelFilterLayout.createSequentialGroup()
                         .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,30 +126,27 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(modelLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(modelFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1)
-                .addGap(16, 16, 16))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-        );
+        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        accountButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        accountButton.setText("Sign In");
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane.setViewportView(inventoryTable);
+
+        makeAppointmentButton.setText("Schedule Test Drive");
+        makeAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeAppointmentButtonActionPerformed(evt);
+            }
+        });
+
+        accountButton.setText("Log In");
         accountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accountButtonActionPerformed(evt);
@@ -173,81 +157,77 @@ public class MainScreen extends javax.swing.JFrame {
         statusLabel.setText("Not Logged In");
         statusLabel.setToolTipText("");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(statusLabel)
-                    .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
+        javax.swing.GroupLayout jPanelInventoryLayout = new javax.swing.GroupLayout(jPanelInventory);
+        jPanelInventory.setLayout(jPanelInventoryLayout);
+        jPanelInventoryLayout.setHorizontalGroup(
+            jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                        .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statusLabel)))
+                    .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                        .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(makeAppointmentButton)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(statusLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+        jPanelInventoryLayout.setVerticalGroup(
+            jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(statusLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16)
+                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(makeAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Car Dealership");
+        jTabbedPane.addTab("Inventory", jPanelInventory);
 
-        jMenuBar1.setPreferredSize(new java.awt.Dimension(178, 36));
+        javax.swing.GroupLayout jPanelAppointmentsLayout = new javax.swing.GroupLayout(jPanelAppointments);
+        jPanelAppointments.setLayout(jPanelAppointmentsLayout);
+        jPanelAppointmentsLayout.setHorizontalGroup(
+            jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 603, Short.MAX_VALUE)
+        );
+        jPanelAppointmentsLayout.setVerticalGroup(
+            jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 286, Short.MAX_VALUE)
+        );
 
-        appointmentOption.setText("Appointment");
-        appointmentOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        addAppointmentOption.setText("Make Appointment");
-        addAppointmentOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addAppointmentOptionActionPerformed(evt);
-            }
-        });
-        appointmentOption.add(addAppointmentOption);
-
-        editAppointmentOption.setText("Edit Appointments");
-        editAppointmentOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editAppointmentOptionActionPerformed(evt);
-            }
-        });
-        appointmentOption.add(editAppointmentOption);
-
-        jMenuBar1.add(appointmentOption);
-
-        setJMenuBar(jMenuBar1);
+        jTabbedPane.addTab("Appointments", jPanelAppointments);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(192, 192, 192)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(titleLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
+
+        jTabbedPane.getAccessibleContext().setAccessibleName("Inventory");
+        jTabbedPane.getAccessibleContext().setAccessibleDescription("");
+
+        getAccessibleContext().setAccessibleName("Car Dealership 🚗 ");
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
         setLocationRelativeTo(null);
@@ -265,22 +245,6 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_accountButtonActionPerformed
 
-    private void addAppointmentOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentOptionActionPerformed
-        // TODO add your handling code here:
-        if (!AccountHandler.isLoggedIn())
-            JOptionPane.showMessageDialog(this, "Please login to your account.", "No account registered.", JOptionPane.INFORMATION_MESSAGE);
-        else {
-            MakeAppointmentScreen makeApt = new MakeAppointmentScreen();
-            makeApt.getPreviousFrameLocation(this.getLocationOnScreen());
-            makeApt.setVisible(true);
-            dispose();
-        }
-    }//GEN-LAST:event_addAppointmentOptionActionPerformed
-
-    private void editAppointmentOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentOptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editAppointmentOptionActionPerformed
-
     private void makeFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeFilterOptionActionPerformed
         VehicleHandler.loadModelsIntoComboBox(modelFilterOption, String.valueOf(makeFilterOption.getSelectedItem()));
         VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(),
@@ -292,22 +256,23 @@ public class MainScreen extends javax.swing.JFrame {
                 String.valueOf(makeFilterOption.getSelectedItem()), String.valueOf(modelFilterOption.getSelectedItem()));
     }//GEN-LAST:event_modelFilterOptionActionPerformed
 
+    private void makeAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeAppointmentButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_makeAppointmentButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountButton;
-    private javax.swing.JMenuItem addAppointmentOption;
-    private javax.swing.JMenu appointmentOption;
-    private javax.swing.JMenuItem editAppointmentOption;
     private javax.swing.JTable inventoryTable;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelAppointments;
     private javax.swing.JPanel jPanelFilter;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel jPanelInventory;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JButton makeAppointmentButton;
     private javax.swing.JComboBox<String> makeFilterOption;
     private javax.swing.JLabel makeLabel;
     private javax.swing.JComboBox<String> modelFilterOption;
     private javax.swing.JLabel modelLabel;
     private javax.swing.JLabel statusLabel;
-    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
