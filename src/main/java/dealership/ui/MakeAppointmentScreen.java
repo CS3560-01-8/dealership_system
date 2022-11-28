@@ -4,6 +4,10 @@
  */
 package dealership.ui;
 
+import dealership.controller.AccountHandler;
+import dealership.controller.AppointmentHandler;
+
+import javax.swing.*;
 import java.awt.Point;
 
 /**
@@ -207,6 +211,12 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
+        //System.out.println(AppointmentHandler.formatTime(String.valueOf(monthSelect2.getSelectedItem()), String.valueOf(dateSelect2.getSelectedItem()), String.valueOf(timeSelect2.getSelectedItem())));
+        String formattedTime = AppointmentHandler.formatTime(String.valueOf(monthSelect2.getSelectedItem()), String.valueOf(dateSelect2.getSelectedItem()), String.valueOf(timeSelect2.getSelectedItem()));
+        if(AppointmentHandler.makeAppointment(AccountHandler.getLoggedInEmail(),"1C6RD7GP5CS629292",formattedTime))
+            JOptionPane.showMessageDialog(this, "Appointment made!", "make success appointment", JOptionPane.ERROR_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(this, "Failed to make an appointment please try another date and time", "fail to make appointment", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

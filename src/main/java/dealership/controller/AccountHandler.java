@@ -30,4 +30,6 @@ public class AccountHandler {
         return loggedInAccount.getName();
     }
 
+    public static String getLoggedInEmail() { return loggedInAccount.getEmail(); }
+
 }
