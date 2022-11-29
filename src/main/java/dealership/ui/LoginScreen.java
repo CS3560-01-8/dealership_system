@@ -11,10 +11,6 @@ import javax.swing.JOptionPane;
 
 import static java.lang.String.valueOf;
 
-/**
- *
- * @author krist
- */
 public class LoginScreen extends javax.swing.JFrame {
 
     
@@ -61,12 +57,12 @@ public class LoginScreen extends javax.swing.JFrame {
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Car Dealership");
-        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 205, 49));
+        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 205, 49));
 
         createAccountLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         createAccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         createAccountLabel.setText("Login");
-        jPanel1.add(createAccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 120, 41));
+        jPanel1.add(createAccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 120, 41));
 
         userInputPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -95,8 +91,8 @@ public class LoginScreen extends javax.swing.JFrame {
         });
         userInputPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 198, 47));
 
-        jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 440, 140));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 255, 10));
+        jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 440, 140));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 255, 10));
 
         cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cancelButton.setText("Cancel");
@@ -139,7 +135,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 170, 40));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 170, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,41 +188,6 @@ public class LoginScreen extends javax.swing.JFrame {
         ca.setVisible(true);
         dispose();
     }//GEN-LAST:event_createAccountButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginScreen().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
