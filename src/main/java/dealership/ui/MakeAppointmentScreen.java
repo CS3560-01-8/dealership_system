@@ -17,10 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Vector;
 
-/**
- *
- * @author krist
- */
 public class MakeAppointmentScreen extends javax.swing.JFrame {
 
     // month list
@@ -74,7 +70,7 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
         if (date == null)
             daySelect.getModel().setSelectedItem("1");
         else {
-            if (Integer.valueOf(date) > numOfDays)
+            if (Integer.parseInt(date) > numOfDays)
                 daySelect.getModel().setSelectedItem(daySelect.getModel().getElementAt(daySelect.getModel().getSize() - 1));
             else
                 daySelect.getModel().setSelectedItem(date);
