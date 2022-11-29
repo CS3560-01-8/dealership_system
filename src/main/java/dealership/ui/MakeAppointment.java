@@ -1,23 +1,26 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package dealership.ui;
 
 import dealership.controller.AccountHandler;
 import dealership.controller.AppointmentHandler;
 import dealership.controller.VehicleHandler;
-
-import javax.swing.*;
-import java.awt.Point;
 import java.awt.event.ItemEvent;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
-public class MakeAppointmentScreen extends javax.swing.JFrame {
+/**
+ *
+ * @author krist
+ */
+public class MakeAppointment extends javax.swing.JDialog {
 
     // month list
     private final String[] MONTH_LIST = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -25,17 +28,15 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
     private int year;
     
     /**
-     * Creates new form MakeAppointmentScreen
+     * Creates new form makeAppt
+     * @param parent Screen that JDialog is attached to
+     * @param modal True if frame can be used while JDialog is in use, false otherwise
      */
-    public MakeAppointmentScreen() {
+    public MakeAppointment(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         vehicleText.setText(VehicleHandler.getSelectedVehicleDetails());
         setCurrentMonthDate();
-    }
-    
-    // Gets previous frame's location on screen
-    public void getPreviousFrameLocation(Point previous) {
-        this.setLocation(previous);
     }
     
     // set options to today's date
@@ -63,7 +64,7 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
     private void setNumDays(String monthName, String date, int year) {
         YearMonth ym = YearMonth.of(year, monthNameToInt(monthName));
         int numOfDays = ym.lengthOfMonth();
-        ArrayList<String> days = new ArrayList<String>();
+        ArrayList<String> days = new ArrayList<>();
         for (int i = 1; i <= numOfDays; i++)
             days.add(String.valueOf(i));
         daySelect.setModel(new DefaultComboBoxModel<>(new Vector<>(days)));
@@ -71,7 +72,7 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
             daySelect.getModel().setSelectedItem("1");
         else {
             if (Integer.parseInt(date) > numOfDays)
-                daySelect.getModel().setSelectedItem(daySelect.getModel().getElementAt(daySelect.getModel().getSize() - 1));
+                daySelect.getModel().setSelectedItem("1");
             else
                 daySelect.getModel().setSelectedItem(date);
         }
@@ -86,6 +87,7 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cancelButton = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         monthSelect = new javax.swing.JComboBox<>();
         monthLabel = new javax.swing.JLabel();
@@ -96,15 +98,23 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
         vehicleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         vehicleText = new javax.swing.JTextPane();
-        cancelButton = new javax.swing.JButton();
         confirmButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("🚗 Schedule a Test Drive");
-        setResizable(false);
 
-        mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Appointment Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cancelButton.setText("Cancel");
+        cancelButton.setToolTipText("Create account");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
+        mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Appointment Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        monthSelect.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         monthSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         monthSelect.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -112,20 +122,28 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
             }
         });
 
+        monthLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         monthLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         monthLabel.setText("Month");
 
+        daySelect.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        dayLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         dayLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         dayLabel.setText("Day");
 
+        timeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         timeLabel.setText("Time");
 
+        timeSelect.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         timeSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8:00 A.M. - 9:00 A.M.", "9:00 A.M. - 10:00 A.M.", "10:00 A.M. - 11:00 A.M.", "11:00 A.M. - 12:00 P.M.", "12:00 P.M. - 1:00 P.M.", "1:00 P.M. - 2:00 P.M.", "2:00 P.M. - 3:00 P.M.", "3:00 P.M. - 4:00 P.M.", "4:00 P.M. - 5:00 P.M.", "5:00 P.M. - 6:00 P.M.", "6:00 P.M. - 7:00 P.M." }));
 
+        vehicleLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         vehicleLabel.setText("Vehicle");
 
         vehicleText.setEditable(false);
+        vehicleText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(vehicleText);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -141,12 +159,12 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
                         .addComponent(vehicleLabel, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(mainPanelLayout.createSequentialGroup()
                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(monthSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(monthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(24, 24, 24)
+                                .addComponent(monthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(monthSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(daySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(daySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane1))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -172,14 +190,7 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        cancelButton.setText("Cancel");
-        cancelButton.setToolTipText("Create account");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-
+        confirmButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         confirmButton.setText("Confirm");
         confirmButton.setToolTipText("Create account");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +204,7 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -201,37 +212,25 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
                         .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        // TODO add your handling code here:
-        String formattedTime = AppointmentHandler.formatTime(String.valueOf(monthSelect.getSelectedItem()), String.valueOf(daySelect.getSelectedItem()), String.valueOf(timeSelect.getSelectedItem()));
-        if(AppointmentHandler.makeAppointment(AccountHandler.getLoggedInEmail(),VehicleHandler.getSelectedVehicleVin(),formattedTime))
-            JOptionPane.showMessageDialog(this, "Appointment made!", "Success", JOptionPane.ERROR_MESSAGE);
-        else
-            JOptionPane.showMessageDialog(this, "Failed to make an appointment please try another date and time", "Error", JOptionPane.ERROR_MESSAGE);
-    }//GEN-LAST:event_confirmButtonActionPerformed
-
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        MainScreen ms = new MainScreen();
-        ms.getPreviousFrameLocation(this.getLocationOnScreen());
-        ms.setVisible(true);
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -243,6 +242,16 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_monthSelectItemStateChanged
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        // TODO add your handling code here:
+        String formattedTime = AppointmentHandler.formatTime(String.valueOf(monthSelect.getSelectedItem()), String.valueOf(daySelect.getSelectedItem()), String.valueOf(timeSelect.getSelectedItem()));
+        if(AppointmentHandler.makeAppointment(AccountHandler.getLoggedInEmail(),VehicleHandler.getSelectedVehicleVin(),formattedTime))
+            JOptionPane.showMessageDialog(this, "Appointment made!", "Success", JOptionPane.ERROR_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(this, "Failed to make an appointment please try another date and time", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;

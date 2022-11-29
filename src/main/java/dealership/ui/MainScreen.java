@@ -11,10 +11,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Point;
 
-/**
- *
- * @author krist
- */
 public class MainScreen extends javax.swing.JFrame {
 
     /**
@@ -317,10 +313,9 @@ public class MainScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please click on a vehicle first.", "No Vehicle Selected!", JOptionPane.ERROR_MESSAGE);
         } else {
             VehicleHandler.selectVehicle(inventoryTable.getSelectedRow());
-            MakeAppointmentScreen screen = new MakeAppointmentScreen();
-            screen.getPreviousFrameLocation(this.getLocationOnScreen());
-            screen.setVisible(true);
-            dispose();
+            MakeAppointment makeAppt = new MakeAppointment(this, true);
+            makeAppt.setLocationRelativeTo(this);
+            makeAppt.setVisible(true);
         }
     }//GEN-LAST:event_makeAppointmentButtonActionPerformed
 
