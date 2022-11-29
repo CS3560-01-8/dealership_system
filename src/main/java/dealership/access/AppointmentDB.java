@@ -62,4 +62,8 @@ public class AppointmentDB {
         }
         return appointments;
     }
+
+    public static void deleteAppointment(String customerEmail, String vin) {
+        DatabaseConnector.executeInsert("DELETE FROM dealership.appointment WHERE customer_email = '" + customerEmail + "' AND vin = '" + vin + "'");
+    }
 }
