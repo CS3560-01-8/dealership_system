@@ -10,6 +10,12 @@ import dealership.controller.VehicleHandler;
 
 import javax.swing.*;
 import java.awt.Point;
+import java.awt.event.ItemEvent;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  *
@@ -17,12 +23,18 @@ import java.awt.Point;
  */
 public class MakeAppointmentScreen extends javax.swing.JFrame {
 
+    // month list
+    private final String[] MONTH_LIST = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    // current year
+    private int year;
+    
     /**
      * Creates new form MakeAppointmentScreen
      */
     public MakeAppointmentScreen() {
         initComponents();
         vehicleText.setText(VehicleHandler.getSelectedVehicleDetails());
+        setCurrentMonthDate();
     }
     
     // Gets previous frame's location on screen
@@ -30,9 +42,43 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
         this.setLocation(previous);
     }
     
+    // set options to today's date
+    private void setCurrentMonthDate() {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMMM dd YYYY");
+        String month = dateFormat.format(LocalDate.now()).substring(0, dateFormat.format(LocalDate.now()).indexOf(" "));
+        String date = dateFormat.format(LocalDate.now()).substring(dateFormat.format(LocalDate.now()).indexOf(" ") + 1, dateFormat.format(LocalDate.now()).lastIndexOf(" "));
+        String yearString = dateFormat.format(LocalDate.now()).substring(dateFormat.format(LocalDate.now()).lastIndexOf(" ") + 1);
+        year = Integer.parseInt(yearString);
+        monthSelect.getModel().setSelectedItem(month);
+        setNumDays(month, date, year);
+    }
+    
+    // change month to int number
+    private int monthNameToInt(String monthName) {
+        int monthNum = 0;
+        for (int i = monthNum; i < MONTH_LIST.length; i++) {
+            if (monthName.equals(MONTH_LIST[i]))
+                monthNum = i + 1;
+        }
+        return monthNum;
+    }
+    
     // set number of days in date combo box
-    private void setNumDays() {
-        
+    private void setNumDays(String monthName, String date, int year) {
+        YearMonth ym = YearMonth.of(year, monthNameToInt(monthName));
+        int numOfDays = ym.lengthOfMonth();
+        ArrayList<String> days = new ArrayList<String>();
+        for (int i = 1; i <= numOfDays; i++)
+            days.add(String.valueOf(i));
+        daySelect.setModel(new DefaultComboBoxModel<>(new Vector<>(days)));
+        if (date == null)
+            daySelect.getModel().setSelectedItem("1");
+        else {
+            if (Integer.valueOf(date) > numOfDays)
+                daySelect.getModel().setSelectedItem(daySelect.getModel().getElementAt(daySelect.getModel().getSize() - 1));
+            else
+                daySelect.getModel().setSelectedItem(date);
+        }
     }
 
     /**
@@ -63,12 +109,15 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
 
         mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Appointment Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        monthSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "Februrary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        monthSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        monthSelect.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                monthSelectItemStateChanged(evt);
+            }
+        });
 
         monthLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         monthLabel.setText("Month");
-
-        daySelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28" }));
 
         dayLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         dayLabel.setText("Day");
@@ -189,6 +238,15 @@ public class MakeAppointmentScreen extends javax.swing.JFrame {
         ms.setVisible(true);
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void monthSelectItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_monthSelectItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            if (evt.getSource() == monthSelect) {
+                setNumDays((String) monthSelect.getSelectedItem(), (String) daySelect.getSelectedItem(), year);
+            }
+        }
+    }//GEN-LAST:event_monthSelectItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
