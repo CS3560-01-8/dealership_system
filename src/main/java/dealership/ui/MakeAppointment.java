@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -41,7 +42,7 @@ public class MakeAppointment extends javax.swing.JDialog {
     
     // set options to today's date
     private void setCurrentMonthDate() {
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMMM dd YYYY");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMMM dd YYYY", Locale.ENGLISH);
         String month = dateFormat.format(LocalDate.now()).substring(0, dateFormat.format(LocalDate.now()).indexOf(" "));
         String date = dateFormat.format(LocalDate.now()).substring(dateFormat.format(LocalDate.now()).indexOf(" ") + 1, dateFormat.format(LocalDate.now()).lastIndexOf(" "));
         String yearString = dateFormat.format(LocalDate.now()).substring(dateFormat.format(LocalDate.now()).lastIndexOf(" ") + 1);
