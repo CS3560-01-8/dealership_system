@@ -23,6 +23,10 @@ public class MainScreen extends javax.swing.JFrame {
         if (AccountHandler.isLoggedIn()) {
             statusLabel.setText("Hi there, " + AccountHandler.getLoggedInName() + "!");
             accountButton.setText("Account");
+            if (AccountHandler.isEmployee())
+                appointmentAndSaleButton.setText("Conduct Sale");
+            else
+                appointmentAndSaleButton.setText("Schedule Test Drive");
         } else {
             statusLabel.setText("Not Logged In");
         }
@@ -73,7 +77,7 @@ public class MainScreen extends javax.swing.JFrame {
         inventoryTable = new javax.swing.JTable();
         statusLabel = new javax.swing.JLabel();
         accountButton = new javax.swing.JButton();
-        makeAppointmentButton = new javax.swing.JButton();
+        appointmentAndSaleButton = new javax.swing.JButton();
         jPanelAppointments = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -199,11 +203,11 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        makeAppointmentButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        makeAppointmentButton.setText("Schedule Test Drive");
-        makeAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
+        appointmentAndSaleButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        appointmentAndSaleButton.setText("Schedule Test Drive");
+        appointmentAndSaleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                makeAppointmentButtonActionPerformed(evt);
+                appointmentAndSaleButtonActionPerformed(evt);
             }
         });
 
@@ -223,7 +227,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(makeAppointmentButton)
+                .addComponent(appointmentAndSaleButton)
                 .addGap(33, 33, 33))
         );
         jPanelInventoryLayout.setVerticalGroup(
@@ -241,7 +245,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(makeAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(appointmentAndSaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
 
@@ -306,18 +310,25 @@ public class MainScreen extends javax.swing.JFrame {
                 String.valueOf(makeFilterOption.getSelectedItem()), String.valueOf(modelFilterOption.getSelectedItem()));
     }//GEN-LAST:event_modelFilterOptionActionPerformed
 
-    private void makeAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeAppointmentButtonActionPerformed
-        if (!AccountHandler.isLoggedIn()) {
-            JOptionPane.showMessageDialog(this, "You must log in before scheduling a test drive!", "Not Logged In", JOptionPane.ERROR_MESSAGE);
-        } else if (inventoryTable.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Please click on a vehicle first.", "No Vehicle Selected!", JOptionPane.ERROR_MESSAGE);
+    private void appointmentAndSaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentAndSaleButtonActionPerformed
+        if (AccountHandler.isEmployee()) {
+            MakeSaleScreen1 sale1 = new MakeSaleScreen1();
+            sale1.getPreviousFrameLocation(this.getLocationOnScreen());
+            sale1.setVisible(true);
+            dispose();
         } else {
-            VehicleHandler.selectVehicle(inventoryTable.getSelectedRow());
-            MakeAppointment makeAppt = new MakeAppointment(this, true);
-            makeAppt.setLocationRelativeTo(this);
-            makeAppt.setVisible(true);
+            if (!AccountHandler.isLoggedIn()) {
+                JOptionPane.showMessageDialog(this, "You must log in before scheduling a test drive!", "Not Logged In", JOptionPane.ERROR_MESSAGE);
+            } else if (inventoryTable.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(this, "Please click on a vehicle first.", "No Vehicle Selected!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                VehicleHandler.selectVehicle(inventoryTable.getSelectedRow());
+                MakeAppointment makeAppt = new MakeAppointment(this, true);
+                makeAppt.setLocationRelativeTo(this);
+                makeAppt.setVisible(true);
+            }
         }
-    }//GEN-LAST:event_makeAppointmentButtonActionPerformed
+    }//GEN-LAST:event_appointmentAndSaleButtonActionPerformed
 
     private void conditionFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conditionFilterOptionActionPerformed
         // TODO add your handling code here:
@@ -333,6 +344,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountButton;
+    private javax.swing.JButton appointmentAndSaleButton;
     private javax.swing.JComboBox<String> conditionFilterOption;
     private javax.swing.JLabel conditionLabel;
     private javax.swing.JTable inventoryTable;
@@ -341,7 +353,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelInventory;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JButton makeAppointmentButton;
     private javax.swing.JComboBox<String> makeFilterOption;
     private javax.swing.JLabel makeLabel;
     private javax.swing.JComboBox<String> mileageFilterOption;

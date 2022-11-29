@@ -82,7 +82,7 @@
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="accountButton" min="-2" pref="85" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="makeAppointmentButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="appointmentAndSaleButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -105,7 +105,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="accountButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="makeAppointmentButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="appointmentAndSaleButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
@@ -320,7 +320,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accountButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="makeAppointmentButton">
+            <Component class="javax.swing.JButton" name="appointmentAndSaleButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
@@ -328,7 +328,7 @@
                 <Property name="text" type="java.lang.String" value="Schedule Test Drive"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="makeAppointmentButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="appointmentAndSaleButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
