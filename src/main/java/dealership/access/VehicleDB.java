@@ -9,30 +9,14 @@ import java.util.ArrayList;
 
 public class VehicleDB {
 
-    public static ArrayList<Vehicle> getAvailableVehicles() {
-        return getAvailableVehicles("", "");
-    }
-
-    public static ArrayList<Vehicle> getAvailableVehicles(String make) {
-        return getAvailableVehicles(make, "");
-    }
-
-    public static ArrayList<Vehicle> getAvailableVehicles(String make, String model) {
-        String query = "SELECT * FROM vehicle WHERE sold = '0'";
-        if (!make.isEmpty()) {
-            query += " AND make = '" + make + "'";
-        }
-        if (!model.isEmpty()) {
-            query += " AND model = '" + model + "'";
-        }
-
-        ResultSet res = DatabaseConnector.executeQuery(query);
+    public static ArrayList<Vehicle> getAvailableVehicles(String whereClause) {
+        ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM vehicle " + whereClause + " ORDER BY make");
         ArrayList<Vehicle> vehicles = new ArrayList<>();
         try {
             while (res.next()) {
                 vehicles.add(new Vehicle(res.getString("vin"), res.getString("make"),
                         res.getString("model"), res.getInt("year"),
-                        res.getString("condition"), res.getInt("mileage"),
+                        res.getString("color"), res.getInt("mileage"),
                         res.getInt("listing_price"), res.getBoolean("sold")));
             }
         } catch (SQLException e) {
@@ -47,6 +31,10 @@ public class VehicleDB {
 
     public static ArrayList<String> getModels(String make) {
         return executeQueryIntoList("SELECT DISTINCT model from dealership.vehicle WHERE sold = '0' AND make = '" + make + "' ORDER BY model");
+    }
+
+    public static ArrayList<String> getColors() {
+        return executeQueryIntoList("SELECT DISTINCT color from dealership.vehicle WHERE sold = '0' ORDER BY color");
     }
 
     private static ArrayList<String> executeQueryIntoList(String query) {
