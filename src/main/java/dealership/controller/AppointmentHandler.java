@@ -3,7 +3,10 @@ package dealership.controller;
 import dealership.access.AppointmentDB;
 import dealership.object.Appointment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Year;
+import java.util.Date;
 import java.util.HashMap;
 
 public class AppointmentHandler {
@@ -39,5 +42,18 @@ public class AppointmentHandler {
         String min = time.substring(startTime.indexOf(":") + 1, startTime.indexOf(" "));
         hour += !startTime.contains("P") || hour == 12 ? 0 : 12;
         return Year.now().getValue() + "-" + monthToInt.get(month) + "-" + date + " " + hour + ":" + min;
+    }
+
+    public static boolean isTimeValid(String time){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date currentTime = new Date();
+        Date appointmentTime = null;
+        try{
+            appointmentTime = formatter.parse(time);
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+
+        return currentTime.compareTo(appointmentTime) < 0;
     }
 }
