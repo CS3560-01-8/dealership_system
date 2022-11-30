@@ -25,6 +25,35 @@ public class LoginScreen extends javax.swing.JFrame {
     public void getPreviousFrameLocation(Point previous) {
         this.setLocation(previous);
     }
+    
+    // Checks if email is a valid format
+    private boolean checkEmailFormat() {
+        String[] unallowed = {"/", "\"", "\\", " ", "#", "*", "(", ")"};
+        for (int i = 0; i < emailInput.getText().length(); i++) {
+            if (String.valueOf(emailInput.getText().charAt(i)).equals(unallowed[i]))
+                return false;
+        }
+        int findA = emailInput.getText().indexOf("@");
+        if (findA != -1) {
+            String ending = emailInput.getText().substring(findA + 1);
+            int findAnotherA = ending.indexOf("@");
+            if (findAnotherA == -1) {
+                int findMailEnd = ending.lastIndexOf(".");
+                if (findMailEnd != -1) {
+                    String mailEnd = ending.substring(findMailEnd + 1);
+                    if ((mailEnd.length() < 2) || (mailEnd.length() > 3))
+                        return false;
+                } else
+                    return false;
+            } else
+                return false;
+            String start = emailInput.getText().substring(0, findA);
+            if (String.valueOf(start.charAt(0)).equals("."))
+                return false;
+        } else
+            return false;
+        return true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,22 +183,24 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        if (emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals("")) {
+        if (emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals(""))
             JOptionPane.showMessageDialog(this, "Please enter an email and password.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        } else if (emailInput.getText().equals("") && !valueOf(passwordInput.getPassword()).equals("")) {
+        else if (emailInput.getText().equals("") && !valueOf(passwordInput.getPassword()).equals(""))
             JOptionPane.showMessageDialog(this, "Please enter email.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        } else if (!emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals("")) {
+        else if (!emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals(""))
             JOptionPane.showMessageDialog(this, "Please enter password.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (AccountHandler.tryLogin(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
-                JOptionPane.showMessageDialog(this, "Login success!", "Log In", JOptionPane.INFORMATION_MESSAGE);
-                MainScreen ms = new MainScreen();
-                ms.getPreviousFrameLocation(this.getLocationOnScreen());
-                ms.setVisible(true);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Login failed! Please check your email or password", "Log in Failed", JOptionPane.ERROR_MESSAGE);
-            }
+        else {
+            if (checkEmailFormat()) {
+                if (AccountHandler.tryLogin(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
+                    JOptionPane.showMessageDialog(this, "Login success!", "Log In", JOptionPane.INFORMATION_MESSAGE);
+                    MainScreen ms = new MainScreen();
+                    ms.getPreviousFrameLocation(this.getLocationOnScreen());
+                    ms.setVisible(true);
+                    dispose();
+                } else
+                    JOptionPane.showMessageDialog(this, "Please check your email or password", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            } else
+                JOptionPane.showMessageDialog(this, "Email is not in the right format. Please retype email.", "Login Failed", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

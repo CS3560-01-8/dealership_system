@@ -28,7 +28,7 @@ public class CreateAccount extends javax.swing.JFrame {
     }
     
     // Find missing information and create message dialog box;
-    private void checkForMissingInfo() {
+    private boolean checkForMissingInfo() {
         boolean anyMissing = false;
         String message = "Please enter ";
         String[] missing = new String[7];
@@ -68,31 +68,7 @@ public class CreateAccount extends javax.swing.JFrame {
             index++;
             anyMissing = true;
         }
-        if (!anyMissing) {
-            if (AccountHandler.createCustomerAccount(emailInput.getText(),
-                        String.valueOf(passwordInput.getPassword()),
-                        firstNameInput.getText(),
-                        lastNameInput.getText(),
-                        phoneInput.getText(),
-                        streetInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText())) {
-                JOptionPane.showMessageDialog(this, "Your account has been created.",
-                        "Account Created", JOptionPane.INFORMATION_MESSAGE);
-                AccountHandler.tryLogin(emailInput.getText(), String.valueOf(passwordInput.getPassword()));
-                MainScreen ms = new MainScreen();
-                ms.getPreviousFrameLocation(this.getLocationOnScreen());
-                ms.setVisible(true);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "An account already exists with that email!",
-                        "Email Taken", JOptionPane.ERROR_MESSAGE);
-            }
-            AccountHandler.createCustomerAccount(emailInput.getText(),
-                String.valueOf(passwordInput.getPassword()),
-                firstNameInput.getText(),
-                lastNameInput.getText(),
-                phoneInput.getText(),
-                streetInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText());
-        } else {
+        if (anyMissing) {
             if (missing[missing.length - 1] == null) {
                 String firstLetter = missing[0].substring(0,1);
                 switch (firstLetter) {
@@ -125,6 +101,86 @@ public class CreateAccount extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(this, message, "Missing information", JOptionPane.ERROR_MESSAGE);
         }
+        return anyMissing;
+    }
+     // Checks if email is a valid format; true if correct, false if not
+    private boolean checkEmailFormat() {
+        String[] unallowed = {"/", "\"", "\\", " ", "#", "*", "(", ")"};
+        for (int i = 0; i < emailInput.getText().length(); i++) {
+            if (String.valueOf(emailInput.getText().charAt(i)).equals(unallowed[i]))
+                return false;
+        }
+        int findA = emailInput.getText().indexOf("@");
+        if (findA != -1) {
+            String ending = emailInput.getText().substring(findA + 1);
+            int findAnotherA = ending.indexOf("@");
+            if (findAnotherA == -1) {
+                int findMailEnd = ending.lastIndexOf(".");
+                if (findMailEnd != -1) {
+                    String mailEnd = ending.substring(findMailEnd + 1);
+                    if ((mailEnd.length() < 2) || (mailEnd.length() > 3))
+                        return false;
+                } else
+                    return false;
+            } else
+                return false;
+            String start = emailInput.getText().substring(0, findA);
+            if (String.valueOf(start.charAt(0)).equals("."))
+                return false;
+        } else
+            return false;
+        return true;
+    }
+    
+    // Check first and last names to see if they are valid; true if correct, false otherwise
+    private boolean checkName() {
+        for (int i = 0; i < firstNameInput.getText().length(); i++) {
+            if (!Character.isLetter(firstNameInput.getText().charAt(i))) {
+                JOptionPane.showMessageDialog(this, "First name contains numbers and/or symbols. Please retype first name.", "Format Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        for (int j = 0; j < lastNameInput.getText().length(); j++) {
+            if (!Character.isLetter(lastNameInput.getText().charAt(j))) {
+                JOptionPane.showMessageDialog(this, "Last name contains numbers and/or symbols. Please retype last name.", "Format Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    // Check phone number; true if correct, false otherwise
+    // Check zip code; true if correct, false otherwise
+    private boolean checkPhoneNum() {
+        if (zipInput.getText().length() != 5) {
+            JOptionPane.showMessageDialog(this, "Zip code is not equal to 5 digits. Please retype zip code.", "Format Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            for (int i = 0; i < 5; i++) {
+                if (!Character.isDigit(zipInput.getText().charAt(i))) {
+                    JOptionPane.showMessageDialog(this, "Zip code contains letters and/or symbols. Please retype zip code.", "Format Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    // Check zip code; true if correct, false otherwise
+    private boolean checkZip() {
+        if (phoneInput.getText().length() != 10) {
+            JOptionPane.showMessageDialog(this, "Phone number is not equal to 10 digits. Please retype phone number.", "Format Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            for (int i = 0; i < 10; i++) {
+                if (!Character.isLetter(phoneInput.getText().charAt(i))) {
+                    JOptionPane.showMessageDialog(this, "Phone number contains letters and/or symbols. Please retype phone number.", "Format Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+            
+        }
+        return true;
     }
 
     /**
@@ -284,7 +340,30 @@ public class CreateAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void makeAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeAccountButtonActionPerformed
-        checkForMissingInfo();
+        if (!checkForMissingInfo()) {
+            if (checkEmailFormat()) {
+                if (checkName()) {
+                    if (checkZip() && checkPhoneNum()) {
+                        if (AccountHandler.createCustomerAccount(emailInput.getText(),
+                                String.valueOf(passwordInput.getPassword()),
+                                firstNameInput.getText(),
+                                lastNameInput.getText(),
+                                phoneInput.getText(),
+                                streetInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText())) {
+                            JOptionPane.showMessageDialog(this, "Your account has been created.",
+                                    "Account Created", JOptionPane.INFORMATION_MESSAGE);
+                            AccountHandler.tryLogin(emailInput.getText(), String.valueOf(passwordInput.getPassword()));
+                            MainScreen ms = new MainScreen();
+                            ms.getPreviousFrameLocation(this.getLocationOnScreen());
+                            ms.setVisible(true);
+                            dispose();
+                        } else
+                            JOptionPane.showMessageDialog(this, "An account already exists with that email!", "Email Taken", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } else
+                JOptionPane.showMessageDialog(this, "Email is not in the right format. Please retype email.", "Format Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_makeAccountButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
