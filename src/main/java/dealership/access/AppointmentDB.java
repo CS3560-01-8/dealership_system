@@ -48,6 +48,20 @@ public class AppointmentDB {
             e.printStackTrace();
         }
     }
+    
+    public static ArrayList<Appointment> getAllAppointments() {
+        ArrayList<Appointment> appointments = new ArrayList<>();
+        try {
+            ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM appointment");
+            while (res.next()) {
+                appointments.add(new Appointment(res.getString(1), res.getString(2), res.getString(3)));
+                System.out.print(String.format("%s, %s, %s\n", res.getString(1), res.getString(2), res.getString(3)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return appointments;
+    }
 
     public static ArrayList<Appointment> getAppointments(String email) {
         ArrayList<Appointment> appointments = new ArrayList<>();

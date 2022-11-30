@@ -9,8 +9,15 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
 
 public class AppointmentHandler {
+    
+    // list of appointments
+    private static ArrayList<Appointment> appts;
+    // index of selected appointment
+    private static int selectedIndex = -1;
+    // list to convert month's name into an int
     private static final HashMap<String, Integer> monthToInt = new HashMap<String, Integer>() {
         {
             put("January", 1);
@@ -62,5 +69,60 @@ public class AppointmentHandler {
         if(AccountHandler.isLoggedIn())
             return AppointmentDB.getAppointments(AccountHandler.getLoggedInEmail());
         return null;
+    }
+    
+    // load all appointments for a specific customer onto table
+    public static void loadAppointmentsIntoTable(DefaultTableModel tableModel) {
+        appts = getLoggedInCustomerAppointments();
+        tableModel.setRowCount(0);
+        Object[] rowData = new Object[2];
+        if (appts != null) {
+            for (Appointment a : appts) {
+                rowData[0] = a.getDateTime();
+                rowData[1] = a.getVin();
+                tableModel.addRow(rowData);
+            }
+        } else {
+            rowData[0] = "No appointments created";
+            tableModel.addRow(rowData);
+        }
+    }
+    
+    // load all appointments onto table
+    public static void loadAllAppointmentsIntoTable(DefaultTableModel tableModel) {
+        appts = AppointmentDB.getAllAppointments();
+        tableModel.setRowCount(0);
+        Object[] rowData = new Object[3];
+        if (appts != null) {
+            for (Appointment a : appts) {
+                rowData[0] = a.getCustomerEmail();
+                rowData[1] = a.getDateTime();
+                rowData[2] = a.getVin();
+                tableModel.addRow(rowData);
+            }
+        } else {
+            rowData[0] = "No appointments created";
+            tableModel.addRow(rowData);
+        }
+    }
+    
+    // set selected item
+    public static void selectAppointment(int index) {
+        if (index >= 0 && index < appts.size()) {
+            selectedIndex = index;
+        }
+    }
+    
+    // get selected item
+    private static Appointment getSelectedAppointment() {
+        return appts.get(selectedIndex);
+    }
+    
+    // delete selected item
+    public static void removeAppointmentFromTable(DefaultTableModel tableModel) {
+        if (appts != null) {
+            AppointmentDB.deleteAppointment(getSelectedAppointment().getCustomerEmail(), getSelectedAppointment().getVin());
+            tableModel.removeRow(selectedIndex);
+        }
     }
 }

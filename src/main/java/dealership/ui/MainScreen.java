@@ -5,12 +5,11 @@
 package dealership.ui;
 
 import dealership.controller.AccountHandler;
+import dealership.controller.AppointmentHandler;
 import dealership.controller.VehicleHandler;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class MainScreen extends javax.swing.JFrame {
@@ -21,18 +20,21 @@ public class MainScreen extends javax.swing.JFrame {
     public MainScreen() {
         initComponents();
         initInventory();
+        initAppointments();
         VehicleHandler.loadStylesIntoComboBox(styleFilterOption);
         VehicleHandler.loadMakesIntoComboBox(makeFilterOption);
         VehicleHandler.loadColorsIntoComboBox(colorFilterOption);
         if (AccountHandler.isLoggedIn()) {
             statusLabel.setText("Hi there, " + AccountHandler.getLoggedInName() + "!");
             accountButton.setText("Account");
+            deleteAppointmentButton.setEnabled(true);
             if (AccountHandler.isEmployee())
                 appointmentAndSaleButton.setText("Conduct Sale");
             else
                 appointmentAndSaleButton.setText("Schedule Test Drive");
         } else {
             statusLabel.setText("Not Logged In");
+            deleteAppointmentButton.setEnabled(false);
         }
     }
     
@@ -41,6 +43,7 @@ public class MainScreen extends javax.swing.JFrame {
         this.setLocation(previous);
     }
 
+    // Fill table for car inventory
     private void initInventory() {
         inventoryTable.setModel(new DefaultTableModel(new Object[] {"Year", "Make", "Model", "Style", "Color", "Mileage", "Price"}, 0) {
             @Override
@@ -59,6 +62,36 @@ public class MainScreen extends javax.swing.JFrame {
         inventoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         inventoryTable.getTableHeader().setResizingAllowed(false);
         inventoryTable.getTableHeader().setReorderingAllowed(false);
+    }
+    
+    // Fill table for appointment table
+    private void initAppointments() {
+        if (AccountHandler.isEmployee()) {
+            appointmentTable.setModel(new DefaultTableModel(new Object[] {"Customer Email", "Date/Time", "Vin"}, 0) {
+                @Override
+                //Prevent editing cells of the table
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
+            AppointmentHandler.loadAllAppointmentsIntoTable((DefaultTableModel) appointmentTable.getModel());
+        } else {
+            appointmentTable.setModel(new DefaultTableModel(new Object[] {"Date/Time", "Vin"}, 0) {
+                @Override
+                //Prevent editing cells of the table
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
+            AppointmentHandler.loadAppointmentsIntoTable((DefaultTableModel) appointmentTable.getModel());
+        }
+        appointmentTable.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+        ((JLabel) appointmentTable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
+        //appointmentTable.getColumnModel().getColumn(0).setPreferredWidth(40);
+        //appointmentTable.getColumnModel().getColumn(4).setPreferredWidth(40);
+        appointmentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        appointmentTable.getTableHeader().setResizingAllowed(false);
+        appointmentTable.getTableHeader().setReorderingAllowed(false);
     }
 
     /**
@@ -81,12 +114,15 @@ public class MainScreen extends javax.swing.JFrame {
         colorFilterOption = new javax.swing.JComboBox<>();
         styleLabel = new javax.swing.JLabel();
         styleFilterOption = new javax.swing.JComboBox<>();
-        jScrollPane = new javax.swing.JScrollPane();
+        inventoryScrollPane = new javax.swing.JScrollPane();
         inventoryTable = new javax.swing.JTable();
         statusLabel = new javax.swing.JLabel();
         accountButton = new javax.swing.JButton();
         appointmentAndSaleButton = new javax.swing.JButton();
         jPanelAppointments = new javax.swing.JPanel();
+        appointmentScrollPane = new javax.swing.JScrollPane();
+        appointmentTable = new javax.swing.JTable();
+        deleteAppointmentButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("🚗 Car Dealership");
@@ -182,7 +218,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(colorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(colorFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         inventoryTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -195,7 +231,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         ));
         inventoryTable.setShowHorizontalLines(true);
-        jScrollPane.setViewportView(inventoryTable);
+        inventoryScrollPane.setViewportView(inventoryTable);
 
         statusLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         statusLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -237,7 +273,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
+                                    .addComponent(inventoryScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInventoryLayout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(appointmentAndSaleButton)))))
@@ -254,7 +290,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(statusLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(inventoryScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(16, 16, 16)
                 .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(appointmentAndSaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,15 +300,47 @@ public class MainScreen extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Vehicle Inventory", null, jPanelInventory, "");
 
+        appointmentTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        appointmentScrollPane.setViewportView(appointmentTable);
+
+        deleteAppointmentButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        deleteAppointmentButton.setText("Delete");
+        deleteAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAppointmentButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAppointmentsLayout = new javax.swing.GroupLayout(jPanelAppointments);
         jPanelAppointments.setLayout(jPanelAppointmentsLayout);
         jPanelAppointmentsLayout.setHorizontalGroup(
             jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 781, Short.MAX_VALUE)
+            .addGroup(jPanelAppointmentsLayout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addGroup(jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(appointmentScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanelAppointmentsLayout.setVerticalGroup(
             jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addGroup(jPanelAppointmentsLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(appointmentScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("My Appointments", jPanelAppointments);
@@ -285,7 +353,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jTabbedPane.getAccessibleContext().setAccessibleName("Tabs");
@@ -301,7 +369,10 @@ public class MainScreen extends javax.swing.JFrame {
     private void accountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButtonActionPerformed
         // TODO add your handling code here:
         if (AccountHandler.isLoggedIn()) {
-            // add edit account screen here
+            EditAccountScreen edit = new EditAccountScreen();
+            edit.getPreviousFrameLocation(this.getLocationOnScreen());
+            edit.setVisible(true);
+            dispose();
         } else {
             LoginScreen login = new LoginScreen();
             login.getPreviousFrameLocation(this.getLocationOnScreen());
@@ -352,16 +423,31 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_appointmentAndSaleButtonActionPerformed
 
+    private void deleteAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAppointmentButtonActionPerformed
+        // TODO add your handling code here:
+        if (appointmentTable.getSelectedRow() == -1) 
+            JOptionPane.showMessageDialog(this, "Please click on an appointment.", "No Appointment Selected", JOptionPane.ERROR_MESSAGE);
+        else {
+                AppointmentHandler.selectAppointment(appointmentTable.getSelectedRow());
+                AppointmentHandler.removeAppointmentFromTable((DefaultTableModel) appointmentTable.getModel());
+                JOptionPane.showMessageDialog(this, "Appointment has been deleted.", "Appointment Deleted", JOptionPane.INFORMATION_MESSAGE);
+                initAppointments();
+        }
+    }//GEN-LAST:event_deleteAppointmentButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountButton;
     private javax.swing.JButton appointmentAndSaleButton;
+    private javax.swing.JScrollPane appointmentScrollPane;
+    private javax.swing.JTable appointmentTable;
     private javax.swing.JComboBox<String> colorFilterOption;
     private javax.swing.JLabel colorLabel;
+    private javax.swing.JButton deleteAppointmentButton;
+    private javax.swing.JScrollPane inventoryScrollPane;
     private javax.swing.JTable inventoryTable;
     private javax.swing.JPanel jPanelAppointments;
     private javax.swing.JPanel jPanelFilter;
     private javax.swing.JPanel jPanelInventory;
-    private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JComboBox<String> makeFilterOption;
     private javax.swing.JLabel makeLabel;
