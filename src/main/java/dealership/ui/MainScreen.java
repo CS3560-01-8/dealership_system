@@ -20,6 +20,7 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         initInventory();
         VehicleHandler.loadMakesIntoComboBox(makeFilterOption);
+        VehicleHandler.loadColorsIntoComboBox(colorFilterOption);
         if (AccountHandler.isLoggedIn()) {
             statusLabel.setText("Hi there, " + AccountHandler.getLoggedInName() + "!");
             accountButton.setText("Account");
@@ -38,14 +39,14 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     private void initInventory() {
-        inventoryTable.setModel(new DefaultTableModel(new Object[] {"Year", "Make", "Model", "Mileage", "Condition", "Price"}, 0) {
+        inventoryTable.setModel(new DefaultTableModel(new Object[] {"Year", "Make", "Model", "Color", "Mileage", "Price"}, 0) {
             @Override
             //Prevent editing cells of the table
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
-        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(), "Any", "Any");
+        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel());
         inventoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         inventoryTable.getTableHeader().setResizingAllowed(false);
         inventoryTable.getTableHeader().setReorderingAllowed(false);
@@ -67,8 +68,8 @@ public class MainScreen extends javax.swing.JFrame {
         makeLabel = new javax.swing.JLabel();
         modelFilterOption = new javax.swing.JComboBox<>();
         modelLabel = new javax.swing.JLabel();
-        conditionLabel = new javax.swing.JLabel();
-        conditionFilterOption = new javax.swing.JComboBox<>();
+        colorLabel = new javax.swing.JLabel();
+        colorFilterOption = new javax.swing.JComboBox<>();
         mileageLabel = new javax.swing.JLabel();
         mileageFilterOption = new javax.swing.JComboBox<>();
         priceLabel = new javax.swing.JLabel();
@@ -89,6 +90,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanelFilter.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filter Results", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
+        makeFilterOption.setName(""); // NOI18N
         makeFilterOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 makeFilterOptionActionPerformed(evt);
@@ -106,18 +108,19 @@ public class MainScreen extends javax.swing.JFrame {
 
         modelLabel.setText("Model");
 
-        conditionLabel.setText("Condition");
+        colorLabel.setText("Color");
 
-        conditionFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "New", "Used" }));
-        conditionFilterOption.addActionListener(new java.awt.event.ActionListener() {
+        colorFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "New", "Used" }));
+        colorFilterOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                conditionFilterOptionActionPerformed(evt);
+                colorFilterOptionActionPerformed(evt);
             }
         });
 
         mileageLabel.setText("Mileage");
 
         mileageFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        mileageFilterOption.setEnabled(false);
         mileageFilterOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mileageFilterOptionActionPerformed(evt);
@@ -127,6 +130,7 @@ public class MainScreen extends javax.swing.JFrame {
         priceLabel.setText("Price");
 
         priceFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        priceFilterOption.setEnabled(false);
         priceFilterOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 priceFilterOptionActionPerformed(evt);
@@ -142,13 +146,13 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(makeFilterOption, 0, 95, Short.MAX_VALUE)
                     .addComponent(modelFilterOption, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(conditionFilterOption, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(colorFilterOption, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mileageFilterOption, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelFilterLayout.createSequentialGroup()
                         .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(makeLabel)
                             .addComponent(modelLabel)
-                            .addComponent(conditionLabel)
+                            .addComponent(colorLabel)
                             .addComponent(mileageLabel)
                             .addComponent(priceLabel))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -166,9 +170,9 @@ public class MainScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(modelFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(conditionLabel)
+                .addComponent(colorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(conditionFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(colorFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mileageLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -301,14 +305,21 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void makeFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeFilterOptionActionPerformed
         VehicleHandler.loadModelsIntoComboBox(modelFilterOption, String.valueOf(makeFilterOption.getSelectedItem()));
-        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(),
-                String.valueOf(makeFilterOption.getSelectedItem()), String.valueOf(modelFilterOption.getSelectedItem()));
+        VehicleHandler.getFilter().setMake(String.valueOf(makeFilterOption.getSelectedItem()));
+        VehicleHandler.getFilter().setModel("Any");
+        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel());
     }//GEN-LAST:event_makeFilterOptionActionPerformed
 
     private void modelFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelFilterOptionActionPerformed
-        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel(),
-                String.valueOf(makeFilterOption.getSelectedItem()), String.valueOf(modelFilterOption.getSelectedItem()));
+        VehicleHandler.getFilter().setModel(String.valueOf(modelFilterOption.getSelectedItem()));
+        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel());
     }//GEN-LAST:event_modelFilterOptionActionPerformed
+
+    private void colorFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorFilterOptionActionPerformed
+        // TODO add your handling code here:
+        VehicleHandler.getFilter().setColor(String.valueOf(colorFilterOption.getSelectedItem()));
+        VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel());
+    }//GEN-LAST:event_colorFilterOptionActionPerformed
 
     private void appointmentAndSaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentAndSaleButtonActionPerformed
         if (AccountHandler.isEmployee()) {
@@ -330,10 +341,6 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_appointmentAndSaleButtonActionPerformed
 
-    private void conditionFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conditionFilterOptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_conditionFilterOptionActionPerformed
-
     private void mileageFilterOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mileageFilterOptionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mileageFilterOptionActionPerformed
@@ -345,8 +352,8 @@ public class MainScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountButton;
     private javax.swing.JButton appointmentAndSaleButton;
-    private javax.swing.JComboBox<String> conditionFilterOption;
-    private javax.swing.JLabel conditionLabel;
+    private javax.swing.JComboBox<String> colorFilterOption;
+    private javax.swing.JLabel colorLabel;
     private javax.swing.JTable inventoryTable;
     private javax.swing.JPanel jPanelAppointments;
     private javax.swing.JPanel jPanelFilter;

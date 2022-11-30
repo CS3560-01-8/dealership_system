@@ -2,6 +2,7 @@ package dealership.controller;
 
 import dealership.access.VehicleDB;
 import dealership.object.Vehicle;
+import dealership.util.VehicleFilter;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,15 +13,10 @@ public class VehicleHandler {
 
     private static ArrayList<Vehicle> loadedVehicles;
     private static int selectedIndex = -1;
+    private static final VehicleFilter filter = new VehicleFilter();
 
-    public static void loadVehiclesIntoTable(DefaultTableModel tableModel, String make, String model) {
-        if (make.equals("Any")) {
-            loadedVehicles = VehicleDB.getAvailableVehicles();
-        } else if (model.equals("Any")) {
-            loadedVehicles = VehicleDB.getAvailableVehicles(make);
-        } else {
-            loadedVehicles = VehicleDB.getAvailableVehicles(make, model);
-        }
+    public static void loadVehiclesIntoTable(DefaultTableModel tableModel) {
+        loadedVehicles = Vehicle.getAvailableVehicles(filter);
         tableModel.setRowCount(0);
         for (Vehicle loadedVehicle : loadedVehicles) {
             tableModel.addRow(loadedVehicle.getRowData());
@@ -39,10 +35,20 @@ public class VehicleHandler {
         comboBox.setModel(new DefaultComboBoxModel<>(new Vector<>(models)));
     }
 
+    public static void loadColorsIntoComboBox(JComboBox<String> comboBox) {
+        ArrayList<String> colors = VehicleDB.getColors();
+        colors.add(0, "Any");
+        comboBox.setModel(new DefaultComboBoxModel<>(new Vector<>(colors)));
+    }
+
     public static void selectVehicle(int index) {
         if (index >= 0 && index < loadedVehicles.size()) {
             selectedIndex = index;
         }
+    }
+
+    public static VehicleFilter getFilter() {
+        return filter;
     }
 
     public static String getSelectedVehicleVin() {

@@ -132,13 +132,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="makeFilterOption" pref="95" max="32767" attributes="0"/>
                               <Component id="modelFilterOption" alignment="1" max="32767" attributes="0"/>
-                              <Component id="conditionFilterOption" alignment="1" max="32767" attributes="0"/>
+                              <Component id="colorFilterOption" alignment="1" max="32767" attributes="0"/>
                               <Component id="mileageFilterOption" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="makeLabel" min="-2" max="-2" attributes="0"/>
                                       <Component id="modelLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="conditionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="colorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="mileageLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="priceLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -161,9 +161,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="modelFilterOption" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="conditionLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="colorLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="conditionFilterOption" min="-2" max="-2" attributes="0"/>
+                          <Component id="colorFilterOption" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="mileageLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -183,6 +183,7 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>
+                    <Property name="name" type="java.lang.String" value="" noResource="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="makeFilterOptionActionPerformed"/>
@@ -216,12 +217,12 @@
                     <Property name="text" type="java.lang.String" value="Model"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="conditionLabel">
+                <Component class="javax.swing.JLabel" name="colorLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Condition"/>
+                    <Property name="text" type="java.lang.String" value="Color"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="conditionFilterOption">
+                <Component class="javax.swing.JComboBox" name="colorFilterOption">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="3">
@@ -232,7 +233,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="conditionFilterOptionActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="colorFilterOptionActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -250,6 +251,7 @@
                         <StringItem index="0" value="All"/>
                       </StringArray>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mileageFilterOptionActionPerformed"/>
@@ -270,6 +272,7 @@
                         <StringItem index="0" value="All"/>
                       </StringArray>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceFilterOptionActionPerformed"/>

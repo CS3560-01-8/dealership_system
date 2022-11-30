@@ -247,7 +247,7 @@ public class MakeAppointment extends javax.swing.JDialog {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
         String formattedTime = AppointmentHandler.formatTime(String.valueOf(monthSelect.getSelectedItem()), String.valueOf(daySelect.getSelectedItem()), String.valueOf(timeSelect.getSelectedItem()));
-        if(AppointmentHandler.makeAppointment(AccountHandler.getLoggedInEmail(),VehicleHandler.getSelectedVehicleVin(),formattedTime))
+        if(AppointmentHandler.isTimeValid(formattedTime) && AppointmentHandler.makeAppointment(AccountHandler.getLoggedInEmail(),VehicleHandler.getSelectedVehicleVin(),formattedTime))
             JOptionPane.showMessageDialog(this, "Appointment made!", "Success", JOptionPane.ERROR_MESSAGE);
         else
             JOptionPane.showMessageDialog(this, "Failed to make an appointment please try another date and time", "Error", JOptionPane.ERROR_MESSAGE);
