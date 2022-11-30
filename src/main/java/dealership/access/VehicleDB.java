@@ -14,15 +14,18 @@ public class VehicleDB {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
         try {
             while (res.next()) {
-                vehicles.add(new Vehicle(res.getString("vin"), res.getString("make"),
-                        res.getString("model"), res.getInt("year"),
-                        res.getString("color"), res.getInt("mileage"),
-                        res.getInt("listing_price"), res.getBoolean("sold")));
+                vehicles.add(new Vehicle(res.getString("vin"), res.getString("make"), res.getString("model"),
+                        res.getInt("year"), res.getString("style"), res.getString("color"),
+                        res.getInt("mileage"), res.getInt("listing_price"), res.getBoolean("sold")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return vehicles;
+    }
+
+    public static ArrayList<String> getStyles() {
+        return executeQueryIntoList("SELECT DISTINCT style from dealership.vehicle WHERE sold = '0' ORDER BY style");
     }
 
     public static ArrayList<String> getMakes() {

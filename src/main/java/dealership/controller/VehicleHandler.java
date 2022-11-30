@@ -23,6 +23,12 @@ public class VehicleHandler {
         }
     }
 
+    public static void loadStylesIntoComboBox(JComboBox<String> comboBox) {
+        ArrayList<String> styles = VehicleDB.getStyles();
+        styles.add(0, "Any");
+        comboBox.setModel(new DefaultComboBoxModel<>(new Vector<>(styles)));
+    }
+
     public static void loadMakesIntoComboBox(JComboBox<String> comboBox) {
         ArrayList<String> makes = VehicleDB.getMakes();
         makes.add(0, "Any");
