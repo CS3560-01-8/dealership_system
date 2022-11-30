@@ -4,15 +4,16 @@ public class Commission {
 
 	private int percentage;
 
-	private String employee_email;
+	private String employeeEmail;
 
-	private int sale_id;
+	private int saleId;
 
-	public Commission(int percentage, String employee_email, int sale_id)
+	public Commission(String employeeEmail, int saleId, int percentage)
 	{
+
 		this.percentage = percentage;
-		this.employee_email = employee_email;
-		this.sale_id = sale_id;
+		this.employeeEmail = employeeEmail;
+		this.saleId = saleId;
 	}
 
 	public int getPercentage() {
@@ -20,10 +21,10 @@ public class Commission {
 	}
 
 	public int getSale_id() {
-		return sale_id;
+		return saleId;
 	}
 
 	public String getEmployee_email() {
-		return employee_email;
+		return employeeEmail;
 	}
 }

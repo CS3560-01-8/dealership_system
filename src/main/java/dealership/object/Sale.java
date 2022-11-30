@@ -1,5 +1,7 @@
 package dealership.object;
 
+import java.util.ArrayList;
+
 public class Sale {
     
     private int id;
@@ -7,6 +9,7 @@ public class Sale {
     private float tax;
     private String cardNumber;
     private String vin;
+    private ArrayList<Commission> commissions;
 
     public Sale(int id, float agreedPrice, float tax, String cardNumber, String vin) {
         this.id = id;
@@ -14,6 +17,12 @@ public class Sale {
         this.tax = tax;
         this.cardNumber = cardNumber;
         this.vin = vin;
+        commissions = new ArrayList<Commission>();
+    }
+
+    public void addCommission(Commission commission)
+    {
+        commissions.add(commission);
     }
 
     public int getId() {
@@ -35,4 +44,6 @@ public class Sale {
     public String getVin() {
         return vin;
     }
+
+    public ArrayList<Commission> getCommission(){return commissions;}
 }
