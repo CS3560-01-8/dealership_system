@@ -6,6 +6,7 @@ import dealership.object.Appointment;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -55,5 +56,11 @@ public class AppointmentHandler {
         }
 
         return currentTime.compareTo(appointmentTime) < 0;
+    }
+
+    public static ArrayList<Appointment> getLoggedInCustomerAppointments(){
+        if(AccountHandler.isLoggedIn())
+            return AppointmentDB.getAppointments(AccountHandler.getLoggedInEmail());
+        return null;
     }
 }
