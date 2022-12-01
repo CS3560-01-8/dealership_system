@@ -15,10 +15,11 @@ public class AppointmentDB {
                 app.getCustomerEmail(), app.getVin(), app.getDateTime()));
     }
 
-    public static boolean checkAvailability(String customerEmail, String vin, String dateTime) {
+    public static boolean isAppointmentValid(String customerEmail, String vin, String dateTime) {
         if (!VehicleDB.checkVin(vin)) return false;
         String query1 = "SELECT 1 FROM appointment WHERE date_time = '" + dateTime + "' AND vin = '" + vin + "'";
         String query2 = "SELECT 1 FROM appointment WHERE date_time = '" + dateTime + "' AND customer_email = '" + customerEmail + "'";
+        String query3 = "SELECT 1 FROM appointment WHERE vin = '" + vin + "' AND customer_email = '" + customerEmail + "'";
         try {
             ResultSet res = DatabaseConnector.executeQuery(query1);
             if (res.next()) {
@@ -28,6 +29,11 @@ public class AppointmentDB {
             res = DatabaseConnector.executeQuery(query2);
             if (res.next()) {
                 System.out.println("Time conflict!");
+                return false;
+            }
+            res = DatabaseConnector.executeQuery(query3);
+            if (res.next()) {
+                System.out.println("Vehicle conflict!");
                 return false;
             }
         } catch (SQLException e) {
