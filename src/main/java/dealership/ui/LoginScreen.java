@@ -57,18 +57,19 @@ public class LoginScreen extends javax.swing.JFrame {
         optionalLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(700, 400));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Car Dealership");
-        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 205, 49));
+        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 205, 49));
 
         createAccountLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         createAccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         createAccountLabel.setText("Login");
-        jPanel1.add(createAccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 120, 41));
+        jPanel1.add(createAccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 120, 41));
 
         userInputPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -97,8 +98,8 @@ public class LoginScreen extends javax.swing.JFrame {
         });
         userInputPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 198, 47));
 
-        jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 440, 140));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 255, 10));
+        jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 490, 140));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 255, 10));
 
         cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cancelButton.setText("Cancel");
@@ -141,7 +142,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 170, 40));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 170, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

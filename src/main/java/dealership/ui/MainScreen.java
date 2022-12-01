@@ -251,7 +251,7 @@ public class MainScreen extends javax.swing.JFrame {
         statusLabel.setText("Not Logged In");
         statusLabel.setToolTipText("");
 
-        accountButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        accountButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         accountButton.setText("Log In");
         accountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +259,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        appointmentAndSaleButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        appointmentAndSaleButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         appointmentAndSaleButton.setText("Schedule Test Drive");
         appointmentAndSaleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

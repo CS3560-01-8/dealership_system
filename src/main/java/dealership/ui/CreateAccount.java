@@ -199,84 +199,84 @@ public class CreateAccount extends javax.swing.JFrame {
         titleLabel.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Car Dealership");
-        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 205, 49));
+        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 205, 49));
 
         createAccountLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         createAccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         createAccountLabel.setText("Create Account");
-        jPanel1.add(createAccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 168, 41));
+        jPanel1.add(createAccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 168, 41));
 
         userInputPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         emailLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         emailLabel.setText("Email");
-        userInputPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 55, -1));
+        userInputPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 55, -1));
 
         emailInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userInputPanel.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 209, -1));
+        userInputPanel.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 209, -1));
 
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         passwordLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         passwordLabel.setText("Password");
-        userInputPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        userInputPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
         passwordInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userInputPanel.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 209, -1));
+        userInputPanel.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 209, -1));
 
         firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         firstNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         firstNameLabel.setText("First Name");
-        userInputPanel.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
+        userInputPanel.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 90, -1));
 
         firstNameInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userInputPanel.add(firstNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 209, -1));
+        userInputPanel.add(firstNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 209, -1));
 
         zipLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         zipLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         zipLabel.setText("ZIP");
-        userInputPanel.add(zipLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, -1, -1));
+        userInputPanel.add(zipLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, -1, -1));
 
         lastNameInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userInputPanel.add(lastNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 209, -1));
+        userInputPanel.add(lastNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 209, -1));
 
         lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lastNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lastNameLabel.setText("Last Name");
-        userInputPanel.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        userInputPanel.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, -1, -1));
 
         phoneInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userInputPanel.add(phoneInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 209, -1));
+        userInputPanel.add(phoneInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 209, -1));
 
         phoneLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         phoneLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         phoneLabel.setText("Phone #");
-        userInputPanel.add(phoneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        userInputPanel.add(phoneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, -1, -1));
 
         zipInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userInputPanel.add(zipInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 70, -1));
+        userInputPanel.add(zipInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 70, -1));
 
         stateInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         stateInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CA", "AL", "AK", "AZ", "AR", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" }));
-        userInputPanel.add(stateInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+        userInputPanel.add(stateInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, -1));
 
         streetLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         streetLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         streetLabel.setText("Street");
-        userInputPanel.add(streetLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+        userInputPanel.add(streetLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, -1));
 
         stateLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         stateLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         stateLabel.setText("State");
-        userInputPanel.add(stateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
+        userInputPanel.add(stateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
 
         streetInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userInputPanel.add(streetInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 209, -1));
+        userInputPanel.add(streetInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 209, -1));
 
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addressLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         addressLabel.setText("Address");
-        userInputPanel.add(addressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
+        userInputPanel.add(addressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, -1));
 
         makeAccountButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         makeAccountButton.setText("Create Account");
@@ -286,7 +286,7 @@ public class CreateAccount extends javax.swing.JFrame {
                 makeAccountButtonActionPerformed(evt);
             }
         });
-        userInputPanel.add(makeAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 170, 47));
+        userInputPanel.add(makeAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 170, 47));
 
         cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cancelButton.setText("Cancel");
@@ -296,9 +296,9 @@ public class CreateAccount extends javax.swing.JFrame {
                 cancelButtonActionPerformed(evt);
             }
         });
-        userInputPanel.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 170, 47));
+        userInputPanel.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 170, 47));
 
-        jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 470, 320));
+        jPanel1.add(userInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 610, 320));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
