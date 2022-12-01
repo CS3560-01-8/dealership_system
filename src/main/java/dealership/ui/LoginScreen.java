@@ -27,32 +27,8 @@ public class LoginScreen extends javax.swing.JFrame {
     }
     
     // Checks if email is a valid format
-    private boolean checkEmailFormat() {
-        String[] unallowed = {"/", "\"", "\\", " ", "#", "*", "(", ")"};
-        for (int i = 0; i < emailInput.getText().length(); i++) {
-            if (String.valueOf(emailInput.getText().charAt(i)).equals(unallowed[i]))
-                return false;
-        }
-        int findA = emailInput.getText().indexOf("@");
-        if (findA != -1) {
-            String ending = emailInput.getText().substring(findA + 1);
-            int findAnotherA = ending.indexOf("@");
-            if (findAnotherA == -1) {
-                int findMailEnd = ending.lastIndexOf(".");
-                if (findMailEnd != -1) {
-                    String mailEnd = ending.substring(findMailEnd + 1);
-                    if ((mailEnd.length() < 2) || (mailEnd.length() > 3))
-                        return false;
-                } else
-                    return false;
-            } else
-                return false;
-            String start = emailInput.getText().substring(0, findA);
-            if (String.valueOf(start.charAt(0)).equals("."))
-                return false;
-        } else
-            return false;
-        return true;
+    private boolean isValidEmail(String email) {
+        return email.matches("[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}");
     }
 
     /**
@@ -190,7 +166,7 @@ public class LoginScreen extends javax.swing.JFrame {
         else if (!emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals(""))
             JOptionPane.showMessageDialog(this, "Please enter password.", "Missing information", JOptionPane.ERROR_MESSAGE);
         else {
-            if (checkEmailFormat()) {
+            if (isValidEmail(emailInput.getText())) {
                 if (AccountHandler.tryLogin(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
                     JOptionPane.showMessageDialog(this, "Login success!", "Log In", JOptionPane.INFORMATION_MESSAGE);
                     MainScreen ms = new MainScreen();

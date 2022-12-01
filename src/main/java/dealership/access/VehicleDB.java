@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class VehicleDB {
 
     public static ArrayList<Vehicle> getAvailableVehicles(String whereClause) {
-        ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM vehicle " + whereClause + " ORDER BY make");
+        ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM vehicle " + whereClause);
         ArrayList<Vehicle> vehicles = new ArrayList<>();
         try {
             while (res.next()) {

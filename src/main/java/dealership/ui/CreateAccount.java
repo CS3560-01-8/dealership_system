@@ -103,33 +103,9 @@ public class CreateAccount extends javax.swing.JFrame {
         }
         return anyMissing;
     }
-     // Checks if email is a valid format; true if correct, false if not
-    private boolean checkEmailFormat() {
-        String[] unallowed = {"/", "\"", "\\", " ", "#", "*", "(", ")"};
-        for (int i = 0; i < emailInput.getText().length(); i++) {
-            if (String.valueOf(emailInput.getText().charAt(i)).equals(unallowed[i]))
-                return false;
-        }
-        int findA = emailInput.getText().indexOf("@");
-        if (findA != -1) {
-            String ending = emailInput.getText().substring(findA + 1);
-            int findAnotherA = ending.indexOf("@");
-            if (findAnotherA == -1) {
-                int findMailEnd = ending.lastIndexOf(".");
-                if (findMailEnd != -1) {
-                    String mailEnd = ending.substring(findMailEnd + 1);
-                    if ((mailEnd.length() < 2) || (mailEnd.length() > 3))
-                        return false;
-                } else
-                    return false;
-            } else
-                return false;
-            String start = emailInput.getText().substring(0, findA);
-            if (String.valueOf(start.charAt(0)).equals("."))
-                return false;
-        } else
-            return false;
-        return true;
+
+    private boolean isValidEmail(String email) {
+        return email.matches("[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}");
     }
     
     // Check first and last names to see if they are valid; true if correct, false otherwise
@@ -341,7 +317,7 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void makeAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeAccountButtonActionPerformed
         if (!checkForMissingInfo()) {
-            if (checkEmailFormat()) {
+            if (isValidEmail(emailInput.getText())) {
                 if (checkName()) {
                     if (checkZip() && checkPhoneNum()) {
                         if (AccountHandler.createCustomerAccount(emailInput.getText(),
