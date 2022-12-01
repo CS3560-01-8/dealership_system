@@ -11,6 +11,8 @@ import dealership.controller.VehicleHandler;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainScreen extends javax.swing.JFrame {
 
@@ -53,8 +55,23 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel());
+
         inventoryTable.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         ((JLabel) inventoryTable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
+        inventoryTable.getTableHeader().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String sortBy = inventoryTable.getColumnName(inventoryTable.columnAtPoint(e.getPoint()));
+                if (sortBy.equals("Price")) {
+                    sortBy = "listing_price";
+                } else {
+                    sortBy = sortBy.toLowerCase();
+                }
+                VehicleHandler.getFilter().setSortBy(sortBy);
+                VehicleHandler.loadVehiclesIntoTable((DefaultTableModel) inventoryTable.getModel());
+            }
+        });
+
         inventoryTable.getColumnModel().getColumn(0).setPreferredWidth(40);
         inventoryTable.getColumnModel().getColumn(4).setPreferredWidth(40);
         inventoryTable.getColumnModel().getColumn(5).setPreferredWidth(40);
