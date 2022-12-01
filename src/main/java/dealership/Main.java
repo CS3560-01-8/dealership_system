@@ -1,9 +1,12 @@
 package dealership;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import dealership.db.DatabaseConnector;
 import dealership.ui.MainScreen;
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Main {
 
@@ -14,7 +17,11 @@ public class Main {
         }
 
         DatabaseConnector.createConnection(args[0]);
-        UIManager.setLookAndFeel(new FlatLightLaf());
+        if (LocalTime.now().isAfter(LocalTime.of(18, 0)) || LocalTime.now().isBefore(LocalTime.of(4, 0))) {
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        } else {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        }
         new MainScreen().setVisible(true);
     }
 
