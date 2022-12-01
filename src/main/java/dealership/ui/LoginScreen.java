@@ -19,6 +19,7 @@ public class LoginScreen extends javax.swing.JFrame {
      */
     public LoginScreen() {
         initComponents();
+        this.getRootPane().setDefaultButton(loginButton);
     }
     
     // Gets previous frame's location on screen
@@ -168,7 +169,6 @@ public class LoginScreen extends javax.swing.JFrame {
         else {
             if (isValidEmail(emailInput.getText())) {
                 if (AccountHandler.tryLogin(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
-                    JOptionPane.showMessageDialog(this, "Login success!", "Log In", JOptionPane.INFORMATION_MESSAGE);
                     MainScreen ms = new MainScreen();
                     ms.getPreviousFrameLocation(this.getLocationOnScreen());
                     ms.setVisible(true);
