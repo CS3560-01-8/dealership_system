@@ -5,7 +5,6 @@
 package dealership.ui;
 
 import dealership.controller.AccountHandler;
-import dealership.controller.AppointmentHandler;
 import dealership.controller.VehicleHandler;
 import java.awt.event.ItemEvent;
 import java.time.LocalDate;
@@ -14,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,14 +26,17 @@ public class MakeAppointment extends javax.swing.JDialog {
     private final String[] MONTH_LIST = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     // current year
     private int year;
+
+    private final JTable appointmentTable;
     
     /**
      * Creates new form makeAppt
      * @param parent Screen that JDialog is attached to
      * @param modal True if frame can be used while JDialog is in use, false otherwise
      */
-    public MakeAppointment(java.awt.Frame parent, boolean modal) {
+    public MakeAppointment(java.awt.Frame parent, boolean modal, JTable appointmentTable) {
         super(parent, modal);
+        this.appointmentTable = appointmentTable;
         initComponents();
         vehicleText.setText(VehicleHandler.getSelectedVehicleDetails());
         setCurrentMonthDate();
@@ -246,9 +248,10 @@ public class MakeAppointment extends javax.swing.JDialog {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-        String formattedTime = AppointmentHandler.formatTime(String.valueOf(monthSelect.getSelectedItem()), String.valueOf(daySelect.getSelectedItem()), String.valueOf(timeSelect.getSelectedItem()));
-        if(AppointmentHandler.isTimeValid(formattedTime) && AppointmentHandler.tryMakeAppointment(VehicleHandler.getSelectedVehicleVin(), formattedTime)) {
+        String formattedTime = AccountHandler.formatTime(String.valueOf(monthSelect.getSelectedItem()), String.valueOf(daySelect.getSelectedItem()), String.valueOf(timeSelect.getSelectedItem()));
+        if(AccountHandler.isTimeValid(formattedTime) && AccountHandler.tryMakeAppointment(VehicleHandler.getSelectedVehicleVin(), formattedTime)) {
             JOptionPane.showMessageDialog(this, "Appointment made!", "Success", JOptionPane.ERROR_MESSAGE);
+            AccountHandler.loadAppointmentsIntoTable((DefaultTableModel) appointmentTable.getModel());
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Failed to make an appointment please try another date and time", "Error", JOptionPane.ERROR_MESSAGE);

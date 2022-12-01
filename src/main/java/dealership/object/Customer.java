@@ -32,4 +32,8 @@ public class Customer extends Account {
         return appointments;
     }
 
+    public void removeAppointment(int selectedAppointmentIndex) {
+        AppointmentDB.deleteAppointment(super.getEmail(), appointments.get(selectedAppointmentIndex).getVin());
+        appointments.remove(selectedAppointmentIndex);
+    }
 }

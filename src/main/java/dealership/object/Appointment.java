@@ -1,9 +1,7 @@
 package dealership.object;
 
-import dealership.access.AppointmentDB;
-import dealership.access.VehicleDB;
-
 public class Appointment {
+
     private String customerEmail;
     private String vin;
     private String dateTime;
@@ -12,7 +10,6 @@ public class Appointment {
         this.customerEmail = customerEmail;
         this.vin = vin;
         this.dateTime = dateTime;
-        //AppointmentDB.write(this);
     }
 
     public String getCustomerEmail() {
@@ -27,7 +24,8 @@ public class Appointment {
         return dateTime;
     }
 
-    public static boolean vinExist(String vin) {
-        return VehicleDB.checkVin(vin);
+    public Object[] getRowData() {
+        return new Object[] {dateTime, vin};
     }
+
 }

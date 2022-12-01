@@ -5,7 +5,6 @@
 package dealership.ui;
 
 import dealership.controller.AccountHandler;
-import dealership.controller.AppointmentHandler;
 import dealership.controller.VehicleHandler;
 
 import javax.swing.*;
@@ -88,24 +87,15 @@ public class MainScreen extends javax.swing.JFrame {
     
     // Fill table for appointment table
     private void initAppointments() {
-        if (AccountHandler.isEmployee()) {
-            appointmentTable.setModel(new DefaultTableModel(new Object[] {"Customer Email", "Date/Time", "Vin"}, 0) {
+        if (AccountHandler.isLoggedIn() && !AccountHandler.isEmployee()) {
+            appointmentTable.setModel(new DefaultTableModel(new Object[] {"Date/Time", "VIN"}, 0) {
                 @Override
                 //Prevent editing cells of the table
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
             });
-            AppointmentHandler.loadAllAppointmentsIntoTable((DefaultTableModel) appointmentTable.getModel());
-        } else {
-            appointmentTable.setModel(new DefaultTableModel(new Object[] {"Date/Time", "Vin"}, 0) {
-                @Override
-                //Prevent editing cells of the table
-                public boolean isCellEditable(int row, int column) {
-                    return false;
-                }
-            });
-            AppointmentHandler.loadAppointmentsIntoTable((DefaultTableModel) appointmentTable.getModel());
+            AccountHandler.loadAppointmentsIntoTable((DefaultTableModel) appointmentTable.getModel());
         }
         appointmentTable.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
         ((JLabel) appointmentTable.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.LEFT);
@@ -438,7 +428,7 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please click on a vehicle first.", "No Vehicle Selected!", JOptionPane.ERROR_MESSAGE);
             } else {
                 VehicleHandler.selectVehicle(inventoryTable.getSelectedRow());
-                MakeAppointment makeAppt = new MakeAppointment(this, true);
+                MakeAppointment makeAppt = new MakeAppointment(this, true, appointmentTable);
                 makeAppt.setLocationRelativeTo(this);
                 makeAppt.setVisible(true);
             }
@@ -446,14 +436,12 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_appointmentAndSaleButtonActionPerformed
 
     private void deleteAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAppointmentButtonActionPerformed
-        // TODO add your handling code here:
         if (appointmentTable.getSelectedRow() == -1) 
-            JOptionPane.showMessageDialog(this, "Please click on an appointment.", "No Appointment Selected", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please click on an appointment first.", "No Appointment Selected", JOptionPane.ERROR_MESSAGE);
         else {
-                AppointmentHandler.selectAppointment(appointmentTable.getSelectedRow());
-                AppointmentHandler.removeAppointmentFromTable((DefaultTableModel) appointmentTable.getModel());
-                JOptionPane.showMessageDialog(this, "Appointment has been deleted.", "Appointment Deleted", JOptionPane.INFORMATION_MESSAGE);
-                initAppointments();
+            AccountHandler.deleteAppointment(appointmentTable.getSelectedRow());
+            AccountHandler.loadAppointmentsIntoTable((DefaultTableModel) appointmentTable.getModel());
+            JOptionPane.showMessageDialog(this, "Appointment has been deleted.", "Appointment Deleted", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_deleteAppointmentButtonActionPerformed
 
