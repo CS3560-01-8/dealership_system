@@ -26,15 +26,20 @@ public class MainScreen extends javax.swing.JFrame {
         VehicleHandler.loadStylesIntoComboBox(styleFilterOption);
         VehicleHandler.loadMakesIntoComboBox(makeFilterOption);
         VehicleHandler.loadColorsIntoComboBox(colorFilterOption);
+
         if (AccountHandler.isLoggedIn()) {
             statusLabel.setText("Hi there, " + AccountHandler.getLoggedInName() + "!");
             accountButton.setText("Account");
             deleteAppointmentButton.setEnabled(true);
-            if (AccountHandler.isEmployee())
+            if (AccountHandler.isEmployee()) {
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.addTab("My Sales", jPanelAppointments);
                 appointmentAndSaleButton.setText("Conduct Sale");
-            else
+            } else {
                 appointmentAndSaleButton.setText("Schedule Test Drive");
+            }
         } else {
+            jTabbedPane.removeTabAt(1);
             statusLabel.setText("Not Logged In");
             deleteAppointmentButton.setEnabled(false);
         }
