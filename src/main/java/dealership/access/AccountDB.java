@@ -2,7 +2,6 @@ package dealership.access;
 
 import dealership.db.DatabaseConnector;
 import dealership.object.Account;
-import dealership.object.Appointment;
 import dealership.object.Customer;
 import dealership.object.Employee;
 

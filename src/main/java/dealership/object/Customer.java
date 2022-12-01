@@ -1,13 +1,12 @@
 package dealership.object;
 
-
+import dealership.access.AppointmentDB;
 import java.util.ArrayList;
 
 public class Customer extends Account {
 
     private final String address;
-
-    private ArrayList<Appointment> appointments = null;
+    private final ArrayList<Appointment> appointments;
 
     public Customer(String email, String firstName, String lastName, String phoneNum, String address, ArrayList<Appointment> appointments) {
         super(email, firstName, lastName, phoneNum);
@@ -19,16 +18,18 @@ public class Customer extends Account {
         return address;
     }
 
-    public void addAppointments(ArrayList<Appointment> appointments) {
-        for (Appointment appointment : appointments) {
-            this.appointments.add(appointment);
+    public boolean tryAddAppointment(String vin, String dateTime) {
+        if (AppointmentDB.isAppointmentValid(super.getEmail(), vin, dateTime)) {
+            Appointment appointment = new Appointment(super.getEmail(), vin, dateTime);
+            appointments.add(appointment);
+            AppointmentDB.writeAppointment(appointment);
+            return true;
         }
+        return false;
     }
 
     public ArrayList<Appointment> getAppointments() {
         return appointments;
     }
-
-    ;
 
 }

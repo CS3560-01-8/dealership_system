@@ -2,6 +2,7 @@ package dealership.controller;
 
 import dealership.access.AppointmentDB;
 import dealership.object.Appointment;
+import dealership.object.Customer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 public class AppointmentHandler {
-    
+
     // list of appointments
     private static ArrayList<Appointment> appts;
     // index of selected appointment
@@ -35,14 +36,9 @@ public class AppointmentHandler {
         }
     };
 
-    public static boolean makeAppointment(String email, String vin, String dateTIme) {
-        if (AppointmentDB.isAppointmentValid(email, vin, dateTIme)) {
-            AppointmentDB.writeAppointment(new Appointment(email, vin, dateTIme));
-            return true;
-        }
-        return false;
+    public static boolean tryMakeAppointment(String vin, String dateTime) {
+        return ((Customer) AccountHandler.getLoggedInAccount()).tryAddAppointment(vin, dateTime);
     }
-
 
     public static String formatTime(String month, String date, String time) {
         String startTime = time.substring(0, time.indexOf("-"));

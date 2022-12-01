@@ -2,7 +2,6 @@ package dealership.controller;
 
 import dealership.access.AccountDB;
 import dealership.object.Account;
-import dealership.object.Appointment;
 import dealership.object.Customer;
 import dealership.object.Employee;
 
@@ -22,11 +21,15 @@ public class AccountHandler {
         AccountDB.writeCustomer(new Customer(email, firstName, lastName, phoneNum, address, new ArrayList<>()), password);
         return true;
     }
-    
+
+    protected static Account getLoggedInAccount() {
+        return loggedInAccount;
+    }
+
     // test if login is valid; true if so, false otherwise
     public static boolean tryLogin(String email, String password) {
         loggedInAccount = Account.getAccount(email, password);
-        return loggedInAccount != null;
+        return isLoggedIn();
     }
 
     // test if user is logged into an account; true if so, false otherwise
