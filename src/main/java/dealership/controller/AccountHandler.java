@@ -2,8 +2,11 @@ package dealership.controller;
 
 import dealership.access.AccountDB;
 import dealership.object.Account;
+import dealership.object.Appointment;
 import dealership.object.Customer;
 import dealership.object.Employee;
+
+import java.util.ArrayList;
 
 public class AccountHandler {
 
@@ -16,7 +19,7 @@ public class AccountHandler {
             return false;
         }
         //TODO fix direct call to DB with Customer object?
-        AccountDB.writeCustomer(new Customer(email, firstName, lastName, phoneNum, address), password);
+        AccountDB.writeCustomer(new Customer(email, firstName, lastName, phoneNum, address, new ArrayList<>()), password);
         return true;
     }
     

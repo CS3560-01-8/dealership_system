@@ -2,6 +2,7 @@ package dealership.access;
 
 import dealership.db.DatabaseConnector;
 import dealership.object.Account;
+import dealership.object.Appointment;
 import dealership.object.Customer;
 import dealership.object.Employee;
 
@@ -53,7 +54,8 @@ public class AccountDB {
                     "WHERE account.email = '%s' AND account.password = '%s';", email, password));
             if (res.next()) {
                 return new Customer(res.getString("email"), res.getString("first_name"),
-                        res.getString("last_name"), res.getString("phone_num"), res.getString("address"));
+                        res.getString("last_name"), res.getString("phone_num"),
+                        res.getString("address"), AppointmentDB.getAppointments(email));
             }
         } catch (SQLException e) {
             e.printStackTrace();
