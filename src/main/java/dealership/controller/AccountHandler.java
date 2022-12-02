@@ -115,4 +115,7 @@ public class AccountHandler {
         ((Customer) loggedInAccount).removeAppointment(index);
     }
 
+    public static boolean hasMadeAppointmentWithVehicle(String vin) {
+        return ((Customer) loggedInAccount).hasMadeAppointment(vin);
+    }
 }

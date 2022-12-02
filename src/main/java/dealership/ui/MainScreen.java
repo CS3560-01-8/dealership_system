@@ -424,14 +424,21 @@ public class MainScreen extends javax.swing.JFrame {
             dispose();
         } else {
             if (!AccountHandler.isLoggedIn()) {
-                JOptionPane.showMessageDialog(this, "You must log in before scheduling a test drive!", "Not Logged In", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "You must log in before scheduling a test drive!",
+                        "Not Logged In", JOptionPane.ERROR_MESSAGE);
             } else if (inventoryTable.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(this, "Please click on a vehicle first.", "No Vehicle Selected!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please click on a vehicle first.",
+                        "No Vehicle Selected", JOptionPane.ERROR_MESSAGE);
             } else {
                 VehicleHandler.selectVehicle(inventoryTable.getSelectedRow());
-                MakeAppointment makeAppt = new MakeAppointment(this, true, appointmentTable);
-                makeAppt.setLocationRelativeTo(this);
-                makeAppt.setVisible(true);
+                if (AccountHandler.hasMadeAppointmentWithVehicle(VehicleHandler.getSelectedVehicleVin())) {
+                    JOptionPane.showMessageDialog(this, "You're already scheduled to test drive this vehicle!",
+                            "Appointment Already Made", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    MakeAppointment makeAppt = new MakeAppointment(this, true, appointmentTable);
+                    makeAppt.setLocationRelativeTo(this);
+                    makeAppt.setVisible(true);
+                }
             }
         }
     }//GEN-LAST:event_appointmentAndSaleButtonActionPerformed

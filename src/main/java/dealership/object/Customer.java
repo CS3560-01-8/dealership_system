@@ -39,4 +39,13 @@ public class Customer extends Account {
         AppointmentDB.deleteAppointment(super.getEmail(), appointments.get(selectedAppointmentIndex).getVin());
         appointments.remove(selectedAppointmentIndex);
     }
+
+    public boolean hasMadeAppointment(String vin) {
+        for (Appointment appointment : appointments) {
+            if (appointment.getVin().equals(vin)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
