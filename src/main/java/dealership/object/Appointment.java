@@ -2,6 +2,7 @@ package dealership.object;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Appointment {
 
@@ -28,7 +29,7 @@ public class Appointment {
     }
 
     public Object[] getRowData() {
-        return new Object[] {dt.format(DateTimeFormatter.ofPattern("EEEE, MMM d @ h a")), vin};
+        return new Object[] {dt.format(DateTimeFormatter.ofPattern("EEEE, MMM d @ h a", Locale.ENGLISH)), vin};
     }
 
 }
