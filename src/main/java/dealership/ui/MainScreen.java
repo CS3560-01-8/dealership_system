@@ -128,18 +128,19 @@ public class MainScreen extends javax.swing.JFrame {
         styleFilterOption = new javax.swing.JComboBox<>();
         inventoryScrollPane = new javax.swing.JScrollPane();
         inventoryTable = new javax.swing.JTable();
-        statusLabel = new javax.swing.JLabel();
-        accountButton = new javax.swing.JButton();
         appointmentAndSaleButton = new javax.swing.JButton();
         jPanelAppointments = new javax.swing.JPanel();
         appointmentScrollPane = new javax.swing.JScrollPane();
         appointmentTable = new javax.swing.JTable();
         deleteAppointmentButton = new javax.swing.JButton();
+        statusLabel = new javax.swing.JLabel();
+        accountButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("🚗 Car Dealership");
+        setResizable(false);
 
-        jTabbedPane.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTabbedPane.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTabbedPane.setName(""); // NOI18N
         jTabbedPane.setOpaque(true);
         jTabbedPane.setPreferredSize(new java.awt.Dimension(700, 400));
@@ -231,7 +232,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(colorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(colorFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         inventoryTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -245,19 +246,6 @@ public class MainScreen extends javax.swing.JFrame {
         ));
         inventoryTable.setShowHorizontalLines(true);
         inventoryScrollPane.setViewportView(inventoryTable);
-
-        statusLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        statusLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        statusLabel.setText("Not Logged In");
-        statusLabel.setToolTipText("");
-
-        accountButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        accountButton.setText("Log In");
-        accountButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accountButtonActionPerformed(evt);
-            }
-        });
 
         appointmentAndSaleButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         appointmentAndSaleButton.setText("Schedule Test Drive");
@@ -273,41 +261,24 @@ public class MainScreen extends javax.swing.JFrame {
             jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInventoryLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
+                .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelInventoryLayout.createSequentialGroup()
-                        .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(inventoryScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInventoryLayout.createSequentialGroup()
-                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelInventoryLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(statusLabel))
-                            .addGroup(jPanelInventoryLayout.createSequentialGroup()
-                                .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inventoryScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInventoryLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(appointmentAndSaleButton)))))
-                        .addGap(16, 16, 16))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(appointmentAndSaleButton)))
+                .addGap(16, 16, 16))
         );
         jPanelInventoryLayout.setVerticalGroup(
             jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
                 .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelInventoryLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanelFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelInventoryLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(statusLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(inventoryScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(inventoryScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
-                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(appointmentAndSaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(appointmentAndSaleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
@@ -328,7 +299,7 @@ public class MainScreen extends javax.swing.JFrame {
         appointmentScrollPane.setViewportView(appointmentTable);
 
         deleteAppointmentButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        deleteAppointmentButton.setText("Delete");
+        deleteAppointmentButton.setLabel("Delete Appointment");
         deleteAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteAppointmentButtonActionPerformed(evt);
@@ -339,34 +310,61 @@ public class MainScreen extends javax.swing.JFrame {
         jPanelAppointments.setLayout(jPanelAppointmentsLayout);
         jPanelAppointmentsLayout.setHorizontalGroup(
             jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAppointmentsLayout.createSequentialGroup()
-                .addGap(224, 224, 224)
-                .addGroup(jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(appointmentScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(122, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAppointmentsLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(appointmentScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(16, 16, 16))
         );
         jPanelAppointmentsLayout.setVerticalGroup(
             jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAppointmentsLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(appointmentScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(appointmentScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         jTabbedPane.addTab("My Appointments", jPanelAppointments);
+
+        statusLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        statusLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        statusLabel.setText("Not Logged In");
+        statusLabel.setToolTipText("");
+
+        accountButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        accountButton.setText("Log In");
+        accountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(accountButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(statusLabel)
+                .addGap(15, 15, 15))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(statusLabel))
+                .addGap(16, 16, 16)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane.getAccessibleContext().setAccessibleName("Tabs");
