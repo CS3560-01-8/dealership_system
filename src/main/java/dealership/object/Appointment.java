@@ -1,5 +1,8 @@
 package dealership.object;
 
+
+import dealership.access.VehicleDB;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -10,10 +13,13 @@ public class Appointment {
     private final String vin;
     private final LocalDateTime dt;
 
+    private final Vehicle vehicle;
+
     public Appointment(String customerEmail, String vin, LocalDateTime dt) {
         this.customerEmail = customerEmail;
         this.vin = vin;
         this.dt = dt;
+        vehicle = VehicleDB.getVehicleByVin(vin);
     }
 
     public String getCustomerEmail() {
@@ -29,7 +35,10 @@ public class Appointment {
     }
 
     public Object[] getRowData() {
-        return new Object[] {dt.format(DateTimeFormatter.ofPattern("EEEE, MMM d @ h a", Locale.ENGLISH)), vin};
+        String date  = dt.format(DateTimeFormatter.ofPattern("EEEE, MMM d", Locale.ENGLISH));
+        String time = dt.format(DateTimeFormatter.ofPattern("hh:ss a", Locale.ENGLISH))
+                + dt.plusHours(1).format(DateTimeFormatter.ofPattern(" - hh:ss a", Locale.ENGLISH));
+        return new Object[] {date, time, vehicle.getYear() + " " + vehicle.getMake() + " " + vehicle.getModel() + " (" + vehicle.getColor() + ")"};
     }
 
 }

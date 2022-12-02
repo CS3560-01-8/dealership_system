@@ -68,5 +68,26 @@ public class VehicleDB {
         return false;
     }
 
+    public static Vehicle getVehicleByVin(String vin) {
+        String make = "";
+        String model = "";
+        int year = 0;
+        String style = "";
+        String color = "";
 
+        try {
+            ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM vehicle WHERE vin = '" + vin + "' AND sold = '0'");
+            if (res.next()) {
+                make = res.getString("make");
+                model = res.getString("model");
+                year = res.getInt("year");
+                style = res.getString("style");
+                color = res.getString("color");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Vehicle(vin, make, model, year, style, color, 0, 0, false);
+    }
 }
