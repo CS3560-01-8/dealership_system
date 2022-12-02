@@ -79,10 +79,10 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        inventoryTable.getColumnModel().getColumn(0).setPreferredWidth(40);
-        inventoryTable.getColumnModel().getColumn(4).setPreferredWidth(40);
-        inventoryTable.getColumnModel().getColumn(5).setPreferredWidth(40);
-        inventoryTable.getColumnModel().getColumn(6).setPreferredWidth(40);
+        //inventoryTable.getColumnModel().getColumn(0).setPreferredWidth(40);
+        //inventoryTable.getColumnModel().getColumn(4).setPreferredWidth(40);
+        //inventoryTable.getColumnModel().getColumn(5).setPreferredWidth(40);
+        //inventoryTable.getColumnModel().getColumn(6).setPreferredWidth(40);
         inventoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         inventoryTable.getTableHeader().setResizingAllowed(false);
         inventoryTable.getTableHeader().setReorderingAllowed(false);
@@ -121,18 +121,17 @@ public class MainScreen extends javax.swing.JFrame {
 
         jTabbedPane = new javax.swing.JTabbedPane();
         jPanelInventory = new javax.swing.JPanel();
-        jPanelFilter = new javax.swing.JPanel();
-        makeFilterOption = new javax.swing.JComboBox<>();
-        makeLabel = new javax.swing.JLabel();
-        modelFilterOption = new javax.swing.JComboBox<>();
-        modelLabel = new javax.swing.JLabel();
-        colorLabel = new javax.swing.JLabel();
-        colorFilterOption = new javax.swing.JComboBox<>();
-        styleLabel = new javax.swing.JLabel();
-        styleFilterOption = new javax.swing.JComboBox<>();
         inventoryScrollPane = new javax.swing.JScrollPane();
         inventoryTable = new javax.swing.JTable();
         appointmentAndSaleButton = new javax.swing.JButton();
+        styleLabel = new javax.swing.JLabel();
+        styleFilterOption = new javax.swing.JComboBox<>();
+        makeLabel = new javax.swing.JLabel();
+        makeFilterOption = new javax.swing.JComboBox<>();
+        modelFilterOption = new javax.swing.JComboBox<>();
+        modelLabel = new javax.swing.JLabel();
+        colorFilterOption = new javax.swing.JComboBox<>();
+        colorLabel = new javax.swing.JLabel();
         jPanelAppointments = new javax.swing.JPanel();
         appointmentScrollPane = new javax.swing.JScrollPane();
         appointmentTable = new javax.swing.JTable();
@@ -149,11 +148,42 @@ public class MainScreen extends javax.swing.JFrame {
         jTabbedPane.setOpaque(true);
         jTabbedPane.setPreferredSize(new java.awt.Dimension(700, 400));
 
-        jPanelFilter.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filter Results", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-        jPanelFilter.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        inventoryTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        inventoryTable.setShowHorizontalLines(true);
+        inventoryScrollPane.setViewportView(inventoryTable);
+
+        appointmentAndSaleButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        appointmentAndSaleButton.setText("Schedule Test Drive");
+        appointmentAndSaleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentAndSaleButtonActionPerformed(evt);
+            }
+        });
+
+        styleLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        styleLabel.setText("Style");
+
+        styleFilterOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        styleFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any" }));
+        styleFilterOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                styleFilterOptionActionPerformed(evt);
+            }
+        });
+
+        makeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        makeLabel.setText("Make");
 
         makeFilterOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        makeFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Any"}));
+        makeFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any" }));
         makeFilterOption.setName(""); // NOI18N
         makeFilterOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,11 +191,8 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        makeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        makeLabel.setText("Make");
-
         modelFilterOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        modelFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Any"}));
+        modelFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any" }));
         modelFilterOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modelFilterOptionActionPerformed(evt);
@@ -175,134 +202,87 @@ public class MainScreen extends javax.swing.JFrame {
         modelLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         modelLabel.setText("Model");
 
-        colorLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        colorLabel.setText("Color");
-
         colorFilterOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        colorFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Any", "New", "Used"}));
+        colorFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any" }));
         colorFilterOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorFilterOptionActionPerformed(evt);
             }
         });
 
-        styleLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        styleLabel.setText("Style");
-
-        styleFilterOption.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        styleFilterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Any"}));
-        styleFilterOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                styleFilterOptionActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelFilterLayout = new javax.swing.GroupLayout(jPanelFilter);
-        jPanelFilter.setLayout(jPanelFilterLayout);
-        jPanelFilterLayout.setHorizontalGroup(
-                jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelFilterLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(makeFilterOption, 0, 112, Short.MAX_VALUE)
-                                        .addComponent(modelFilterOption, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(colorFilterOption, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanelFilterLayout.createSequentialGroup()
-                                                .addGroup(jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(modelLabel)
-                                                        .addComponent(colorLabel)
-                                                        .addComponent(styleLabel)
-                                                        .addComponent(makeLabel))
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(styleFilterOption, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-        );
-        jPanelFilterLayout.setVerticalGroup(
-                jPanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelFilterLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(styleLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(styleFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(makeLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(makeFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(modelLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(modelFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(colorLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(colorFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        inventoryTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-
-                },
-                new String[]{
-
-                }
-        ));
-        inventoryTable.setShowHorizontalLines(true);
-        inventoryScrollPane.setViewportView(inventoryTable);
-
-        appointmentAndSaleButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        appointmentAndSaleButton.setText("Schedule Test Drive");
-        appointmentAndSaleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                appointmentAndSaleButtonActionPerformed(evt);
-            }
-        });
+        colorLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        colorLabel.setText("Color");
 
         javax.swing.GroupLayout jPanelInventoryLayout = new javax.swing.GroupLayout(jPanelInventory);
         jPanelInventory.setLayout(jPanelInventoryLayout);
         jPanelInventoryLayout.setHorizontalGroup(
-                jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelInventoryLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(inventoryScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInventoryLayout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(appointmentAndSaleButton)))
-                                .addGap(16, 16, 16))
+            jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInventoryLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(styleLabel)
+                            .addComponent(styleFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(makeLabel)
+                            .addComponent(makeFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modelLabel)
+                            .addComponent(modelFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                                .addComponent(colorLabel)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(colorFilterOption, 0, 149, Short.MAX_VALUE)))
+                    .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(appointmentAndSaleButton))
+                    .addComponent(inventoryScrollPane, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(24, 24, 24))
         );
         jPanelInventoryLayout.setVerticalGroup(
-                jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelInventoryLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(inventoryScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jPanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(16, 16, 16)
-                                .addComponent(appointmentAndSaleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                                .addGap(16, 16, 16))
+            jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInventoryLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(styleLabel)
+                    .addComponent(makeLabel)
+                    .addComponent(modelLabel)
+                    .addComponent(colorLabel))
+                .addGap(3, 3, 3)
+                .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(makeFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(styleFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modelFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(colorFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(inventoryScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addComponent(appointmentAndSaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         jTabbedPane.addTab("Vehicle Inventory", null, jPanelInventory, "");
 
         appointmentTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         appointmentTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {},
-                        {},
-                        {},
-                        {}
-                },
-                new String[]{
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
 
-                }
+            }
         ));
         appointmentScrollPane.setViewportView(appointmentTable);
 
-        deleteAppointmentButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        deleteAppointmentButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         deleteAppointmentButton.setLabel("Delete Appointment");
         deleteAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,32 +293,32 @@ public class MainScreen extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanelAppointmentsLayout = new javax.swing.GroupLayout(jPanelAppointments);
         jPanelAppointments.setLayout(jPanelAppointmentsLayout);
         jPanelAppointmentsLayout.setHorizontalGroup(
-                jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAppointmentsLayout.createSequentialGroup()
-                                .addContainerGap(22, Short.MAX_VALUE)
-                                .addGroup(jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(appointmentScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(16, 16, 16))
+            jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAppointmentsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(appointmentScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
         jPanelAppointmentsLayout.setVerticalGroup(
-                jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelAppointmentsLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(appointmentScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                .addGap(16, 16, 16)
-                                .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16))
+            jPanelAppointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAppointmentsLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(appointmentScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         jTabbedPane.addTab("My Appointments", jPanelAppointments);
 
-        statusLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        statusLabel.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         statusLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         statusLabel.setText("Not Logged In");
         statusLabel.setToolTipText("");
 
-        accountButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        accountButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         accountButton.setText("Log In");
         accountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -349,26 +329,26 @@ public class MainScreen extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(accountButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(statusLabel)
-                                .addGap(15, 15, 15))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(accountButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(statusLabel)
+                .addGap(23, 23, 23))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(16, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(accountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(statusLabel))
-                                .addGap(16, 16, 16)
-                                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(statusLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(accountButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane.getAccessibleContext().setAccessibleName("Tabs");
@@ -466,7 +446,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane inventoryScrollPane;
     private javax.swing.JTable inventoryTable;
     private javax.swing.JPanel jPanelAppointments;
-    private javax.swing.JPanel jPanelFilter;
     private javax.swing.JPanel jPanelInventory;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JComboBox<String> makeFilterOption;

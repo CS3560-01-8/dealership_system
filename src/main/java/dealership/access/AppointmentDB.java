@@ -75,7 +75,7 @@ public class AppointmentDB {
     public static ArrayList<Appointment> getAppointments(String email) {
         ArrayList<Appointment> appointments = new ArrayList<>();
         try {
-            ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM appointment WHERE customer_email = '" + email + "'");
+            ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM appointment WHERE customer_email = '" + email + "' ORDER BY date_time");
             while (res.next()) {
                 appointments.add(new Appointment(res.getString(1), res.getString(2), res.getObject(3, LocalDateTime.class)));
                 System.out.print(String.format("%s, %s, %s\n", res.getString(1), res.getString(2), res.getString(3)));
