@@ -16,6 +16,10 @@ public class DatabaseConnector {
         }
     }
 
+    public static Connection getConnection() {
+        return conn;
+    }
+
     public static ResultSet executeQuery(String query) {
         ResultSet result = null;
         try {

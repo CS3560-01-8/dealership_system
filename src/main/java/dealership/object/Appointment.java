@@ -1,15 +1,18 @@
 package dealership.object;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Appointment {
 
-    private String customerEmail;
-    private String vin;
-    private String dateTime;
+    private final String customerEmail;
+    private final String vin;
+    private final LocalDateTime dt;
 
-    public Appointment(String customerEmail, String vin, String dateTime) {
+    public Appointment(String customerEmail, String vin, LocalDateTime dt) {
         this.customerEmail = customerEmail;
         this.vin = vin;
-        this.dateTime = dateTime;
+        this.dt = dt;
     }
 
     public String getCustomerEmail() {
@@ -20,12 +23,12 @@ public class Appointment {
         return vin;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public LocalDateTime getDateTime() {
+        return dt;
     }
 
     public Object[] getRowData() {
-        return new Object[] {dateTime, vin};
+        return new Object[] {dt.format(DateTimeFormatter.ofPattern("EEEE, MMM d @ h a")), vin};
     }
 
 }
