@@ -77,7 +77,9 @@ public class AccountHandler {
         int hour = Integer.parseInt(startTime.substring(0, startTime.indexOf(":")));
         String min = time.substring(startTime.indexOf(":") + 1, startTime.indexOf(" "));
         hour += !startTime.contains("P") || hour == 12 ? 0 : 12;
-        return Year.now().getValue() + "-" + monthToInt.get(month) + "-" + date + " " + hour + ":" + min;
+        String dateStr = Integer.parseInt(date) < 10 ? "0" + date : date;
+        String hourStr = hour < 10 ? "0" + hour : hour + "";
+        return Year.now().getValue() + "-" + monthToInt.get(month) + "-" + dateStr + " " + hourStr + ":" + min + ":00";
     }
 
     public static boolean isTimeValid(String time){
