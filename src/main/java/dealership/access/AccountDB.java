@@ -77,12 +77,13 @@ public class AccountDB {
         return null;
     }
 
-    public static ArrayList<String> getEmployeeEmails(){
-        ResultSet res = DatabaseConnector.executeQuery("SELECT employee_email FROM employee");
-        ArrayList<String> employees = new ArrayList<>();
+    public static ArrayList<Employee> getOtherEmployees(Employee curEmployee){
+        ArrayList<Employee> employees = new ArrayList<>();
         try {
+            ResultSet res = DatabaseConnector.executeQuery(String.format("SELECT account.email, account.first_name, account.last_name, account.phone_num, employee.role FROM account JOIN employee ON employee.employee_email = account.email WHERE employee.employee_email != '%s';", curEmployee.getEmail()));
             while (res.next()) {
-                employees.add(res.getString(1));
+                employees.add(new Employee(res.getString("email"), res.getString("first_name"),
+                        res.getString("last_name"), res.getString("phone_num"), res.getString("role")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
