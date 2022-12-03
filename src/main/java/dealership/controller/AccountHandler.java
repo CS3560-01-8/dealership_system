@@ -43,6 +43,11 @@ public class AccountHandler {
         return isLoggedIn();
     }
 
+    public static void tryLogout(){
+        if(isLoggedIn())
+            loggedInAccount = null;
+    }
+
     // test if user is logged into an account; true if so, false otherwise
     public static boolean isLoggedIn() {
         return loggedInAccount != null;
