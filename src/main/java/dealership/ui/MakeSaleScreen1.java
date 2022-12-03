@@ -14,7 +14,6 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
      */
     public MakeSaleScreen1() {
         initComponents();
-        carInfo.setEditable(false);
     }
     
     // Gets previous frame's location on screen
@@ -32,32 +31,45 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        carInfo = new javax.swing.JTextArea();
-        saleLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        emailInput = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
         submitButton = new javax.swing.JButton();
+        panelVehicleDetails = new javax.swing.JPanel();
+        labelVehicle = new javax.swing.JLabel();
+        labelListingPrice = new javax.swing.JLabel();
+        labelMileage = new javax.swing.JLabel();
+        labelVIN = new javax.swing.JLabel();
+        textListingPrice = new javax.swing.JTextField();
+        textMileage = new javax.swing.JTextField();
+        textVehicle = new javax.swing.JTextField();
+        textVIN = new javax.swing.JTextField();
+        panelEmployees = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        panelSaleDetails = new javax.swing.JPanel();
+        textCustomerEmail = new javax.swing.JTextField();
+        labelCustomerEmail = new javax.swing.JLabel();
+        textAgreedPrice = new javax.swing.JTextField();
+        labelAgreedPrice = new javax.swing.JLabel();
+        labelCardNumber = new javax.swing.JLabel();
+        textCardNumber = new javax.swing.JTextField();
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 592, Short.MAX_VALUE)
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 371, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Start New Sale");
+        setAlwaysOnTop(true);
+        setResizable(false);
 
-        carInfo.setColumns(20);
-        carInfo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        carInfo.setRows(5);
-        carInfo.setText("*Car Information*");
-        jScrollPane1.setViewportView(carInfo);
-
-        saleLabel.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        saleLabel.setText("Sale");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel1.setText("Customer Email");
-
-        emailInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cancelButton.setText("Cancel");
         cancelButton.setToolTipText("Go back to login");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +78,7 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
             }
         });
 
-        submitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        submitButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         submitButton.setText("Submit");
         submitButton.setToolTipText("Go back to login");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -75,57 +87,195 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(saleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
+        panelVehicleDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vehicle Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        labelVehicle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelVehicle.setText("Vehicle");
+
+        labelListingPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelListingPrice.setText("Listing Price");
+
+        labelMileage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelMileage.setText("Mileage");
+
+        labelVIN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelVIN.setText("VIN");
+
+        textListingPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textListingPrice.setEnabled(false);
+
+        textMileage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textMileage.setEnabled(false);
+
+        textVehicle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textVehicle.setEnabled(false);
+
+        textVIN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textVIN.setEnabled(false);
+
+        javax.swing.GroupLayout panelVehicleDetailsLayout = new javax.swing.GroupLayout(panelVehicleDetails);
+        panelVehicleDetails.setLayout(panelVehicleDetailsLayout);
+        panelVehicleDetailsLayout.setHorizontalGroup(
+            panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVehicleDetailsLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(saleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelVehicle)
+                    .addComponent(textVehicle, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                    .addComponent(labelVIN)
+                    .addComponent(textVIN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(labelMileage, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(labelListingPrice))
+                    .addComponent(textMileage, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                    .addComponent(textListingPrice))
                 .addContainerGap(29, Short.MAX_VALUE))
+        );
+        panelVehicleDetailsLayout.setVerticalGroup(
+            panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVehicleDetailsLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelVehicle)
+                    .addComponent(labelMileage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textMileage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textVehicle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelListingPrice)
+                    .addComponent(labelVIN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textListingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textVIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        panelEmployees.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Other Sale Employees", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        jList2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jScrollPane2.setViewportView(jList2);
+
+        javax.swing.GroupLayout panelEmployeesLayout = new javax.swing.GroupLayout(panelEmployees);
+        panelEmployees.setLayout(panelEmployeesLayout);
+        panelEmployeesLayout.setHorizontalGroup(
+            panelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEmployeesLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        panelEmployeesLayout.setVerticalGroup(
+            panelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEmployeesLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        panelSaleDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sale Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+
+        textCustomerEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        labelCustomerEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelCustomerEmail.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelCustomerEmail.setText("Customer Email");
+
+        textAgreedPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        labelAgreedPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelAgreedPrice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelAgreedPrice.setText("Agreed Price");
+
+        labelCardNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelCardNumber.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelCardNumber.setText("Card Number");
+
+        textCardNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout panelSaleDetailsLayout = new javax.swing.GroupLayout(panelSaleDetails);
+        panelSaleDetails.setLayout(panelSaleDetailsLayout);
+        panelSaleDetailsLayout.setHorizontalGroup(
+            panelSaleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSaleDetailsLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(panelSaleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSaleDetailsLayout.createSequentialGroup()
+                        .addComponent(labelCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelSaleDetailsLayout.createSequentialGroup()
+                        .addGroup(panelSaleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textCustomerEmail)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelSaleDetailsLayout.createSequentialGroup()
+                                .addGroup(panelSaleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(16, 16, 16)
+                                .addGroup(panelSaleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelSaleDetailsLayout.createSequentialGroup()
+                                        .addComponent(labelAgreedPrice)
+                                        .addGap(0, 13, Short.MAX_VALUE))
+                                    .addComponent(textAgreedPrice))))
+                        .addGap(24, 24, 24))))
+        );
+        panelSaleDetailsLayout.setVerticalGroup(
+            panelSaleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSaleDetailsLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(labelCustomerEmail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelSaleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelAgreedPrice)
+                    .addComponent(labelCardNumber))
+                .addGap(2, 2, 2)
+                .addGroup(panelSaleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textAgreedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(216, 216, 216)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(panelVehicleDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(panelEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelSaleDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(158, 158, 158))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelVehicleDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(panelSaleDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,7 +292,7 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-        if (emailInput.getText().equals("")) {
+        if (textCustomerEmail.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter email.", "Missing information", JOptionPane.ERROR_MESSAGE);
         } else {
             MakeSaleScreen2 employeeSelect = new MakeSaleScreen2();
@@ -154,12 +304,26 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTextArea carInfo;
-    private javax.swing.JTextField emailInput;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelAgreedPrice;
+    private javax.swing.JLabel labelCardNumber;
+    private javax.swing.JLabel labelCustomerEmail;
+    private javax.swing.JLabel labelListingPrice;
+    private javax.swing.JLabel labelMileage;
+    private javax.swing.JLabel labelVIN;
+    private javax.swing.JLabel labelVehicle;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JLabel saleLabel;
+    private javax.swing.JPanel panelEmployees;
+    private javax.swing.JPanel panelSaleDetails;
+    private javax.swing.JPanel panelVehicleDetails;
     private javax.swing.JButton submitButton;
+    private javax.swing.JTextField textAgreedPrice;
+    private javax.swing.JTextField textCardNumber;
+    private javax.swing.JTextField textCustomerEmail;
+    private javax.swing.JTextField textListingPrice;
+    private javax.swing.JTextField textMileage;
+    private javax.swing.JTextField textVIN;
+    private javax.swing.JTextField textVehicle;
     // End of variables declaration//GEN-END:variables
 }
