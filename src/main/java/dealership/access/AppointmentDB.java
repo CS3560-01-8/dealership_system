@@ -24,7 +24,21 @@ public class AppointmentDB {
         }
     }
 
-    public static boolean isAppointmentValid(String customerEmail, String vin, String dateTime) {
+    public static boolean isAppointmentValid(String customerEmail, String vin, LocalDateTime dateTime) {
+        String query = "SELECT 1 FROM appointment WHERE date_time = ? AND (vin = ? OR customer_email = ?)";
+        try {
+            PreparedStatement ps = DatabaseConnector.getConnection().prepareStatement(query);
+            ps.setObject(1, dateTime);
+            ps.setString(2, vin);
+            ps.setString(3, customerEmail);
+            return ps.executeQuery().next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /*public static boolean isAppointmentValid(String customerEmail, String vin, String dateTime) {
         if (!VehicleDB.checkVin(vin)) return false;
         String query1 = "SELECT 1 FROM appointment WHERE date_time = '" + dateTime + "' AND vin = '" + vin + "'";
         String query2 = "SELECT 1 FROM appointment WHERE date_time = '" + dateTime + "' AND customer_email = '" + customerEmail + "'";
@@ -43,9 +57,9 @@ public class AppointmentDB {
             e.printStackTrace();
         }
         return true;
-    }
+    }*/
 
-    public static void getTime() {
+    /*public static void getTime() {
         String query = "SELECT * FROM appointment";
         try {
             ResultSet res = DatabaseConnector.executeQuery(query);
@@ -56,7 +70,7 @@ public class AppointmentDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
     
     /*public static ArrayList<Appointment> getAllAppointments() {
         ArrayList<Appointment> appointments = new ArrayList<>();

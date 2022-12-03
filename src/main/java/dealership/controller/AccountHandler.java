@@ -9,10 +9,14 @@ import dealership.object.Employee;
 import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class AccountHandler {
 
@@ -72,7 +76,7 @@ public class AccountHandler {
         }
     };
 
-    public static String formatTime(String month, String date, String time) {
+    /*public static String formatTime(String month, String date, String time) {
         String startTime = time.substring(0, time.indexOf("-"));
         int hour = Integer.parseInt(startTime.substring(0, startTime.indexOf(":")));
         String min = time.substring(startTime.indexOf(":") + 1, startTime.indexOf(" "));
@@ -80,9 +84,14 @@ public class AccountHandler {
         String dateStr = Integer.parseInt(date) < 10 ? "0" + date : date;
         String hourStr = hour < 10 ? "0" + hour : hour + "";
         return Year.now().getValue() + "-" + monthToInt.get(month) + "-" + dateStr + " " + hourStr + ":" + min + ":00";
+    }*/
+
+    public static LocalDateTime formatDateTime(String date, String time) {
+        return LocalDateTime.parse(date + " " + LocalDate.now().getYear() + " " + time.substring(0, 8),
+                DateTimeFormatter.ofPattern("EEEE, MMM d y hh:mm a", Locale.ENGLISH));
     }
 
-    public static boolean isTimeValid(String time){
+    /*public static boolean isTimeValid(String time){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date currentTime = new Date();
         Date appointmentTime = null;
@@ -93,9 +102,9 @@ public class AccountHandler {
         }
 
         return currentTime.compareTo(appointmentTime) < 0;
-    }
+    }*/
 
-    public static boolean tryMakeAppointment(String vin, String dateTime) {
+    public static boolean tryMakeAppointment(String vin, LocalDateTime dateTime) {
         return ((Customer) loggedInAccount).tryAddAppointment(vin, dateTime);
     }
 
