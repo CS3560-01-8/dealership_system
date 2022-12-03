@@ -53,7 +53,7 @@ public class VehicleDB {
         return results;
     }
 
-    public static boolean checkVin(String vin) {
+    public static boolean isVinValid(String vin) {
         String query = "SELECT 1 FROM vehicle WHERE vin = '" + vin + "' AND sold = '0'";
         try {
             ResultSet res = DatabaseConnector.executeQuery(query);
@@ -89,5 +89,12 @@ public class VehicleDB {
         }
 
         return new Vehicle(vin, make, model, year, style, color, 0, 0, false);
+    }
+
+    public static void carSold(String vin) {
+        if (isVinValid(vin)) {
+            String query = "UPDATE dealership.vehicle SET sold = 1 WHERE vin = '" + vin + "'";
+            DatabaseConnector.executeInsert(query);
+        }
     }
 }

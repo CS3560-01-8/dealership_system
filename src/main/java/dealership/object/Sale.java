@@ -1,32 +1,28 @@
 package dealership.object;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Sale {
-    
-    private int id;
+
     private float agreedPrice;
     private float tax;
     private String cardNumber;
     private String vin;
+    private final LocalDateTime date;
     private ArrayList<Commission> commissions;
 
-    public Sale(int id, float agreedPrice, float tax, String cardNumber, String vin) {
-        this.id = id;
+    public Sale(String vin, float agreedPrice, float tax, String cardNumber) {
         this.agreedPrice = agreedPrice;
         this.tax = tax;
         this.cardNumber = cardNumber;
         this.vin = vin;
+        date = LocalDateTime.now();
         commissions = new ArrayList<Commission>();
     }
 
-    public void addCommission(Commission commission)
-    {
+    public void addCommission(Commission commission) {
         commissions.add(commission);
-    }
-
-    public int getId() {
-        return id;
     }
 
     public float getAgreedPrice() {
@@ -45,5 +41,11 @@ public class Sale {
         return vin;
     }
 
-    public ArrayList<Commission> getCommission(){return commissions;}
+    public ArrayList<Commission> getCommission() {
+        return commissions;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
 }

@@ -48,7 +48,7 @@ public class Vehicle {
     }
 
     public void sell() {
-        sold = true;
+        VehicleDB.carSold(vin);
     }
 
     public String getMake() {

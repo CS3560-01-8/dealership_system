@@ -12,8 +12,8 @@ public class CommissionDB {
         for (int i = 0; i < commissions.size(); i++)
         {
             DatabaseConnector.executeInsert(String.format(
-                    "INSERT INTO `dealership`.`commission` (`employee_email`, `sale_id`, `percentage`) VALUES ('%s', '%d', '%d')",
-                    commissions.get(i).getEmployee_email(), commissions.get(i).getSale_id(), commissions.get(i).getPercentage()
+                    "INSERT INTO `dealership`.`commission` (`employee_email`, `vin`, `percentage`) VALUES ('%s', '%s', '%d')",
+                    commissions.get(i).getEmployee_email(), commissions.get(i).getVin(),commissions.get(i).getPercentage()
             ));
         }
     }
