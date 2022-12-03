@@ -56,6 +56,10 @@ public class AccountHandler {
     // get email of logged in user
     public static String getLoggedInEmail() { return loggedInAccount.getEmail(); }
 
+    protected static Account getLoggedInAccount() {
+        return loggedInAccount;
+    }
+
     // test if account is for an employee
     public static boolean isEmployee()
     {

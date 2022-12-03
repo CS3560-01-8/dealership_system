@@ -1,7 +1,6 @@
 package dealership.controller;
 
 import dealership.access.*;
-import dealership.object.Commission;
 import dealership.object.Employee;
 import dealership.object.Sale;
 
@@ -37,8 +36,14 @@ public class SaleHandler {
     }
 
     private static ArrayList<Employee> getEmployeesInSale(JPanel listOtherEmployees) {
-        //TODO implement
-        return null;
+        ArrayList<Employee> employeesInSale = new ArrayList<>();
+        employeesInSale.add((Employee) AccountHandler.getLoggedInAccount());
+        for (int i = 0; i < listOtherEmployees.getComponents().length; i++) {
+            if (((JCheckBox) listOtherEmployees.getComponents()[i]).isSelected()) {
+                employeesInSale.add(employeesBesidesLoggedIn.get(i));
+            }
+        }
+        return employeesInSale;
     }
 
 }
