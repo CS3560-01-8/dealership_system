@@ -3,30 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package dealership.ui;
+
 ;
 import dealership.controller.AccountHandler;
+
 import java.awt.Point;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author krist
  */
 public class CreateAccount extends javax.swing.JFrame {
 
-    
+
     /**
      * Creates new form CreateAccount
      */
     public CreateAccount() {
         initComponents();
     }
-    
+
     // Gets previous frame's location on screen
     public void getPreviousFrameLocation(Point previous) {
         this.setLocation(previous);
     }
-    
+
     // Find missing information and create message dialog box;
     private boolean checkForMissingInfo() {
         boolean anyMissing = false;
@@ -70,7 +71,7 @@ public class CreateAccount extends javax.swing.JFrame {
         }
         if (anyMissing) {
             if (missing[missing.length - 1] == null) {
-                String firstLetter = missing[0].substring(0,1);
+                String firstLetter = missing[0].substring(0, 1);
                 switch (firstLetter) {
                     case "a":
                     case "e":
@@ -105,57 +106,46 @@ public class CreateAccount extends javax.swing.JFrame {
     }
 
     private boolean isValidEmail(String email) {
-        return email.matches("[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}");
-    }
-    
-    // Check first and last names to see if they are valid; true if correct, false otherwise
-    private boolean checkName() {
-        for (int i = 0; i < firstNameInput.getText().length(); i++) {
-            if (!Character.isLetter(firstNameInput.getText().charAt(i))) {
-                JOptionPane.showMessageDialog(this, "First name contains numbers and/or symbols. Please retype first name.", "Format Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
-        }
-        for (int j = 0; j < lastNameInput.getText().length(); j++) {
-            if (!Character.isLetter(lastNameInput.getText().charAt(j))) {
-                JOptionPane.showMessageDialog(this, "Last name contains numbers and/or symbols. Please retype last name.", "Format Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
+        if(!email.matches("[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}")){
+            JOptionPane.showMessageDialog(this, "Email is not in the right format. Please retype email.", "Format Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         return true;
     }
-    
+
+    // Check first and last names to see if they are valid; true if correct, false otherwise
+    private boolean isValidName(String firstName, String lastName) {
+        if (!firstName.matches("^(?=.{1,40}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
+            JOptionPane.showMessageDialog(this, "First name contains numbers and/or symbols. Please retype first name.", "Format Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!lastName.matches("^(?=.{1,40}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
+            JOptionPane.showMessageDialog(this, "Last name contains numbers and/or symbols. Please retype last name.", "Format Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
     // Check phone number; true if correct, false otherwise
     // Check zip code; true if correct, false otherwise
-    private boolean checkPhoneNum() {
-        if (zipInput.getText().length() != 5) {
-            JOptionPane.showMessageDialog(this, "Zip code is not equal to 5 digits. Please retype zip code.", "Format Error", JOptionPane.ERROR_MESSAGE);
+    private boolean isValidZip(String zip) {
+        if (!zip.matches("\\d{5}")) {
+            JOptionPane.showMessageDialog(this, "Zip code is not in right format.Please retype zip code.", "Format Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else {
-            for (int i = 0; i < 5; i++) {
-                if (!Character.isDigit(zipInput.getText().charAt(i))) {
-                    JOptionPane.showMessageDialog(this, "Zip code contains letters and/or symbols. Please retype zip code.", "Format Error", JOptionPane.ERROR_MESSAGE);
-                    return false;
-                }
-            }
         }
+
         return true;
     }
-    
+
     // Check zip code; true if correct, false otherwise
-    private boolean checkZip() {
-        if (phoneInput.getText().length() != 10) {
-            JOptionPane.showMessageDialog(this, "Phone number is not equal to 10 digits. Please retype phone number.", "Format Error", JOptionPane.ERROR_MESSAGE);
+    private boolean isValidPhoneNo(String phoneNo) {
+        if (!phoneNo.matches("\\d{10}")) {
+            JOptionPane.showMessageDialog(this, "Phone number is not in right format. Please retype phone number.", "Format Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else {
-            for (int i = 0; i < 10; i++) {
-                if (!Character.isLetter(phoneInput.getText().charAt(i))) {
-                    JOptionPane.showMessageDialog(this, "Phone number contains letters and/or symbols. Please retype phone number.", "Format Error", JOptionPane.ERROR_MESSAGE);
-                    return false;
-                }
-            }
-            
         }
+
+
         return true;
     }
 
@@ -257,7 +247,7 @@ public class CreateAccount extends javax.swing.JFrame {
         userInputPanel.add(zipInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 70, -1));
 
         stateInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        stateInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CA", "AL", "AK", "AZ", "AR", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" }));
+        stateInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"CA", "AL", "AK", "AZ", "AR", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
         userInputPanel.add(stateInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, -1));
 
         streetLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -303,12 +293,12 @@ public class CreateAccount extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();
@@ -317,29 +307,25 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void makeAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeAccountButtonActionPerformed
         if (!checkForMissingInfo()) {
-            if (isValidEmail(emailInput.getText())) {
-                if (checkName()) {
-                    if (checkZip() && checkPhoneNum()) {
-                        if (AccountHandler.createCustomerAccount(emailInput.getText(),
-                                String.valueOf(passwordInput.getPassword()),
-                                firstNameInput.getText(),
-                                lastNameInput.getText(),
-                                phoneInput.getText(),
-                                streetInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText())) {
-                            JOptionPane.showMessageDialog(this, "Your account has been created.",
-                                    "Account Created", JOptionPane.INFORMATION_MESSAGE);
-                            AccountHandler.tryLogin(emailInput.getText(), String.valueOf(passwordInput.getPassword()));
-                            MainScreen ms = new MainScreen();
-                            ms.getPreviousFrameLocation(this.getLocationOnScreen());
-                            ms.setVisible(true);
-                            dispose();
-                        } else
-                            JOptionPane.showMessageDialog(this, "An account already exists with that email!", "Email Taken", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            } else
-                JOptionPane.showMessageDialog(this, "Email is not in the right format. Please retype email.", "Format Error", JOptionPane.ERROR_MESSAGE);
+            if (isValidEmail(emailInput.getText()) && isValidName(firstNameInput.getText(), lastNameInput.getText()) && isValidPhoneNo(phoneInput.getText()) && isValidZip(zipInput.getText())) {
+                if (AccountHandler.createCustomerAccount(emailInput.getText(),
+                        String.valueOf(passwordInput.getPassword()),
+                        firstNameInput.getText(),
+                        lastNameInput.getText(),
+                        phoneInput.getText(),
+                        streetInput.getText() + " " + stateInput.getSelectedItem() + ", " + zipInput.getText())) {
+                    JOptionPane.showMessageDialog(this, "Your account has been created.",
+                            "Account Created", JOptionPane.INFORMATION_MESSAGE);
+                    AccountHandler.tryLogin(emailInput.getText(), String.valueOf(passwordInput.getPassword()));
+                    MainScreen ms = new MainScreen();
+                    ms.getPreviousFrameLocation(this.getLocationOnScreen());
+                    ms.setVisible(true);
+                    dispose();
+                } else
+                    JOptionPane.showMessageDialog(this, "An account already exists with that email!", "Email Taken", JOptionPane.ERROR_MESSAGE);
+            }
         }
+
     }//GEN-LAST:event_makeAccountButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
