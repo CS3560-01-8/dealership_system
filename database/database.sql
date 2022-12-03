@@ -38,7 +38,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('amiquelet7@bloglovin.com','Alexandrina','Miquelet','225-670-1525','0o6I3MJ'),('austin@gmail.com','Austin','Aluzzi','738-492-8323','poop'),('bpengelleya@mlb.com','Bianca','Pengelley','651-839-6997','iDkPFZX'),('bringe4@naver.com','Briney','Ringe','731-844-3027','3YgQYcyKU'),('gbaser9@sciencedirect.com','Giustino','Baser','551-498-8776','QS2xBhFaJ8Dn'),('gschimonek8@sfgate.com','Gerek','Schimonek','531-230-9716','TXXFD0cv6'),('hzoellner0@nhs.uk','Honoria','Zoellner','324-838-5523','PiDam5Jd'),('igodfery6@fema.gov','Isa','Godfery','455-319-2622','6eaF2BPg76l9'),('ljimmesb@geocities.jp','Latrena','Jimmes','988-302-8866','wMuHiBIKIo1'),('lmccoveney5@ibm.com','Lydon','McCoveney','531-497-0113','WXSJcNaOOs'),('mdewerkd@soundcloud.com','Millicent','de Werk','912-199-3055','P8Ih9oXx'),('sclurowc@google.it','Sybille','Clurow','728-591-8087','zkzTn0pICk'),('vcluitt3@unc.edu','Valle','Cluitt','507-808-2690','cjnnRc'),('wgammett1@eepurl.com','Willem','Gammett','221-124-5271','QvrIEVezzd8Q'),('wkayese@pinterest.com','Wheeler','Kayes','224-827-4461','Jq29nvSOIX'),('wosharkey2@ucsd.edu','Webb','O\'Sharkey','401-940-8713','h1b57dytIZi7');
+INSERT INTO `account` VALUES ('123@123.com','test','user','1234567890','123'),('amiquelet7@bloglovin.com','Alexandrina','Miquelet','225-670-1525','0o6I3MJ'),('austin@gmail.com','Austin','Aluzzi','738-492-8323','poop'),('bpengelleya@mlb.com','Bianca','Pengelley','651-839-6997','iDkPFZX'),('bringe4@naver.com','Briney','Ringe','731-844-3027','3YgQYcyKU'),('gbaser9@sciencedirect.com','Giustino','Baser','551-498-8776','QS2xBhFaJ8Dn'),('gschimonek8@sfgate.com','Gerek','Schimonek','531-230-9716','TXXFD0cv6'),('hzoellner0@nhs.uk','Honoria','Zoellner','324-838-5523','PiDam5Jd'),('igodfery6@fema.gov','Isa','Godfery','455-319-2622','6eaF2BPg76l9'),('ljimmesb@geocities.jp','Latrena','Jimmes','988-302-8866','wMuHiBIKIo1'),('lmccoveney5@ibm.com','Lydon','McCoveney','531-497-0113','WXSJcNaOOs'),('mdewerkd@soundcloud.com','Millicent','de Werk','912-199-3055','P8Ih9oXx'),('sclurowc@google.it','Sybille','Clurow','728-591-8087','zkzTn0pICk'),('t@1.com','test','tset','1234567890','123'),('test@123.com','employee','test',NULL,'123'),('vcluitt3@unc.edu','Valle','Cluitt','507-808-2690','cjnnRc'),('wgammett1@eepurl.com','Willem','Gammett','221-124-5271','QvrIEVezzd8Q'),('wkayese@pinterest.com','Wheeler','Kayes','224-827-4461','Jq29nvSOIX'),('wosharkey2@ucsd.edu','Webb','O\'Sharkey','401-940-8713','h1b57dytIZi7');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,6 +67,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
+INSERT INTO `appointment` VALUES ('amiquelet7@bloglovin.com','WA1GFCFS7FR008229','2022-12-01 08:00:00'),('amiquelet7@bloglovin.com','WBAFR7C53BC601658','2022-12-02 08:00:00'),('austin@gmail.com','1G1BE5SM4J7104340','2022-12-07 08:00:00'),('austin@gmail.com','1G1PF5SC8C7118805','2022-12-10 10:00:00'),('austin@gmail.com','5TDYK3DCXFS578731','2022-12-01 16:00:00'),('austin@gmail.com','W1K6G7GB1MA054029','2022-12-01 15:00:00'),('austin@gmail.com','WBA4J1C56JBM11255','2022-12-03 08:00:00'),('austin@gmail.com','WBAPH5G51BNM79375','2022-12-06 08:00:00'),('austin@gmail.com','WDDUG8CB1FA136087','2022-12-01 17:00:00');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,12 +80,12 @@ DROP TABLE IF EXISTS `commission`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `commission` (
   `employee_email` varchar(45) NOT NULL,
-  `sale_id` int NOT NULL,
+  `vin` varchar(45) DEFAULT NULL,
   `percentage` int DEFAULT NULL,
-  PRIMARY KEY (`employee_email`,`sale_id`),
-  KEY `saleid_idx` (`sale_id`),
+  PRIMARY KEY (`employee_email`),
+  KEY `vin3_idx` (`vin`),
   CONSTRAINT `email3` FOREIGN KEY (`employee_email`) REFERENCES `employee` (`employee_email`),
-  CONSTRAINT `saleid` FOREIGN KEY (`sale_id`) REFERENCES `sale` (`sale_id`)
+  CONSTRAINT `vin3` FOREIGN KEY (`vin`) REFERENCES `sale` (`vin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -118,7 +119,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('amiquelet7@bloglovin.com','4003 Horner Street'),('austin@gmail.com','111 Street CA, 84920'),('hzoellner0@nhs.uk','2703 Arbor Court'),('lmccoveney5@ibm.com','95 West Virginia Avenue');
+INSERT INTO `customer` VALUES ('123@123.com','123 asd GA, 45656'),('amiquelet7@bloglovin.com','4003 Horner Street'),('austin@gmail.com','111 Street CA, 84920'),('hzoellner0@nhs.uk','2703 Arbor Court'),('lmccoveney5@ibm.com','95 West Virginia Avenue'),('t@1.com','adsad CA, 12345');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +144,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES ('hzoellner0@nhs.uk','role2'),('lmccoveney5@ibm.com','role2'),('vcluitt3@unc.edu','role1'),('wkayese@pinterest.com','role1');
+INSERT INTO `employee` VALUES ('hzoellner0@nhs.uk','role2'),('lmccoveney5@ibm.com','role2'),('test@123.com','role3'),('vcluitt3@unc.edu','role1'),('wkayese@pinterest.com','role1');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,14 +156,13 @@ DROP TABLE IF EXISTS `sale`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sale` (
-  `sale_id` int NOT NULL,
+  `vin` varchar(45) NOT NULL,
   `agreed_price` float DEFAULT NULL,
   `tax` float DEFAULT NULL,
   `card_num` varchar(45) DEFAULT NULL,
-  `vin` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`sale_id`),
-  KEY `vin_idx` (`vin`),
-  CONSTRAINT `vin2` FOREIGN KEY (`vin`) REFERENCES `vehicle` (`vin`)
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`vin`),
+  KEY `vin_idx` (`vin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -172,7 +172,7 @@ CREATE TABLE `sale` (
 
 LOCK TABLES `sale` WRITE;
 /*!40000 ALTER TABLE `sale` DISABLE KEYS */;
-INSERT INTO `sale` VALUES (1,666,6,'58585',NULL);
+INSERT INTO `sale` VALUES ('1G1RC6E48FU129398',123145,55,'23146764','2022-12-03 12:45:48');
 /*!40000 ALTER TABLE `sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,4 +217,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-29 22:40:03
+-- Dump completed on 2022-12-03 13:22:10
