@@ -69,4 +69,7 @@ public class VehicleHandler {
         return loadedVehicles.get(selectedIndex);
     }
 
+    public static String getSelectedVehicleListingPrice() {
+        return "$" + loadedVehicles.get(selectedIndex).getListingPrice();
+    }
 }

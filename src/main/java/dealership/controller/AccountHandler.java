@@ -33,6 +33,10 @@ public class AccountHandler {
         return true;
     }
 
+    public static boolean customerExists(String email) {
+        return Customer.exists(email);
+    }
+
     // test if login is valid; true if so, false otherwise
     public static boolean tryLogin(String email, String password) {
         loggedInAccount = Account.getAccount(email, password);

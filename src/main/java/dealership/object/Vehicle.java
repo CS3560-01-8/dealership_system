@@ -44,7 +44,7 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return year + " " + make + " " + model;
+        return year + " " + make + " " + model + " (" + color + ")";
     }
 
     public void sell() {
@@ -66,4 +66,13 @@ public class Vehicle {
     public String getColor() {
         return color;
     }
+
+    public int getMileage() {
+        return mileage;
+    }
+
+    public int getListingPrice() {
+        return listingPrice;
+    }
+
 }

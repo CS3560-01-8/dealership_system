@@ -399,28 +399,32 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_colorFilterOptionActionPerformed
 
     private void appointmentAndSaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentAndSaleButtonActionPerformed
+        if (!AccountHandler.isLoggedIn()) {
+            JOptionPane.showMessageDialog(this, "You must log in first!",
+                    "Not Logged In", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (inventoryTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Please click on a vehicle first.",
+                    "No Vehicle Selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        VehicleHandler.selectVehicle(inventoryTable.getSelectedRow());
+
         if (AccountHandler.isEmployee()) {
             MakeSaleScreen1 sale1 = new MakeSaleScreen1();
             sale1.getPreviousFrameLocation(this.getLocationOnScreen());
             sale1.setVisible(true);
             dispose();
         } else {
-            if (!AccountHandler.isLoggedIn()) {
-                JOptionPane.showMessageDialog(this, "You must log in before scheduling a test drive!",
-                        "Not Logged In", JOptionPane.ERROR_MESSAGE);
-            } else if (inventoryTable.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(this, "Please click on a vehicle first.",
-                        "No Vehicle Selected", JOptionPane.ERROR_MESSAGE);
+            if (AccountHandler.hasMadeAppointmentWithVehicle(VehicleHandler.getSelectedVehicleVin())) {
+                JOptionPane.showMessageDialog(this, "You're already scheduled to test drive this vehicle!",
+                        "Appointment Already Made", JOptionPane.ERROR_MESSAGE);
             } else {
-                VehicleHandler.selectVehicle(inventoryTable.getSelectedRow());
-                if (AccountHandler.hasMadeAppointmentWithVehicle(VehicleHandler.getSelectedVehicleVin())) {
-                    JOptionPane.showMessageDialog(this, "You're already scheduled to test drive this vehicle!",
-                            "Appointment Already Made", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    MakeAppointment makeAppt = new MakeAppointment(this, true, appointmentTable);
-                    makeAppt.setLocationRelativeTo(this);
-                    makeAppt.setVisible(true);
-                }
+                MakeAppointment makeAppt = new MakeAppointment(this, true, appointmentTable);
+                makeAppt.setLocationRelativeTo(this);
+                makeAppt.setVisible(true);
             }
         }
     }//GEN-LAST:event_appointmentAndSaleButtonActionPerformed

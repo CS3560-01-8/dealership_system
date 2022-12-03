@@ -38,7 +38,7 @@ public class Appointment {
         String date  = dt.format(DateTimeFormatter.ofPattern("EEEE, MMM d", Locale.ENGLISH));
         String time = dt.format(DateTimeFormatter.ofPattern("hh:ss a", Locale.ENGLISH))
                 + dt.plusHours(1).format(DateTimeFormatter.ofPattern(" - hh:ss a", Locale.ENGLISH));
-        return new Object[] {date, time, vehicle.getYear() + " " + vehicle.getMake() + " " + vehicle.getModel() + " (" + vehicle.getColor() + ")"};
+        return new Object[] {date, time, vehicle.toString()};
     }
 
 }

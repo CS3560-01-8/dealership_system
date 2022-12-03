@@ -1,13 +1,17 @@
 package dealership.controller;
 
-import dealership.access.AppointmentDB;
-import dealership.access.CommissionDB;
-import dealership.access.SaleDB;
-import dealership.access.VehicleDB;
+import dealership.access.*;
 import dealership.object.Commission;
+import dealership.object.Employee;
 import dealership.object.Sale;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+
 public class SaleHandler {
+
+    private static ArrayList<Employee> employeesBesidesLoggedIn;
 
     public static boolean makeSale(String vin, float agreedPrice, float tax, String cardNum){
         if(!VehicleDB.isVinValid(vin)) return false;
@@ -22,6 +26,19 @@ public class SaleHandler {
         }
         CommissionDB.writeCommissions(sale.getCommission());
         return true;
+    }
+
+    public static void loadEmployeesIntoList(JPanel listOtherEmployees) {
+        employeesBesidesLoggedIn = AccountDB.getAllEmployeesBesides(AccountHandler.getLoggedInEmail());
+        listOtherEmployees.setLayout(new GridLayout(0, 1));
+        for (Employee employee : employeesBesidesLoggedIn) {
+            listOtherEmployees.add(new JCheckBox(employee.getName() + " (" + employee.getRole() + ")"));
+        }
+    }
+
+    private static ArrayList<Employee> getEmployeesInSale(JPanel listOtherEmployees) {
+        //TODO implement
+        return null;
     }
 
 }

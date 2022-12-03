@@ -4,8 +4,17 @@
  */
 package dealership.ui;
 
-import java.awt.Point;
-import javax.swing.JOptionPane;
+import dealership.access.AccountDB;
+import dealership.controller.AccountHandler;
+import dealership.controller.SaleHandler;
+import dealership.controller.VehicleHandler;
+import dealership.object.Employee;
+
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class MakeSaleScreen1 extends javax.swing.JFrame {
 
@@ -14,6 +23,14 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
      */
     public MakeSaleScreen1() {
         initComponents();
+        initVehicleDetails();
+        SaleHandler.loadEmployeesIntoList(panelEmployeeList);
+    }
+
+    public void initVehicleDetails() {
+        textVehicle.setText(VehicleHandler.getSelectedVehicleDetails());
+        textVIN.setText(VehicleHandler.getSelectedVehicleVin());
+        textListingPrice.setText(VehicleHandler.getSelectedVehicleListingPrice());
     }
     
     // Gets previous frame's location on screen
@@ -36,15 +53,13 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
         panelVehicleDetails = new javax.swing.JPanel();
         labelVehicle = new javax.swing.JLabel();
         labelListingPrice = new javax.swing.JLabel();
-        labelMileage = new javax.swing.JLabel();
         labelVIN = new javax.swing.JLabel();
         textListingPrice = new javax.swing.JTextField();
-        textMileage = new javax.swing.JTextField();
         textVehicle = new javax.swing.JTextField();
         textVIN = new javax.swing.JTextField();
         panelEmployees = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jScrollPane = new javax.swing.JScrollPane();
+        panelEmployeeList = new javax.swing.JPanel();
         panelSaleDetails = new javax.swing.JPanel();
         textCustomerEmail = new javax.swing.JTextField();
         labelCustomerEmail = new javax.swing.JLabel();
@@ -95,17 +110,11 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
         labelListingPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelListingPrice.setText("Listing Price");
 
-        labelMileage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelMileage.setText("Mileage");
-
         labelVIN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelVIN.setText("VIN");
 
         textListingPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textListingPrice.setEnabled(false);
-
-        textMileage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textMileage.setEnabled(false);
 
         textVehicle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textVehicle.setEnabled(false);
@@ -119,31 +128,26 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
             panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelVehicleDetailsLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelVehicle)
-                    .addComponent(textVehicle, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(labelVIN)
-                    .addComponent(textVIN))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(labelMileage, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(labelListingPrice))
-                    .addComponent(textMileage, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(textListingPrice))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(textVehicle)
+                    .addGroup(panelVehicleDetailsLayout.createSequentialGroup()
+                        .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelVehicle)
+                            .addComponent(labelVIN)
+                            .addComponent(textVIN, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelListingPrice)
+                            .addComponent(textListingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(29, 29, 29))
         );
         panelVehicleDetailsLayout.setVerticalGroup(
             panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelVehicleDetailsLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelVehicle)
-                    .addComponent(labelMileage))
+                .addComponent(labelVehicle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textMileage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textVehicle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(textVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addGroup(panelVehicleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelListingPrice)
@@ -157,24 +161,25 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
 
         panelEmployees.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Other Sale Employees", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jList2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jScrollPane2.setViewportView(jList2);
+        panelEmployeeList.setBackground(new java.awt.Color(255, 255, 255));
+        panelEmployeeList.setLayout(new java.awt.GridBagLayout());
+        jScrollPane.setViewportView(panelEmployeeList);
 
         javax.swing.GroupLayout panelEmployeesLayout = new javax.swing.GroupLayout(panelEmployees);
         panelEmployees.setLayout(panelEmployeesLayout);
         panelEmployeesLayout.setHorizontalGroup(
             panelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEmployeesLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmployeesLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         panelEmployeesLayout.setVerticalGroup(
             panelEmployeesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEmployeesLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         panelSaleDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sale Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
@@ -266,7 +271,7 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelVehicleDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
@@ -291,29 +296,35 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // TODO add your handling code here:
-        if (textCustomerEmail.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Please enter email.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        } else {
-            MakeSaleScreen2 employeeSelect = new MakeSaleScreen2();
-            employeeSelect.getPreviousFrameLocation(this.getLocationOnScreen());
-            employeeSelect.setVisible(true);
-            dispose();
+        if (textCustomerEmail.getText().isEmpty() || textCardNumber.getText().isEmpty() || textAgreedPrice.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter all sale details!", "Missing information", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        //TODO more input validation
+
+        if (!AccountHandler.customerExists(textCustomerEmail.getText())) {
+            JOptionPane.showMessageDialog(this, "A customer with that email does not exist!", "Customer Not Found", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        MakeSaleScreen2 employeeSelect = new MakeSaleScreen2();
+        employeeSelect.getPreviousFrameLocation(this.getLocationOnScreen());
+        employeeSelect.setVisible(true);
+        dispose();
     }//GEN-LAST:event_submitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JLabel labelAgreedPrice;
     private javax.swing.JLabel labelCardNumber;
     private javax.swing.JLabel labelCustomerEmail;
     private javax.swing.JLabel labelListingPrice;
-    private javax.swing.JLabel labelMileage;
     private javax.swing.JLabel labelVIN;
     private javax.swing.JLabel labelVehicle;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel panelEmployeeList;
     private javax.swing.JPanel panelEmployees;
     private javax.swing.JPanel panelSaleDetails;
     private javax.swing.JPanel panelVehicleDetails;
@@ -322,7 +333,6 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
     private javax.swing.JTextField textCardNumber;
     private javax.swing.JTextField textCustomerEmail;
     private javax.swing.JTextField textListingPrice;
-    private javax.swing.JTextField textMileage;
     private javax.swing.JTextField textVIN;
     private javax.swing.JTextField textVehicle;
     // End of variables declaration//GEN-END:variables

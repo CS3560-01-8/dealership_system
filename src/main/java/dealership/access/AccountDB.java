@@ -77,10 +77,12 @@ public class AccountDB {
         return null;
     }
 
-    public static ArrayList<Employee> getOtherEmployees(Employee curEmployee){
+    public static ArrayList<Employee> getAllEmployeesBesides(String email){
         ArrayList<Employee> employees = new ArrayList<>();
         try {
-            ResultSet res = DatabaseConnector.executeQuery(String.format("SELECT account.email, account.first_name, account.last_name, account.phone_num, employee.role FROM account JOIN employee ON employee.employee_email = account.email WHERE employee.employee_email != '%s';", curEmployee.getEmail()));
+            ResultSet res = DatabaseConnector.executeQuery(String.format("SELECT account.email, account.first_name, account.last_name, " +
+                    "account.phone_num, employee.role FROM account JOIN employee ON employee.employee_email = account.email WHERE employee.employee_email != '%s';",
+                    email));
             while (res.next()) {
                 employees.add(new Employee(res.getString("email"), res.getString("first_name"),
                         res.getString("last_name"), res.getString("phone_num"), res.getString("role")));
