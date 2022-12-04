@@ -3,6 +3,7 @@ package dealership.object;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Sale {
 
@@ -71,7 +72,7 @@ public class Sale {
 
     public Object[] getRowData(Employee employee) {
         Commission commission = commissions.stream().filter(c -> c.getEmployee_email().equals(employee.getEmail())).findFirst().get();
-        return new Object[] {date.format(DateTimeFormatter.ISO_DATE),
+        return new Object[] {date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH)),
                 vehicle.toString(),
                 customer.getName(),
                 String.format("$%.2f", agreedPrice + tax),

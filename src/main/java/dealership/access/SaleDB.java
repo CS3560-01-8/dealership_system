@@ -2,6 +2,7 @@ package dealership.access;
 
 import dealership.db.DatabaseConnector;
 import dealership.object.Sale;
+import dealership.object.Vehicle;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,14 +32,18 @@ public class SaleDB {
     public static ArrayList<Sale> getSales(String email) {
         ArrayList<Sale> sales = new ArrayList<>();
         try {
-            ResultSet res = DatabaseConnector.executeQuery("SELECT sale.vin, sale.agreed_price, sale.tax, sale.date, " +
-                    "sale.customer_email, sale.card_num FROM sale JOIN commission ON sale.vin = commission.vin " +
+            ResultSet res = DatabaseConnector.executeQuery("SELECT sale.*, vehicle.year, vehicle.make, vehicle.model, vehicle.style, " +
+                    "vehicle.color, vehicle.mileage, vehicle.listing_price FROM sale " +
+                    "JOIN commission ON sale.vin = commission.vin " +
+                    "JOIN vehicle ON sale.vin = vehicle.vin " +
                     "WHERE commission.employee_email = '" + email + "' ORDER BY date");
 
             while (res.next()) {
-                //TODO join with vehicle table so we don't make another query for each sale
                 sales.add(new Sale(CommissionDB.getCommissionsByVin(res.getString("vin")),
-                        VehicleDB.getVehicleByVin(res.getString("vin")),
+                        new Vehicle(res.getString("vin"), res.getString("make"),
+                                res.getString("model"), res.getInt("year"),
+                                res.getString("style"), res.getString("color"),
+                                res.getInt("mileage"), res.getInt("listing_price"), true),
                         res.getFloat("agreed_price"),
                         res.getFloat("tax"),
                         res.getString("card_num"),

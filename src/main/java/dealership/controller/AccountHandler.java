@@ -91,7 +91,7 @@ public class AccountHandler {
         }
 
         if (sales.isEmpty()) {
-            tableModel.addRow(new Object[] {"No sales conducted"});
+            tableModel.addRow(new Object[] {"No sales"});
         }
     }
 }
