@@ -68,8 +68,10 @@ public class LoginFrame extends javax.swing.JFrame {
 
         emailInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        labelPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelPassword.setText("Password");
 
+        labelEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelEmail.setText("Email");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -103,7 +105,6 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cancelButton.setText("Cancel");
         cancelButton.setToolTipText("Create account");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +113,6 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        createAccountButton.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         createAccountButton.setText("Create Account");
         createAccountButton.setToolTipText("Create account");
         createAccountButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +139,7 @@ public class LoginFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -163,7 +163,9 @@ public class LoginFrame extends javax.swing.JFrame {
             if (isValidEmail(emailInput.getText())) {
                 if (AccountHandler.tryLogin(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
                     MainScreen ms = new MainScreen();
-                    ms.getPreviousFrameLocation(this.getLocationOnScreen());
+                    Point location = this.getLocationOnScreen();
+                    location.translate(-210, -100);
+                    ms.getPreviousFrameLocation(location);
                     ms.setVisible(true);
                     dispose();
                 } else
@@ -183,7 +185,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
-        CreateAccount ca = new CreateAccount();
+        CreateAccountFrame ca = new CreateAccountFrame();
         ca.getPreviousFrameLocation(this.getLocationOnScreen());
         ca.setVisible(true);
         dispose();
