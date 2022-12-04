@@ -4,13 +4,11 @@ import java.util.HashMap;
 
 public class Commission {
 
-    private int percentage;
+    private final int percentage;
+    private final String employeeEmail;
+    private final String vin;
 
-    private String employeeEmail;
-
-    private String vin;
-
-    public static final HashMap<String, Integer> weightMap = new HashMap<String, Integer>(){
+    public static final HashMap<String, Integer> weightMap = new HashMap<>(){
             {
                 put("Sr Salesperson", 4);
                 put("Jr Salesperson", 2);

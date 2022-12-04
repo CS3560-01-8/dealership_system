@@ -11,14 +11,14 @@ public class Appointment {
 
     private final String customerEmail;
     private final String vin;
-    private final LocalDateTime dt;
+    private final LocalDateTime dateTime;
 
     private final Vehicle vehicle;
 
-    public Appointment(String customerEmail, String vin, LocalDateTime dt) {
+    public Appointment(String customerEmail, String vin, LocalDateTime dateTime) {
         this.customerEmail = customerEmail;
         this.vin = vin;
-        this.dt = dt;
+        this.dateTime = dateTime;
         vehicle = VehicleDB.getVehicleByVin(vin);
     }
 
@@ -31,13 +31,13 @@ public class Appointment {
     }
 
     public LocalDateTime getDateTime() {
-        return dt;
+        return dateTime;
     }
 
     public Object[] getRowData() {
-        String date  = dt.format(DateTimeFormatter.ofPattern("EEEE, MMM d", Locale.ENGLISH));
-        String time = dt.format(DateTimeFormatter.ofPattern("hh:ss a", Locale.ENGLISH))
-                + dt.plusHours(1).format(DateTimeFormatter.ofPattern(" - hh:ss a", Locale.ENGLISH));
+        String date  = dateTime.format(DateTimeFormatter.ofPattern("EEEE, MMM d", Locale.ENGLISH));
+        String time = dateTime.format(DateTimeFormatter.ofPattern("hh:ss a", Locale.ENGLISH))
+                + dateTime.plusHours(1).format(DateTimeFormatter.ofPattern(" - hh:ss a", Locale.ENGLISH));
         return new Object[] {date, time, vehicle.toString()};
     }
 

@@ -33,9 +33,9 @@ public class DatabaseConnector {
         return result;
     }
 
-    public static void executeInsert(String query) {
+    public static void executeUpdate(String query) {
         try {
-            System.out.println(query);
+            System.out.println("Query: " + query);
             Statement statement = conn.createStatement();
             statement.executeUpdate(query);
         } catch (SQLException e) {

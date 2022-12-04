@@ -26,14 +26,6 @@ public class SaleHandler {
         return pendingSale;
     }
 
-    public static boolean makeCommission(Sale sale) {
-        if (!SaleDB.isSaleValid(sale.getVehicle().getVin())) {
-            return false;
-        }
-        CommissionDB.writeCommissions(sale.getCommission());
-        return true;
-    }
-
     public static void loadEmployeesIntoList(JPanel listOtherEmployees) {
         employeesBesidesLoggedIn = AccountDB.getAllEmployeesBesides(AccountHandler.getLoggedInEmail());
         listOtherEmployees.setLayout(new GridLayout(0, 1));

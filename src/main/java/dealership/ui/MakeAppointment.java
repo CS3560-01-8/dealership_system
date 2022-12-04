@@ -6,14 +6,9 @@ package dealership.ui;
 
 import dealership.controller.AccountHandler;
 import dealership.controller.VehicleHandler;
-import java.awt.event.ItemEvent;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,11 +17,6 @@ import javax.swing.table.DefaultTableModel;
  * @author krist
  */
 public class MakeAppointment extends javax.swing.JDialog {
-
-    // month list
-    private final String[] MONTH_LIST = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    // current year
-    private int year;
 
     private final JTable appointmentTable;
     
@@ -41,7 +31,6 @@ public class MakeAppointment extends javax.swing.JDialog {
         initComponents();
         vehicleText.setText(VehicleHandler.getSelectedVehicleDetails());
         loadDatesForNextTwoWeeks();
-        //setCurrentMonthDate();
     }
 
    private void loadDatesForNextTwoWeeks() {
@@ -51,44 +40,6 @@ public class MakeAppointment extends javax.swing.JDialog {
            dateTime = dateTime.plusDays(1);
        }
     }
-
-    /*
-    // set options to today's date
-    private void setCurrentMonthDate() {
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMMM dd YYYY", Locale.ENGLISH);
-        String month = dateFormat.format(LocalDate.now()).substring(0, dateFormat.format(LocalDate.now()).indexOf(" "));
-        String date = dateFormat.format(LocalDate.now()).substring(dateFormat.format(LocalDate.now()).indexOf(" ") + 1, dateFormat.format(LocalDate.now()).lastIndexOf(" "));
-        String yearString = dateFormat.format(LocalDate.now()).substring(dateFormat.format(LocalDate.now()).lastIndexOf(" ") + 1);
-        year = Integer.parseInt(yearString);
-    }
-    
-    // change month to int number
-    private int monthNameToInt(String monthName) {
-        int monthNum = 0;
-        for (int i = monthNum; i < MONTH_LIST.length; i++) {
-            if (monthName.equals(MONTH_LIST[i]))
-                monthNum = i + 1;
-        }
-        return monthNum;
-    }
-    
-    // set number of days in date combo box
-   /* private void setNumDays(String monthName, String date, int year) {
-        YearMonth ym = YearMonth.of(year, monthNameToInt(monthName));
-        int numOfDays = ym.lengthOfMonth();
-        ArrayList<String> days = new ArrayList<>();
-        for (int i = 1; i <= numOfDays; i++)
-            days.add(String.valueOf(i));
-        daySelect.setModel(new DefaultComboBoxModel<>(new Vector<>(days)));
-        if (date == null)
-            daySelect.getModel().setSelectedItem("1");
-        else {
-            if (Integer.parseInt(date) > numOfDays)
-                daySelect.getModel().setSelectedItem("1");
-            else
-                daySelect.getModel().setSelectedItem(date);
-        }
-    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.

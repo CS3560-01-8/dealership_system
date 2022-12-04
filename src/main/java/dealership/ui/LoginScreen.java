@@ -161,11 +161,11 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        if (emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals(""))
+        if (emailInput.getText().isEmpty() && passwordInput.getPassword().length == 0)
             JOptionPane.showMessageDialog(this, "Please enter an email and password.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        else if (emailInput.getText().equals("") && !valueOf(passwordInput.getPassword()).equals(""))
+        else if (emailInput.getText().isEmpty())
             JOptionPane.showMessageDialog(this, "Please enter email.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        else if (!emailInput.getText().equals("") && valueOf(passwordInput.getPassword()).equals(""))
+        else if (passwordInput.getPassword().length == 1)
             JOptionPane.showMessageDialog(this, "Please enter password.", "Missing information", JOptionPane.ERROR_MESSAGE);
         else {
             if (isValidEmail(emailInput.getText())) {

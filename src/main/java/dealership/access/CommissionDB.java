@@ -9,25 +9,22 @@ import java.util.ArrayList;
 
 public class CommissionDB {
 
-    public static void writeCommissions(ArrayList<Commission> commissions)
-    {
-        for (int i = 0; i < commissions.size(); i++)
-        {
-            DatabaseConnector.executeInsert(String.format(
+    public static void writeCommissions(ArrayList<Commission> commissions) {
+        for (Commission commission : commissions) {
+            DatabaseConnector.executeUpdate(String.format(
                     "INSERT INTO `dealership`.`commission` (`employee_email`, `vin`, `percentage`) VALUES ('%s', '%s', '%d')",
-                    commissions.get(i).getEmployee_email(), commissions.get(i).getVin(),commissions.get(i).getPercentage()
-            ));
+                    commission.getEmployee_email(), commission.getVin(), commission.getPercentage()));
         }
     }
 
-    public static ArrayList<Commission> getCommissionsByVin(String vin){
+    public static ArrayList<Commission> getCommissionsByVin(String vin) {
         ArrayList<Commission> commissions = new ArrayList<>();
-        try{
+        try {
             ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM dealership.commission WHERE vin = '" + vin + "';");
-            while(res.next()){
+            while (res.next()) {
                 commissions.add(new Commission(res.getString("employee_email"), vin, res.getInt("percentage")));
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return commissions;

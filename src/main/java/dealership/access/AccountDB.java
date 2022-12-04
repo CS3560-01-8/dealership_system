@@ -12,10 +12,10 @@ import java.util.ArrayList;
 public class AccountDB {
 
     public static void writeCustomer(Customer account, String password) {
-        DatabaseConnector.executeInsert(String.format(
+        DatabaseConnector.executeUpdate(String.format(
                 "INSERT INTO `dealership`.`account` (`email`, `first_name`, `last_name`, `phone_num`, `password`) VALUES ('%s', '%s', '%s', '%s', '%s')",
                 account.getEmail(), account.getFirstName(), account.getLastName(), account.getPhoneNum(), password));
-        DatabaseConnector.executeInsert(String.format(
+        DatabaseConnector.executeUpdate(String.format(
                 "INSERT INTO `dealership`.`customer` (`customer_email`, `address`) VALUES ('%s', '%s')",
                 account.getEmail(), account.getAddress()));
     }

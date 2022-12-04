@@ -9,7 +9,6 @@ import dealership.controller.SaleHandler;
 import dealership.controller.VehicleHandler;
 
 import java.awt.*;
-import java.util.ArrayList;
 import javax.swing.*;
 
 public class MakeSaleScreen1 extends javax.swing.JFrame {

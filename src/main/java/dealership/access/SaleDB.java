@@ -50,22 +50,4 @@ public class SaleDB {
         return sales;
     }
 
-    public static boolean isSaleValid(String vin) {
-        String query = "SELECT 1 FROM sale WHERE vin = '" + vin + "'";
-        try {
-            ResultSet res = DatabaseConnector.executeQuery(query);
-            if (res.next()) {
-                System.out.println("sale found");
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println("sale not found!");
-        return false;
-    }
-
-
-
-
 }

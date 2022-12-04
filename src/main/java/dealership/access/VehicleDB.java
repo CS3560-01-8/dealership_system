@@ -57,14 +57,10 @@ public class VehicleDB {
         String query = "SELECT 1 FROM vehicle WHERE vin = '" + vin + "' AND sold = '0'";
         try {
             ResultSet res = DatabaseConnector.executeQuery(query);
-            if (res.next()) {
-                System.out.println("car found!");
-                return true;
-            }
+            return res.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("car not found!");
         return false;
     }
 
@@ -94,7 +90,7 @@ public class VehicleDB {
     public static void carSold(String vin) {
         if (isVinValid(vin)) {
             String query = "UPDATE dealership.vehicle SET sold = 1 WHERE vin = '" + vin + "'";
-            DatabaseConnector.executeInsert(query);
+            DatabaseConnector.executeUpdate(query);
         }
     }
 }

@@ -106,7 +106,7 @@ public class CreateAccount extends javax.swing.JFrame {
     }
 
     private boolean isValidEmail(String email) {
-        if(!email.matches("[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}")){
+        if (!email.matches("[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}")) {
             JOptionPane.showMessageDialog(this, "Email is not in the right format. Please retype email.", "Format Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }

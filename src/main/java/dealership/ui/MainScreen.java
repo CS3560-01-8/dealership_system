@@ -5,7 +5,6 @@
 package dealership.ui;
 
 import dealership.controller.AccountHandler;
-import dealership.controller.SaleHandler;
 import dealership.controller.VehicleHandler;
 
 import javax.swing.*;

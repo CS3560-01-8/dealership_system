@@ -5,6 +5,7 @@ import dealership.access.SaleDB;
 import java.util.ArrayList;
 
 public class Employee extends Account {
+
     private final String role;
     private final ArrayList<Sale> sales;
 
