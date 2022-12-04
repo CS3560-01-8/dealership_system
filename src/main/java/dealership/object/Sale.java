@@ -1,6 +1,7 @@
 package dealership.object;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Sale {
@@ -26,11 +27,10 @@ public class Sale {
         this.commissions = new ArrayList<>();
         this.customer = customer;
         float totalWeights = 0;
-        for(Employee employee: allSaleEmployees){
+        for (Employee employee : allSaleEmployees){
             totalWeights += Commission.weightMap.get(employee.getRole());
         }
-        for (Employee employee: allSaleEmployees)
-        {
+        for (Employee employee : allSaleEmployees) {
             this.commissions.add(new Commission(employee.getEmail(), vehicle.getVin(), Math.round(Commission.weightMap.get(employee.getRole()) / totalWeights * 15)));
         }
     }
@@ -43,10 +43,6 @@ public class Sale {
         this.date = LocalDateTime.now();
         this.customer = customer;
         this.commissions = commissions;
-    }
-
-    public void addCommission(Commission commission) {
-        commissions.add(commission);
     }
 
     public float getAgreedPrice() {
@@ -72,4 +68,14 @@ public class Sale {
     public LocalDateTime getDate() {
         return date;
     }
+
+    public Object[] getRowData(Employee employee) {
+        Commission commission = commissions.stream().filter(c -> c.getEmployee_email().equals(employee.getEmail())).findFirst().get();
+        return new Object[] {date.format(DateTimeFormatter.ISO_DATE),
+                vehicle.toString(),
+                customer.getName(),
+                String.format("$%.2f", agreedPrice + tax),
+                String.format("$%.2f (%d%%)", commission.getPercentage() / 100.0 * (agreedPrice + tax), commission.getPercentage())};
+    }
+
 }

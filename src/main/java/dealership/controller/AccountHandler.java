@@ -1,10 +1,7 @@
 package dealership.controller;
 
 import dealership.access.AccountDB;
-import dealership.object.Account;
-import dealership.object.Appointment;
-import dealership.object.Customer;
-import dealership.object.Employee;
+import dealership.object.*;
 
 import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
@@ -13,10 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.*;
 
 public class AccountHandler {
 
@@ -139,5 +133,17 @@ public class AccountHandler {
 
     public static boolean hasMadeAppointmentWithVehicle(String vin) {
         return ((Customer) loggedInAccount).hasMadeAppointment(vin);
+    }
+
+    public static void loadSalesIntoTable(DefaultTableModel tableModel) {
+        ArrayList<Sale> sales = ((Employee) loggedInAccount).getSales();
+
+        for (Sale sale : sales) {
+            tableModel.addRow(sale.getRowData((Employee) loggedInAccount));
+        }
+
+        if (sales.isEmpty()) {
+            tableModel.addRow(new Object[] {"No sales conducted"});
+        }
     }
 }

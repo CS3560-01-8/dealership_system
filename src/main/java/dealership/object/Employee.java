@@ -22,4 +22,8 @@ public class Employee extends Account {
         sales.add(pendingSale);
         SaleDB.writeSale(pendingSale);
     }
+
+    public ArrayList<Sale> getSales() {
+        return sales;
+    }
 }
