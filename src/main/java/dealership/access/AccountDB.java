@@ -38,19 +38,19 @@ public class AccountDB {
     public static Account getAccount(String email, String password) {
         Account account = null;
         if (accountRecordExists(email, password)) {
-            account = getCustomer(email, password);
+            account = getCustomer(email);
             if (account == null) {
-                account = getEmployee(email, password);
+                account = getEmployee(email);
             }
         }
         return account;
     }
 
-    private static Customer getCustomer(String email, String password) {
+    public static Customer getCustomer(String email) {
         try {
             ResultSet res = DatabaseConnector.executeQuery(String.format("SELECT account.email, account.first_name, account.last_name, " +
                     "account.phone_num, customer.address FROM account JOIN customer ON customer.customer_email = account.email " +
-                    "WHERE account.email = '%s' AND account.password = '%s';", email, password));
+                    "WHERE account.email = '%s';", email));
             if (res.next()) {
                 return new Customer(res.getString("email"), res.getString("first_name"),
                         res.getString("last_name"), res.getString("phone_num"),
@@ -62,11 +62,11 @@ public class AccountDB {
         return null;
     }
 
-    private static Employee getEmployee(String email, String password) {
+    private static Employee getEmployee(String email) {
         try {
             ResultSet res = DatabaseConnector.executeQuery(String.format("SELECT account.email, account.first_name, account.last_name, " +
                     "account.phone_num, employee.role FROM account JOIN employee ON employee.employee_email = account.email " +
-                    "WHERE account.email = '%s' AND account.password = '%s';", email, password));
+                    "WHERE account.email = '%s';", email));
             if (res.next()) {
                 return new Employee(res.getString("email"), res.getString("first_name"),
                         res.getString("last_name"), res.getString("phone_num"), res.getString("role"));

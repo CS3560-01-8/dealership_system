@@ -308,6 +308,8 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
             return;
         }
 
+        SaleHandler.submitSale(textVIN.getText(), Float.parseFloat(textAgreedPrice.getText()),Float.parseFloat(textAgreedPrice.getText()) * 0.1f,textCardNumber.getText(), textCustomerEmail.getText());
+
         MakeSaleScreen2 employeeSelect = new MakeSaleScreen2();
         employeeSelect.getPreviousFrameLocation(this.getLocationOnScreen());
         employeeSelect.setVisible(true);
