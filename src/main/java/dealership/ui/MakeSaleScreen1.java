@@ -161,7 +161,6 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
 
         panelEmployees.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Other Sale Employees", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        panelEmployeeList.setBackground(new java.awt.Color(255, 255, 255));
         panelEmployeeList.setLayout(new java.awt.GridBagLayout());
         jScrollPane.setViewportView(panelEmployeeList);
 
@@ -311,10 +310,9 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
         SaleHandler.submitSale(Float.parseFloat(textAgreedPrice.getText()),
                 Float.parseFloat(textAgreedPrice.getText()) * 0.1f,textCardNumber.getText(), textCustomerEmail.getText());
 
-        MakeSaleScreen2 employeeSelect = new MakeSaleScreen2();
+        MakeSaleScreen2 employeeSelect = new MakeSaleScreen2(this, true);
         employeeSelect.getPreviousFrameLocation(this.getLocationOnScreen());
         employeeSelect.setVisible(true);
-        dispose();
     }//GEN-LAST:event_submitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -31,7 +31,7 @@ public class AppointmentDB {
             ps.setObject(1, dateTime);
             ps.setString(2, vin);
             ps.setString(3, customerEmail);
-            return ps.executeQuery().next();
+            return !ps.executeQuery().next();
         } catch (SQLException e) {
             e.printStackTrace();
         }

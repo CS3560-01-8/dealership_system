@@ -4,18 +4,36 @@
  */
 package dealership.ui;
 
-import java.awt.Point;
-import javax.swing.JOptionPane;
+import dealership.controller.SaleHandler;
+import dealership.object.Sale;
 
-public class MakeSaleScreen2 extends javax.swing.JFrame {
+import java.awt.Point;
+
+public class MakeSaleScreen2 extends javax.swing.JDialog {
 
     /**
      * Creates new form MakeSaleScreen2
      */
-    public MakeSaleScreen2() {
+    public MakeSaleScreen2(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        initSaleDetails();
+        this.getRootPane().setDefaultButton(buttonConfirm);
     }
-    
+
+    private void initSaleDetails() {
+        Sale pendingSale = SaleHandler.getSale();
+        textVehicle.setText(pendingSale.getVehicle().toString());
+        textVIN.setText(pendingSale.getVehicle().getVin());
+        textCustomerName.setText(pendingSale.getCustomer().getName());
+        textCardNumber.setText(pendingSale.getCardNumber());
+        textAddress.setText(pendingSale.getCustomer().getAddress());
+        textPhoneNumber.setText(pendingSale.getCustomer().getPhoneNum());
+        textAgreedPrice.setText(String.format("$%.2f", pendingSale.getAgreedPrice()));
+        textTax.setText(String.format("$%.2f", pendingSale.getTax()));
+        textTotal.setText(String.format("$%.2f", (pendingSale.getAgreedPrice() + pendingSale.getTax())));
+    }
+
     // Gets previous frame's location on screen
     public void getPreviousFrameLocation(Point previous) {
         this.setLocation(previous);
@@ -30,203 +48,261 @@ public class MakeSaleScreen2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainPanel = new javax.swing.JPanel();
-        employeeListPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        selectedEmployeeList = new javax.swing.JList<>();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        allEmployeeList = new javax.swing.JList<>();
-        jLabel1 = new javax.swing.JLabel();
-        addEmployeeButton = new javax.swing.JButton();
-        removeEmployeeButton = new javax.swing.JButton();
+        saleDetails = new javax.swing.JPanel();
+        labelVehicle = new javax.swing.JLabel();
+        labeAgreedPrice = new javax.swing.JLabel();
+        labelVIN = new javax.swing.JLabel();
+        textAgreedPrice = new javax.swing.JTextField();
+        textVehicle = new javax.swing.JTextField();
+        textVIN = new javax.swing.JTextField();
+        textTax = new javax.swing.JTextField();
+        labelTax = new javax.swing.JLabel();
+        textTotal = new javax.swing.JTextField();
+        labelTotal = new javax.swing.JLabel();
+        textCardNumber = new javax.swing.JTextField();
+        labelCustomerName = new javax.swing.JLabel();
+        textCustomerName = new javax.swing.JTextField();
+        labelCustomerName1 = new javax.swing.JLabel();
+        textAddress = new javax.swing.JTextField();
+        labelCustomerName2 = new javax.swing.JLabel();
+        labelCustomerName3 = new javax.swing.JLabel();
+        textPhoneNumber = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
-        submitButton = new javax.swing.JButton();
-        saleLabel = new javax.swing.JLabel();
+        buttonConfirm = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 400));
+        setTitle(" Finalize Sale");
+        setResizable(false);
 
-        selectedEmployeeList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jScrollPane2.setViewportView(selectedEmployeeList);
+        saleDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sale Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Sale Employees");
+        labelVehicle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelVehicle.setText("Vehicle");
 
-        allEmployeeList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jScrollPane1.setViewportView(allEmployeeList);
+        labeAgreedPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labeAgreedPrice.setText("Agreed Price");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("All Employees");
+        labelVIN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelVIN.setText("VIN");
 
-        addEmployeeButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addEmployeeButton.setText("Add");
-        addEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addEmployeeButtonActionPerformed(evt);
-            }
-        });
+        textAgreedPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textAgreedPrice.setEnabled(false);
 
-        removeEmployeeButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        removeEmployeeButton.setText("Remove");
-        removeEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeEmployeeButtonActionPerformed(evt);
-            }
-        });
+        textVehicle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textVehicle.setEnabled(false);
 
-        javax.swing.GroupLayout employeeListPanelLayout = new javax.swing.GroupLayout(employeeListPanel);
-        employeeListPanel.setLayout(employeeListPanelLayout);
-        employeeListPanelLayout.setHorizontalGroup(
-            employeeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, employeeListPanelLayout.createSequentialGroup()
-                .addGroup(employeeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(employeeListPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(employeeListPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                        .addGroup(employeeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addEmployeeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removeEmployeeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)))
-                .addGroup(employeeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+        textVIN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textVIN.setEnabled(false);
+
+        textTax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textTax.setEnabled(false);
+
+        labelTax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelTax.setText("Tax");
+
+        textTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textTotal.setEnabled(false);
+
+        labelTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelTotal.setText("Total");
+
+        textCardNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textCardNumber.setEnabled(false);
+        textCardNumber.setMinimumSize(new java.awt.Dimension(65, 26));
+
+        labelCustomerName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelCustomerName.setText("Customer Name");
+        labelCustomerName.setToolTipText("");
+
+        textCustomerName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textCustomerName.setEnabled(false);
+        textCustomerName.setPreferredSize(new java.awt.Dimension(65, 26));
+
+        labelCustomerName1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelCustomerName1.setText("Customer Card Number");
+        labelCustomerName1.setToolTipText("");
+
+        textAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textAddress.setEnabled(false);
+
+        labelCustomerName2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelCustomerName2.setText("Customer Address");
+        labelCustomerName2.setToolTipText("");
+
+        labelCustomerName3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelCustomerName3.setText("Customer Phone");
+        labelCustomerName3.setToolTipText("");
+
+        textPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textPhoneNumber.setEnabled(false);
+
+        javax.swing.GroupLayout saleDetailsLayout = new javax.swing.GroupLayout(saleDetails);
+        saleDetails.setLayout(saleDetailsLayout);
+        saleDetailsLayout.setHorizontalGroup(
+            saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(saleDetailsLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(saleDetailsLayout.createSequentialGroup()
+                        .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelVehicle)
+                            .addComponent(labelCustomerName))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(saleDetailsLayout.createSequentialGroup()
+                        .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(saleDetailsLayout.createSequentialGroup()
+                                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(saleDetailsLayout.createSequentialGroup()
+                                        .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labeAgreedPrice)
+                                            .addComponent(textAgreedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(24, 24, 24)
+                                        .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(textTax, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(labelTax)))
+                                    .addComponent(textAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelCustomerName2))
+                                .addGap(24, 24, 24)
+                                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textTotal)
+                                    .addComponent(textPhoneNumber)
+                                    .addGroup(saleDetailsLayout.createSequentialGroup()
+                                        .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelTotal)
+                                            .addComponent(labelCustomerName3))
+                                        .addGap(0, 17, Short.MAX_VALUE))))
+                            .addGroup(saleDetailsLayout.createSequentialGroup()
+                                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textVehicle)
+                                    .addComponent(textCustomerName, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
+                                .addGap(24, 24, 24)
+                                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(saleDetailsLayout.createSequentialGroup()
+                                        .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelCustomerName1)
+                                            .addComponent(textVIN, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(labelVIN))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(textCardNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(24, 24, 24))))
         );
-        employeeListPanelLayout.setVerticalGroup(
-            employeeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(employeeListPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(employeeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(employeeListPanelLayout.createSequentialGroup()
-                        .addGroup(employeeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(employeeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(employeeListPanelLayout.createSequentialGroup()
-                                .addComponent(addEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(removeEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(36, 36, 36))
+        saleDetailsLayout.setVerticalGroup(
+            saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(saleDetailsLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelVehicle)
+                    .addComponent(labelVIN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textVIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCustomerName)
+                    .addComponent(labelCustomerName1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCustomerName2)
+                    .addComponent(labelCustomerName3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labeAgreedPrice)
+                    .addComponent(labelTax)
+                    .addComponent(labelTotal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(saleDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textAgreedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textTax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cancelButton.setText("Cancel");
-        cancelButton.setToolTipText("Go back to login");
+        cancelButton.setToolTipText("");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
             }
         });
 
-        submitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        submitButton.setText("Submit");
-        submitButton.setToolTipText("Go back to login");
-        submitButton.addActionListener(new java.awt.event.ActionListener() {
+        buttonConfirm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        buttonConfirm.setText("Confirm");
+        buttonConfirm.setToolTipText("");
+        buttonConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitButtonActionPerformed(evt);
+                buttonConfirmActionPerformed(evt);
             }
         });
-
-        saleLabel.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        saleLabel.setText("Sale");
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(saleLabel))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(employeeListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(saleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(employeeListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(saleDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(buttonConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(saleDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmActionPerformed
+
+    }//GEN-LAST:event_buttonConfirmActionPerformed
+
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
-        MakeSaleScreen1 emailConfirm = new MakeSaleScreen1();
-        emailConfirm.getPreviousFrameLocation(this.getLocationOnScreen());
-        emailConfirm.setVisible(true);
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // TODO add your handling code here:
-        if (selectedEmployeeList.getModel().getSize() == 0) {
-            JOptionPane.showMessageDialog(this, "Please select at least one employee.", "Missing information", JOptionPane.ERROR_MESSAGE);
-        } else {
-            MakeSaleScreen2 employeeSelect = new MakeSaleScreen2();
-            employeeSelect.getPreviousFrameLocation(this.getLocationOnScreen());
-            employeeSelect.setVisible(true);
-            dispose();
-        }
-    }//GEN-LAST:event_submitButtonActionPerformed
-
-    private void addEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeButtonActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_addEmployeeButtonActionPerformed
-
-    private void removeEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEmployeeButtonActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_removeEmployeeButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addEmployeeButton;
-    private javax.swing.JList<String> allEmployeeList;
+    private javax.swing.JButton buttonConfirm;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JPanel employeeListPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JButton removeEmployeeButton;
-    private javax.swing.JLabel saleLabel;
-    private javax.swing.JList<String> selectedEmployeeList;
-    private javax.swing.JButton submitButton;
+    private javax.swing.JLabel labeAgreedPrice;
+    private javax.swing.JLabel labelCustomerName;
+    private javax.swing.JLabel labelCustomerName1;
+    private javax.swing.JLabel labelCustomerName2;
+    private javax.swing.JLabel labelCustomerName3;
+    private javax.swing.JLabel labelTax;
+    private javax.swing.JLabel labelTotal;
+    private javax.swing.JLabel labelVIN;
+    private javax.swing.JLabel labelVehicle;
+    private javax.swing.JPanel saleDetails;
+    private javax.swing.JTextField textAddress;
+    private javax.swing.JTextField textAgreedPrice;
+    private javax.swing.JTextField textCardNumber;
+    private javax.swing.JTextField textCustomerName;
+    private javax.swing.JTextField textPhoneNumber;
+    private javax.swing.JTextField textTax;
+    private javax.swing.JTextField textTotal;
+    private javax.swing.JTextField textVIN;
+    private javax.swing.JTextField textVehicle;
     // End of variables declaration//GEN-END:variables
 }
