@@ -38,7 +38,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('123@123.com','test','user','1234567890','123'),('amiquelet7@bloglovin.com','Alexandrina','Miquelet','225-670-1525','0o6I3MJ'),('austin@gmail.com','Austin','Aluzzi','738-492-8323','poop'),('bpengelleya@mlb.com','Bianca','Pengelley','651-839-6997','iDkPFZX'),('bringe4@naver.com','Briney','Ringe','731-844-3027','3YgQYcyKU'),('gbaser9@sciencedirect.com','Giustino','Baser','551-498-8776','QS2xBhFaJ8Dn'),('gschimonek8@sfgate.com','Gerek','Schimonek','531-230-9716','TXXFD0cv6'),('hzoellner0@nhs.uk','Honoria','Zoellner','324-838-5523','PiDam5Jd'),('igodfery6@fema.gov','Isa','Godfery','455-319-2622','6eaF2BPg76l9'),('ljimmesb@geocities.jp','Latrena','Jimmes','988-302-8866','wMuHiBIKIo1'),('lmccoveney5@ibm.com','Lydon','McCoveney','531-497-0113','WXSJcNaOOs'),('mdewerkd@soundcloud.com','Millicent','de Werk','912-199-3055','P8Ih9oXx'),('sclurowc@google.it','Sybille','Clurow','728-591-8087','zkzTn0pICk'),('t@1.com','test','tset','1234567890','123'),('test@123.com','employee','test',NULL,'123'),('vcluitt3@unc.edu','Valle','Cluitt','507-808-2690','cjnnRc'),('wgammett1@eepurl.com','Willem','Gammett','221-124-5271','QvrIEVezzd8Q'),('wkayese@pinterest.com','Wheeler','Kayes','224-827-4461','Jq29nvSOIX'),('wosharkey2@ucsd.edu','Webb','O\'Sharkey','401-940-8713','h1b57dytIZi7');
+INSERT INTO `account` VALUES ('123@123.com','test','user','1234567890','123'),('aaustin@dealership.com','Austin','Aluzzi','3569963216','123'),('amiquelet7@bloglovin.com','Alexandrina','Miquelet','225-670-1525','0o6I3MJ'),('austin@gmail.com','Austin','Aluzzi','738-492-8323','poop'),('bjonny@dealership.com','Jonny','Biden','1230456678','123'),('bpengelleya@mlb.com','Bianca','Pengelley','651-839-6997','iDkPFZX'),('bringe4@naver.com','Briney','Ringe','731-844-3027','3YgQYcyKU'),('dblake@dealership.com','Blake','Dukowski','1236523362','123'),('gbaser9@sciencedirect.com','Giustino','Baser','551-498-8776','QS2xBhFaJ8Dn'),('gschimonek8@sfgate.com','Gerek','Schimonek','531-230-9716','TXXFD0cv6'),('hzoellner0@nhs.uk','Honoria','Zoellner','324-838-5523','PiDam5Jd'),('igodfery6@fema.gov','Isa','Godfery','455-319-2622','6eaF2BPg76l9'),('kkristine@dealership.com','Kristine','Kinoshita','1224537088','123'),('ljimmesb@geocities.jp','Latrena','Jimmes','988-302-8866','wMuHiBIKIo1'),('lmccoveney5@ibm.com','Lydon','McCoveney','531-497-0113','WXSJcNaOOs'),('malon@@dealership.com','Alon','Mask','9563265543','123'),('mdewerkd@soundcloud.com','Millicent','de Werk','912-199-3055','P8Ih9oXx'),('rrichard@dealership.com','Richard','Reyes','2665593265','123'),('sclurowc@google.it','Sybille','Clurow','728-591-8087','zkzTn0pICk'),('sjohn@dealership.com','John','Siena','7422013347','123'),('t@1.com','test','tset','1234567890','123'),('test@123.com','employee','test',NULL,'123'),('vcluitt3@unc.edu','Valle','Cluitt','507-808-2690','cjnnRc'),('wgammett1@eepurl.com','Willem','Gammett','221-124-5271','QvrIEVezzd8Q'),('wkayese@pinterest.com','Wheeler','Kayes','224-827-4461','Jq29nvSOIX'),('wosharkey2@ucsd.edu','Webb','O\'Sharkey','401-940-8713','h1b57dytIZi7'),('zhanmo@dealership.com','Hanmo','Zhang','0125634479','123');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +144,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES ('hzoellner0@nhs.uk','role2'),('lmccoveney5@ibm.com','role2'),('test@123.com','role3'),('vcluitt3@unc.edu','role1'),('wkayese@pinterest.com','role1');
+INSERT INTO `employee` VALUES ('aaustin@dealership.com','Sr Salesperson'),('bjonny@dealership.com','Jr Salesperson'),('dblake@dealership.com','Sr Salesperson'),('kkristine@dealership.com','Sr Salesperson'),('malon@@dealership.com','Jr Salesperson'),('rrichard@dealership.com','Manager'),('sjohn@dealership.com','Jr Salesperson'),('zhanmo@dealership.com','Jr Salesperson');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-04  0:33:28
+-- Dump completed on 2022-12-04  1:24:50
