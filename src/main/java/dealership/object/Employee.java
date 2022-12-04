@@ -1,10 +1,12 @@
 package dealership.object;
 
+import dealership.access.SaleDB;
+
 import java.util.ArrayList;
 
 public class Employee extends Account {
-    private String role;
-    private ArrayList<Sale> sales;
+    private final String role;
+    private final ArrayList<Sale> sales;
 
     public Employee(String email, String firstName, String lastName, String phoneNum, String role, ArrayList<Sale> sales) {
         super(email, firstName, lastName, phoneNum);
@@ -16,4 +18,8 @@ public class Employee extends Account {
         return role;
     }
 
+    public void addSale(Sale pendingSale) {
+        sales.add(pendingSale);
+        SaleDB.writeSale(pendingSale);
+    }
 }

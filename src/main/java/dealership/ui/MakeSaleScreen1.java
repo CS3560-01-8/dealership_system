@@ -4,17 +4,12 @@
  */
 package dealership.ui;
 
-import dealership.access.AccountDB;
 import dealership.controller.AccountHandler;
 import dealership.controller.SaleHandler;
 import dealership.controller.VehicleHandler;
-import dealership.object.Employee;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 public class MakeSaleScreen1 extends javax.swing.JFrame {
 
@@ -307,7 +302,7 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
             return;
         }
 
-        SaleHandler.submitSale(Float.parseFloat(textAgreedPrice.getText()),
+        SaleHandler.startSale(Float.parseFloat(textAgreedPrice.getText()),
                 Float.parseFloat(textAgreedPrice.getText()) * 0.1f,textCardNumber.getText(), textCustomerEmail.getText());
 
         MakeSaleScreen2 employeeSelect = new MakeSaleScreen2(this, true);

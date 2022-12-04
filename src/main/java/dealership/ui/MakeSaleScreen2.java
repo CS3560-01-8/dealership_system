@@ -7,15 +7,19 @@ package dealership.ui;
 import dealership.controller.SaleHandler;
 import dealership.object.Sale;
 
-import java.awt.Point;
+import javax.swing.*;
+import java.awt.*;
 
 public class MakeSaleScreen2 extends javax.swing.JDialog {
 
     /**
      * Creates new form MakeSaleScreen2
      */
+    private final Frame parent;
+
     public MakeSaleScreen2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
         initSaleDetails();
         this.getRootPane().setDefaultButton(buttonConfirm);
@@ -275,7 +279,13 @@ public class MakeSaleScreen2 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmActionPerformed
-
+        SaleHandler.finalizeSale();
+        JOptionPane.showMessageDialog(this, "Sale completed!", "Sale Complete", JOptionPane.INFORMATION_MESSAGE);
+        MainScreen inv = new MainScreen();
+        inv.getPreviousFrameLocation(parent.getLocationOnScreen());
+        inv.setVisible(true);
+        dispose();
+        parent.dispose();
     }//GEN-LAST:event_buttonConfirmActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

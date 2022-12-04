@@ -1,10 +1,8 @@
 package dealership.controller;
 
 import dealership.access.*;
-import dealership.object.Customer;
 import dealership.object.Employee;
 import dealership.object.Sale;
-import dealership.object.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,19 +11,19 @@ import java.util.ArrayList;
 public class SaleHandler {
 
     private static ArrayList<Employee> employeesBesidesLoggedIn;
-    private static Sale currentSale;
+    private static Sale pendingSale;
 
-    public static void submitSale(float agreedPrice, float tax, String cardNum, String customerEmail) {
-        currentSale = new Sale(VehicleHandler.getSelectedVehicle(), agreedPrice, tax, cardNum, AccountDB.getCustomer(customerEmail));
+    public static void startSale(float agreedPrice, float tax, String cardNum, String customerEmail) {
+        pendingSale = new Sale(VehicleHandler.getSelectedVehicle(), agreedPrice, tax, cardNum, AccountDB.getCustomer(customerEmail));
+    }
+
+    public static void finalizeSale() {
+        ((Employee) AccountHandler.getLoggedInAccount()).addSale(pendingSale);
+        pendingSale = null;
     }
 
     public static Sale getSale() {
-        return currentSale;
-    }
-
-    public static boolean makeSale(Vehicle vehicle, float agreedPrice, float tax, String cardNum, Customer customer) {
-        SaleDB.writeSale(new Sale(vehicle, agreedPrice, tax, cardNum, customer));
-        return true;
+        return pendingSale;
     }
 
     public static boolean makeCommission(Sale sale) {
