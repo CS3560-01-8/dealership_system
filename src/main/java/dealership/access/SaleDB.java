@@ -29,10 +29,13 @@ public class SaleDB {
         }
     }
 
-    public static ArrayList<Sale> getSales() {
-        ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM sale");
+    public static ArrayList<Sale> getSales(String email) {
         ArrayList<Sale> sales = new ArrayList<>();
         try {
+            ResultSet res = DatabaseConnector.executeQuery("SELECT sale.vin, sale.agreed_price, sale.tax, sale.date, " +
+                    "sale.customer_email, sale.card_num FROM sale JOIN commission ON sale.vin = commission.vin " +
+                    "WHERE commission.employee_email = '" + email + "' ORDER BY date");
+
             while (res.next()) {
                 sales.add(new Sale(res.getString("vin"),
                         res.getFloat("agreed_price"),

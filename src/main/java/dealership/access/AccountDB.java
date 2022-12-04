@@ -4,6 +4,7 @@ import dealership.db.DatabaseConnector;
 import dealership.object.Account;
 import dealership.object.Customer;
 import dealership.object.Employee;
+import dealership.object.Sale;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,7 +70,8 @@ public class AccountDB {
                     "WHERE account.email = '%s';", email));
             if (res.next()) {
                 return new Employee(res.getString("email"), res.getString("first_name"),
-                        res.getString("last_name"), res.getString("phone_num"), res.getString("role"));
+                        res.getString("last_name"), res.getString("phone_num"),
+                        res.getString("role"), SaleDB.getSales(email));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +87,7 @@ public class AccountDB {
                     email));
             while (res.next()) {
                 employees.add(new Employee(res.getString("email"), res.getString("first_name"),
-                        res.getString("last_name"), res.getString("phone_num"), res.getString("role")));
+                        res.getString("last_name"), res.getString("phone_num"), res.getString("role"), new ArrayList<>()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
