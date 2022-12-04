@@ -53,17 +53,6 @@ public class VehicleDB {
         return results;
     }
 
-    public static boolean isVinValid(String vin) {
-        String query = "SELECT 1 FROM vehicle WHERE vin = '" + vin + "' AND sold = '0'";
-        try {
-            ResultSet res = DatabaseConnector.executeQuery(query);
-            return res.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     public static Vehicle getVehicleByVin(String vin) {
         String make = "";
         String model = "";
@@ -87,10 +76,7 @@ public class VehicleDB {
         return new Vehicle(vin, make, model, year, style, color, 0, 0, false);
     }
 
-    public static void carSold(String vin) {
-        if (isVinValid(vin)) {
-            String query = "UPDATE dealership.vehicle SET sold = 1 WHERE vin = '" + vin + "'";
-            DatabaseConnector.executeUpdate(query);
-        }
+    public static void updateVehicleAsSold(String vin) {
+        DatabaseConnector.executeUpdate("UPDATE dealership.vehicle SET sold = 1 WHERE vin = '" + vin + "'");
     }
 }

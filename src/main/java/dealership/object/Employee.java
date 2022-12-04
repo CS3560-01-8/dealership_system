@@ -22,6 +22,7 @@ public class Employee extends Account {
     public void addSale(Sale pendingSale) {
         sales.add(pendingSale);
         SaleDB.writeSale(pendingSale);
+        pendingSale.getVehicle().sell();
     }
 
     public ArrayList<Sale> getSales() {
