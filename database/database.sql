@@ -80,9 +80,9 @@ DROP TABLE IF EXISTS `commission`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `commission` (
   `employee_email` varchar(45) NOT NULL,
-  `vin` varchar(45) DEFAULT NULL,
+  `vin` varchar(45) NOT NULL,
   `percentage` int DEFAULT NULL,
-  PRIMARY KEY (`employee_email`),
+  PRIMARY KEY (`employee_email`,`vin`),
   KEY `vin3_idx` (`vin`),
   CONSTRAINT `email3` FOREIGN KEY (`employee_email`) REFERENCES `employee` (`employee_email`),
   CONSTRAINT `vin3` FOREIGN KEY (`vin`) REFERENCES `sale` (`vin`)
@@ -221,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-03 16:49:41
+-- Dump completed on 2022-12-04  0:33:28
