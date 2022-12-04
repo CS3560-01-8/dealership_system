@@ -25,9 +25,13 @@ public class Sale {
         this.date = LocalDateTime.now();
         this.commissions = new ArrayList<>();
         this.customer = customer;
-        for (int i = 0; i < allSaleEmployees.size(); i++)
+        float totalWeights = 0;
+        for(Employee employee: allSaleEmployees){
+            totalWeights += Commission.weightMap.get(employee.getRole());
+        }
+        for (Employee employee: allSaleEmployees)
         {
-            this.commissions.add(new Commission(allSaleEmployees.get(i).getEmail(), vehicle.getVin(), 10));
+            this.commissions.add(new Commission(employee.getEmail(), vehicle.getVin(), Math.round(Commission.weightMap.get(employee.getRole()) / totalWeights * 15)));
         }
     }
 

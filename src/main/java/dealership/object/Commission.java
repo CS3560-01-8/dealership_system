@@ -1,5 +1,7 @@
 package dealership.object;
 
+import java.util.HashMap;
+
 public class Commission {
 
     private int percentage;
@@ -8,8 +10,15 @@ public class Commission {
 
     private String vin;
 
-    public Commission(String employeeEmail, String vin, int percentage) {
+    public static final HashMap<String, Integer> weightMap = new HashMap<String, Integer>(){
+            {
+                put("Sr Salesperson", 4);
+                put("Jr Salesperson", 2);
+                put("Manager", 1);
+            }
+    };
 
+    public Commission(String employeeEmail, String vin, int percentage) {
         this.percentage = percentage;
         this.employeeEmail = employeeEmail;
         this.vin = vin;
