@@ -9,6 +9,7 @@ import dealership.controller.SaleHandler;
 import dealership.controller.VehicleHandler;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class MakeSaleScreen1 extends javax.swing.JFrame {
@@ -303,7 +304,7 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
         }
 
         SaleHandler.startSale(Float.parseFloat(textAgreedPrice.getText()),
-                Float.parseFloat(textAgreedPrice.getText()) * 0.1f,textCardNumber.getText(), textCustomerEmail.getText());
+                Float.parseFloat(textAgreedPrice.getText()) * 0.1f,textCardNumber.getText(), textCustomerEmail.getText(), SaleHandler.getEmployeesInSale(panelEmployeeList));
 
         MakeSaleScreen2 employeeSelect = new MakeSaleScreen2(this, true);
         employeeSelect.getPreviousFrameLocation(this.getLocationOnScreen());

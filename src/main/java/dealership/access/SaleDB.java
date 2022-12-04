@@ -1,6 +1,7 @@
 package dealership.access;
 
 import dealership.db.DatabaseConnector;
+import dealership.object.Commission;
 import dealership.object.Sale;
 import dealership.access.CommissionDB;
 
@@ -38,11 +39,13 @@ public class SaleDB {
 
             while (res.next()) {
                 //TODO join with vehicle table so we don't make another query for each sale
-                sales.add(new Sale(VehicleDB.getVehicleByVin(res.getString("vin")),
+                sales.add(new Sale(CommissionDB.getCommissionsByVin(res.getString("vin")),
+                        VehicleDB.getVehicleByVin(res.getString("vin")),
                         res.getFloat("agreed_price"),
                         res.getFloat("tax"),
                         res.getString("card_num"),
                         AccountDB.getCustomer(res.getString("customer_email"))));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,6 +67,8 @@ public class SaleDB {
         System.out.println("sale not found!");
         return false;
     }
+
+
 
 
 }

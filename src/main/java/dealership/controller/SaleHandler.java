@@ -13,8 +13,8 @@ public class SaleHandler {
     private static ArrayList<Employee> employeesBesidesLoggedIn;
     private static Sale pendingSale;
 
-    public static void startSale(float agreedPrice, float tax, String cardNum, String customerEmail) {
-        pendingSale = new Sale(VehicleHandler.getSelectedVehicle(), agreedPrice, tax, cardNum, AccountDB.getCustomer(customerEmail));
+    public static void startSale(float agreedPrice, float tax, String cardNum, String customerEmail, ArrayList<Employee> allSaleEmployees) {
+        pendingSale = new Sale(VehicleHandler.getSelectedVehicle(), agreedPrice, tax, cardNum, AccountDB.getCustomer(customerEmail), allSaleEmployees);
     }
 
     public static void finalizeSale() {
@@ -42,7 +42,7 @@ public class SaleHandler {
         }
     }
 
-    private static ArrayList<Employee> getEmployeesInSale(JPanel listOtherEmployees) {
+    public static ArrayList<Employee> getEmployeesInSale(JPanel listOtherEmployees) {
         ArrayList<Employee> employeesInSale = new ArrayList<>();
         employeesInSale.add((Employee) AccountHandler.getLoggedInAccount());
         for (int i = 0; i < listOtherEmployees.getComponents().length; i++) {
