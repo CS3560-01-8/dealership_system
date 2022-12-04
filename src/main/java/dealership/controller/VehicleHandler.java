@@ -65,11 +65,11 @@ public class VehicleHandler {
         return getSelectedVehicle().toString();
     }
 
-    private static Vehicle getSelectedVehicle() {
-        return loadedVehicles.get(selectedIndex);
+    public static String getSelectedVehicleListingPrice() {
+        return "$" + getSelectedVehicle().getListingPrice();
     }
 
-    public static String getSelectedVehicleListingPrice() {
-        return "$" + loadedVehicles.get(selectedIndex).getListingPrice();
+    protected static Vehicle getSelectedVehicle() {
+        return loadedVehicles.get(selectedIndex);
     }
 }

@@ -5,25 +5,25 @@ import java.util.ArrayList;
 
 public class Sale {
 
-    private float agreedPrice;
-    private float tax;
-    private String cardNumber;
-    private String vin;
+    private final float agreedPrice;
+    private final float tax;
+    private final String cardNumber;
+    private final Vehicle vehicle;
     private final LocalDateTime date;
-    private ArrayList<Commission> commissions;
-    private Customer customer;
+    private final ArrayList<Commission> commissions;
+    private final Customer customer;
 
     public Customer getCustomer() {
         return customer;
     }
 
-    public Sale(String vin, float agreedPrice, float tax, String cardNumber, Customer customer) {
+    public Sale(Vehicle vehicle, float agreedPrice, float tax, String cardNumber, Customer customer) {
         this.agreedPrice = agreedPrice;
         this.tax = tax;
         this.cardNumber = cardNumber;
-        this.vin = vin;
-        date = LocalDateTime.now();
-        commissions = new ArrayList<Commission>();
+        this.vehicle = vehicle;
+        this.date = LocalDateTime.now();
+        this.commissions = new ArrayList<Commission>();
         this.customer = customer;
     }
 
@@ -43,8 +43,8 @@ public class Sale {
         return cardNumber;
     }
 
-    public String getVin() {
-        return vin;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     public ArrayList<Commission> getCommission() {

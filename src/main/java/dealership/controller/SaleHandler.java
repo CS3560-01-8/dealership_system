@@ -4,6 +4,7 @@ import dealership.access.*;
 import dealership.object.Customer;
 import dealership.object.Employee;
 import dealership.object.Sale;
+import dealership.object.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,22 +15,21 @@ public class SaleHandler {
     private static ArrayList<Employee> employeesBesidesLoggedIn;
     private static Sale currentSale;
 
-    public static void submitSale(String vin, float agreedPrice, float tax, String cardNum, String customerEmail) {
-        currentSale = new Sale(vin, agreedPrice, tax, cardNum, AccountDB.getCustomer(customerEmail));
+    public static void submitSale(float agreedPrice, float tax, String cardNum, String customerEmail) {
+        currentSale = new Sale(VehicleHandler.getSelectedVehicle(), agreedPrice, tax, cardNum, AccountDB.getCustomer(customerEmail));
     }
 
     public static Sale getSale() {
         return currentSale;
     }
 
-    public static boolean makeSale(String vin, float agreedPrice, float tax, String cardNum, Customer customer) {
-        if (!VehicleDB.isVinValid(vin)) return false;
-        SaleDB.writeSale(new Sale(vin, agreedPrice, tax, cardNum, customer));
+    public static boolean makeSale(Vehicle vehicle, float agreedPrice, float tax, String cardNum, Customer customer) {
+        SaleDB.writeSale(new Sale(vehicle, agreedPrice, tax, cardNum, customer));
         return true;
     }
 
     public static boolean makeCommission(Sale sale) {
-        if (!SaleDB.isSaleValid(sale.getVin())) {
+        if (!SaleDB.isSaleValid(sale.getVehicle().getVin())) {
             return false;
         }
         CommissionDB.writeCommissions(sale.getCommission());

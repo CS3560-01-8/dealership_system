@@ -15,7 +15,7 @@ public class SaleDB {
         String query = "INSERT INTO `dealership`.`sale` (`vin`, `agreed_price`, `tax`, `card_num`, `date`, `customer_email`) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = DatabaseConnector.getConnection().prepareStatement(query);
-            ps.setString(1, sale.getVin());
+            ps.setString(1, sale.getVehicle().getVin());
             ps.setFloat(2, sale.getAgreedPrice());
             ps.setFloat(3, sale.getTax());
             ps.setString(4, sale.getCardNumber());
@@ -37,7 +37,8 @@ public class SaleDB {
                     "WHERE commission.employee_email = '" + email + "' ORDER BY date");
 
             while (res.next()) {
-                sales.add(new Sale(res.getString("vin"),
+                //TODO join with vehicle table so we don't make another query for each sale
+                sales.add(new Sale(VehicleDB.getVehicleByVin(res.getString("vin")),
                         res.getFloat("agreed_price"),
                         res.getFloat("tax"),
                         res.getString("card_num"),
