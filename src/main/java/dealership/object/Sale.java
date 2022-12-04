@@ -11,14 +11,20 @@ public class Sale {
     private String vin;
     private final LocalDateTime date;
     private ArrayList<Commission> commissions;
+    private Customer customer;
 
-    public Sale(String vin, float agreedPrice, float tax, String cardNumber) {
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Sale(String vin, float agreedPrice, float tax, String cardNumber, Customer customer) {
         this.agreedPrice = agreedPrice;
         this.tax = tax;
         this.cardNumber = cardNumber;
         this.vin = vin;
         date = LocalDateTime.now();
         commissions = new ArrayList<Commission>();
+        this.customer = customer;
     }
 
     public void addCommission(Commission commission) {

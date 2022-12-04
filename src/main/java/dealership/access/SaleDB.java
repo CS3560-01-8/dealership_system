@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class SaleDB {
     public static void writeSale(Sale sale) {
 
-        String query = "INSERT INTO `dealership`.`sale` (`vin`, `agreed_price`, `tax`, `card_num`, `date`) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO `dealership`.`sale` (`vin`, `agreed_price`, `tax`, `card_num`, `date`, `customer_email`) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = DatabaseConnector.getConnection().prepareStatement(query);
             ps.setString(1, sale.getVin());
@@ -20,6 +20,7 @@ public class SaleDB {
             ps.setFloat(3, sale.getTax());
             ps.setString(4, sale.getCardNumber());
             ps.setObject(5, sale.getDate());
+            ps.setString(6, sale.getCustomer().getEmail());
             ps.execute();
 
             CommissionDB.writeCommissions(sale.getCommission());
@@ -28,7 +29,7 @@ public class SaleDB {
         }
     }
 
-    public static ArrayList<Sale> getSale() {
+    public static ArrayList<Sale> getSales() {
         ResultSet res = DatabaseConnector.executeQuery("SELECT * FROM sale");
         ArrayList<Sale> sales = new ArrayList<>();
         try {
@@ -36,7 +37,8 @@ public class SaleDB {
                 sales.add(new Sale(res.getString("vin"),
                         res.getFloat("agreed_price"),
                         res.getFloat("tax"),
-                        res.getString("card_num")));
+                        res.getString("card_num"),
+                        AccountDB.getCustomer(res.getString("customer_email"))));
             }
         } catch (SQLException e) {
             e.printStackTrace();

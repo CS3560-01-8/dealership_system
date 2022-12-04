@@ -365,7 +365,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void accountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButtonActionPerformed
         // TODO add your handling code here:
         if (AccountHandler.isLoggedIn()) {
-            if (JOptionPane.showConfirmDialog(null, "Are you sure to log out?", "Log Out", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", "Log Out", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 AccountHandler.tryLogout();
             } else {
                 return;
@@ -435,7 +435,7 @@ public class MainScreen extends javax.swing.JFrame {
         if (appointmentTable.getSelectedRow() == -1)
             JOptionPane.showMessageDialog(this, "Please click on an appointment first.", "No Appointment Selected", JOptionPane.ERROR_MESSAGE);
         else {
-            if(JOptionPane.showConfirmDialog(null, "Are you sure to delete this appointment?", "Delete Appointment", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "Are you sure to you want to delete this appointment?", "Delete Appointment", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 AccountHandler.deleteAppointment(appointmentTable.getSelectedRow());
                 AccountHandler.loadAppointmentsIntoTable((DefaultTableModel) appointmentTable.getModel());
                 JOptionPane.showMessageDialog(this, "Appointment has been deleted.", "Appointment Deleted", JOptionPane.INFORMATION_MESSAGE);

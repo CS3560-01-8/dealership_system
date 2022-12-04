@@ -67,7 +67,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES ('amiquelet7@bloglovin.com','WA1GFCFS7FR008229','2022-12-01 08:00:00'),('amiquelet7@bloglovin.com','WBAFR7C53BC601658','2022-12-02 08:00:00'),('austin@gmail.com','1G1BE5SM4J7104340','2022-12-07 08:00:00'),('austin@gmail.com','1G1PF5SC8C7118805','2022-12-10 10:00:00'),('austin@gmail.com','5TDYK3DCXFS578731','2022-12-01 16:00:00'),('austin@gmail.com','W1K6G7GB1MA054029','2022-12-01 15:00:00'),('austin@gmail.com','WBA4J1C56JBM11255','2022-12-03 08:00:00'),('austin@gmail.com','WBAPH5G51BNM79375','2022-12-06 08:00:00'),('austin@gmail.com','WDDUG8CB1FA136087','2022-12-01 17:00:00');
+INSERT INTO `appointment` VALUES ('amiquelet7@bloglovin.com','WA1GFCFS7FR008229','2022-12-01 08:00:00'),('amiquelet7@bloglovin.com','WBAFR7C53BC601658','2022-12-02 08:00:00'),('austin@gmail.com','1G1BE5SM4J7104340','2022-12-07 08:00:00'),('austin@gmail.com','5TDYK3DCXFS578731','2022-12-01 16:00:00'),('austin@gmail.com','W1K6G7GB1MA054029','2022-12-01 15:00:00'),('austin@gmail.com','WBA4J1C56JBM11255','2022-12-03 08:00:00'),('austin@gmail.com','WBAPH5G51BNM79375','2022-12-06 08:00:00'),('austin@gmail.com','WDDUG8CB1FA136087','2022-12-01 17:00:00');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,8 +161,12 @@ CREATE TABLE `sale` (
   `tax` float DEFAULT NULL,
   `card_num` varchar(45) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
+  `customer_email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`vin`),
-  KEY `vin_idx` (`vin`)
+  KEY `vin_idx` (`vin`),
+  KEY `email_idx` (`customer_email`),
+  CONSTRAINT `email4` FOREIGN KEY (`customer_email`) REFERENCES `customer` (`customer_email`),
+  CONSTRAINT `vin4` FOREIGN KEY (`vin`) REFERENCES `vehicle` (`vin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -172,7 +176,7 @@ CREATE TABLE `sale` (
 
 LOCK TABLES `sale` WRITE;
 /*!40000 ALTER TABLE `sale` DISABLE KEYS */;
-INSERT INTO `sale` VALUES ('1G1RC6E48FU129398',123145,55,'23146764','2022-12-03 12:45:48');
+INSERT INTO `sale` VALUES ('1G1RC6E48FU129398',123145,55,'23146764','2022-12-03 12:45:48',NULL);
 /*!40000 ALTER TABLE `sale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-03 13:22:10
+-- Dump completed on 2022-12-03 16:49:41
