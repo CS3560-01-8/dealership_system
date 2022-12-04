@@ -14,7 +14,7 @@ public class SaleHandler {
     private static Sale pendingSale;
 
     public static void startSale(float agreedPrice, float tax, String cardNum, String customerEmail, ArrayList<Employee> allSaleEmployees) {
-        pendingSale = new Sale(VehicleHandler.getSelectedVehicle(), agreedPrice, tax, cardNum, AccountDB.getCustomer(customerEmail), allSaleEmployees);
+        pendingSale = new Sale(VehicleHandler.getSelectedVehicle(), agreedPrice, tax, cardNum, AccountDB.getCustomerWithoutAppointments(customerEmail), allSaleEmployees);
     }
 
     public static void finalizeSale() {

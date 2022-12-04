@@ -1,9 +1,7 @@
 package dealership.access;
 
 import dealership.db.DatabaseConnector;
-import dealership.object.Commission;
 import dealership.object.Sale;
-import dealership.access.CommissionDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,8 +42,7 @@ public class SaleDB {
                         res.getFloat("agreed_price"),
                         res.getFloat("tax"),
                         res.getString("card_num"),
-                        AccountDB.getCustomer(res.getString("customer_email"))));
-
+                        AccountDB.getCustomerWithoutAppointments(res.getString("customer_email"))));
             }
         } catch (SQLException e) {
             e.printStackTrace();

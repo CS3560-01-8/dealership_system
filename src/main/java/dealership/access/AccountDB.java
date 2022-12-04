@@ -4,7 +4,6 @@ import dealership.db.DatabaseConnector;
 import dealership.object.Account;
 import dealership.object.Customer;
 import dealership.object.Employee;
-import dealership.object.Sale;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,7 +38,7 @@ public class AccountDB {
     public static Account getAccount(String email, String password) {
         Account account = null;
         if (accountRecordExists(email, password)) {
-            account = getCustomer(email);
+            account = getCustomerWithAppointments(email);
             if (account == null) {
                 account = getEmployee(email);
             }
@@ -47,7 +46,15 @@ public class AccountDB {
         return account;
     }
 
-    public static Customer getCustomer(String email) {
+    public static Customer getCustomerWithAppointments(String email) {
+        return getCustomer(email, true);
+    }
+
+    public static Customer getCustomerWithoutAppointments(String email) {
+        return getCustomer(email, false);
+    }
+
+    private static Customer getCustomer(String email, boolean withAppointments) {
         try {
             ResultSet res = DatabaseConnector.executeQuery(String.format("SELECT account.email, account.first_name, account.last_name, " +
                     "account.phone_num, customer.address FROM account JOIN customer ON customer.customer_email = account.email " +
@@ -55,7 +62,8 @@ public class AccountDB {
             if (res.next()) {
                 return new Customer(res.getString("email"), res.getString("first_name"),
                         res.getString("last_name"), res.getString("phone_num"),
-                        res.getString("address"), AppointmentDB.getAppointments(email));
+                        res.getString("address"),
+                        withAppointments ? AppointmentDB.getAppointments(email) : new ArrayList<>());
             }
         } catch (SQLException e) {
             e.printStackTrace();
