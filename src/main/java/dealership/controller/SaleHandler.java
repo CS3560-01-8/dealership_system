@@ -30,7 +30,9 @@ public class SaleHandler {
         employeesBesidesLoggedIn = AccountDB.getAllEmployeesBesides(AccountHandler.getLoggedInEmail());
         listOtherEmployees.setLayout(new GridLayout(0, 1));
         for (Employee employee : employeesBesidesLoggedIn) {
-            listOtherEmployees.add(new JCheckBox(employee.getName() + " (" + employee.getRole() + ")"));
+            JCheckBox checkBox = new JCheckBox(employee.getName() + " (" + employee.getRole() + ")");
+            checkBox.setFont(new java.awt.Font("Segoe UI", 0, 14));
+            listOtherEmployees.add(checkBox);
         }
     }
 
