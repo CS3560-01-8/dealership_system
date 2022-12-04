@@ -63,6 +63,7 @@ public class MakeAppointment extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("🚗 Schedule a Test Drive");
+        setResizable(false);
 
         cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cancelButton.setText("Cancel");

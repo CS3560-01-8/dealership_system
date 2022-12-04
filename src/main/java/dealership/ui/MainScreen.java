@@ -427,8 +427,10 @@ public class MainScreen extends javax.swing.JFrame {
                 return;
             }
         }
-        LoginScreen login = new LoginScreen();
-        login.getPreviousFrameLocation(this.getLocationOnScreen());
+        LoginFrame login = new LoginFrame();
+        Point location = this.getLocationOnScreen();
+        location.translate(210, 100);
+        login.getPreviousFrameLocation(location);
         login.setVisible(true);
         dispose();
 

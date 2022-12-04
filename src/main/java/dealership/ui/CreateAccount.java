@@ -330,7 +330,7 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        LoginScreen login = new LoginScreen();
+        LoginFrame login = new LoginFrame();
         login.getPreviousFrameLocation(this.getLocationOnScreen());
         login.setVisible(true);
         dispose();
