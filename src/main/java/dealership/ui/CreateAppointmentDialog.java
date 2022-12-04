@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author krist
  */
-public class MakeAppointment extends javax.swing.JDialog {
+public class CreateAppointmentDialog extends javax.swing.JDialog {
 
     private final JTable appointmentTable;
     
@@ -25,7 +25,7 @@ public class MakeAppointment extends javax.swing.JDialog {
      * @param parent Screen that JDialog is attached to
      * @param modal True if frame can be used while JDialog is in use, false otherwise
      */
-    public MakeAppointment(java.awt.Frame parent, boolean modal, JTable appointmentTable) {
+    public CreateAppointmentDialog(java.awt.Frame parent, boolean modal, JTable appointmentTable) {
         super(parent, modal);
         this.appointmentTable = appointmentTable;
         initComponents();

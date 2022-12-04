@@ -11,12 +11,12 @@ import dealership.controller.VehicleHandler;
 import java.awt.*;
 import javax.swing.*;
 
-public class MakeSaleScreen1 extends javax.swing.JFrame {
+public class CreateSaleFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MakeSaleScreen1
      */
-    public MakeSaleScreen1() {
+    public CreateSaleFrame() {
         initComponents();
         initVehicleDetails();
         SaleHandler.loadEmployeesIntoList(panelEmployeeList);
@@ -283,7 +283,7 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        MainScreen inv = new MainScreen();
+        MainFrame inv = new MainFrame();
         inv.getPreviousFrameLocation(this.getLocationOnScreen());
         inv.setVisible(true);
         dispose();
@@ -305,7 +305,7 @@ public class MakeSaleScreen1 extends javax.swing.JFrame {
         SaleHandler.startSale(Float.parseFloat(textAgreedPrice.getText()),
                 Float.parseFloat(textAgreedPrice.getText()) * 0.1f,textCardNumber.getText(), textCustomerEmail.getText(), SaleHandler.getEmployeesInSale(panelEmployeeList));
 
-        MakeSaleScreen2 employeeSelect = new MakeSaleScreen2(this, true);
+        ConfirmSaleDialog employeeSelect = new ConfirmSaleDialog(this, true);
         employeeSelect.getPreviousFrameLocation(this.getLocationOnScreen());
         employeeSelect.setVisible(true);
     }//GEN-LAST:event_submitButtonActionPerformed

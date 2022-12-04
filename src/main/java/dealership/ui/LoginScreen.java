@@ -170,7 +170,7 @@ public class LoginScreen extends javax.swing.JFrame {
         else {
             if (isValidEmail(emailInput.getText())) {
                 if (AccountHandler.tryLogin(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
-                    MainScreen ms = new MainScreen();
+                    MainFrame ms = new MainFrame();
                     ms.getPreviousFrameLocation(this.getLocationOnScreen());
                     ms.setVisible(true);
                     dispose();
@@ -183,7 +183,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        MainScreen ms = new MainScreen();
+        MainFrame ms = new MainFrame();
         ms.getPreviousFrameLocation(this.getLocationOnScreen());
         ms.setVisible(true);
         dispose();

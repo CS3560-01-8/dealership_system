@@ -13,12 +13,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MainScreen extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuScreen
      */
-    public MainScreen() {
+    public MainFrame() {
         initComponents();
         initInventory();
 
@@ -473,7 +473,7 @@ public class MainScreen extends javax.swing.JFrame {
         VehicleHandler.selectVehicle(inventoryTable.getSelectedRow());
 
         if (AccountHandler.isEmployee()) {
-            MakeSaleScreen1 sale1 = new MakeSaleScreen1();
+            CreateSaleFrame sale1 = new CreateSaleFrame();
             sale1.getPreviousFrameLocation(this.getLocationOnScreen());
             sale1.setVisible(true);
             dispose();
@@ -482,7 +482,7 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "You're already scheduled to test drive this vehicle!",
                         "Appointment Already Made", JOptionPane.ERROR_MESSAGE);
             } else {
-                MakeAppointment makeAppt = new MakeAppointment(this, true, appointmentTable);
+                CreateAppointmentDialog makeAppt = new CreateAppointmentDialog(this, true, appointmentTable);
                 makeAppt.setLocationRelativeTo(this);
                 makeAppt.setVisible(true);
             }

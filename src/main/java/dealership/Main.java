@@ -3,9 +3,8 @@ package dealership;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import dealership.db.DatabaseConnector;
-import dealership.ui.MainScreen;
+import dealership.ui.MainFrame;
 import javax.swing.*;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Main {
@@ -22,7 +21,7 @@ public class Main {
         } else {
             UIManager.setLookAndFeel(new FlatLightLaf());
         }
-        new MainScreen().setVisible(true);
+        new MainFrame().setVisible(true);
     }
 
 }

@@ -162,7 +162,7 @@ public class LoginFrame extends javax.swing.JFrame {
         else {
             if (isValidEmail(emailInput.getText())) {
                 if (AccountHandler.tryLogin(emailInput.getText(), valueOf(passwordInput.getPassword()))) {
-                    MainScreen ms = new MainScreen();
+                    MainFrame ms = new MainFrame();
                     Point location = this.getLocationOnScreen();
                     location.translate(-210, -100);
                     ms.getPreviousFrameLocation(location);
@@ -176,7 +176,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        MainScreen ms = new MainScreen();
+        MainFrame ms = new MainFrame();
         Point location = this.getLocationOnScreen();
         location.translate(-210, -100);
         ms.getPreviousFrameLocation(location);

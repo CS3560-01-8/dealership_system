@@ -317,7 +317,7 @@ public class CreateAccount extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Your account has been created.",
                             "Account Created", JOptionPane.INFORMATION_MESSAGE);
                     AccountHandler.tryLogin(emailInput.getText(), String.valueOf(passwordInput.getPassword()));
-                    MainScreen ms = new MainScreen();
+                    MainFrame ms = new MainFrame();
                     ms.getPreviousFrameLocation(this.getLocationOnScreen());
                     ms.setVisible(true);
                     dispose();
