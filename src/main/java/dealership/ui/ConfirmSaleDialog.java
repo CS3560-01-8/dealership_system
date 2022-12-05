@@ -74,7 +74,7 @@ public class ConfirmSaleDialog extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
         buttonConfirm = new javax.swing.JButton();
 
-        setTitle(" Finalize Sale");
+        setTitle("🚗 Finalize Sale");
         setResizable(false);
 
         saleDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sale Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N

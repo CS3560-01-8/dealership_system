@@ -38,6 +38,7 @@ public class MainFrame extends javax.swing.JFrame {
                 initAppointments();
             }
         } else {
+            //remove both appointments and sales tab
             jTabbedPane.removeTabAt(1);
             jTabbedPane.removeTabAt(1);
             statusLabel.setText("Not Logged In");
@@ -80,10 +81,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        //inventoryTable.getColumnModel().getColumn(0).setPreferredWidth(40);
-        //inventoryTable.getColumnModel().getColumn(4).setPreferredWidth(40);
-        //inventoryTable.getColumnModel().getColumn(5).setPreferredWidth(40);
-        //inventoryTable.getColumnModel().getColumn(6).setPreferredWidth(40);
         inventoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         inventoryTable.getTableHeader().setResizingAllowed(false);
         inventoryTable.getTableHeader().setReorderingAllowed(false);
@@ -246,25 +243,23 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInventoryLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(inventoryScrollPane)
                     .addGroup(jPanelInventoryLayout.createSequentialGroup()
                         .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(styleLabel)
-                            .addComponent(styleFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(makeLabel)
-                            .addComponent(makeFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modelLabel)
-                            .addComponent(modelFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(styleFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24)
                         .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelInventoryLayout.createSequentialGroup()
-                                .addComponent(colorLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(colorFilterOption, 0, 167, Short.MAX_VALUE)))
+                            .addComponent(makeFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(makeLabel))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modelLabel)
+                            .addComponent(modelFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addGroup(jPanelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(colorLabel)
+                            .addComponent(colorFilterOption, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(inventoryScrollPane)
                     .addGroup(jPanelInventoryLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(appointmentAndSaleButton)))

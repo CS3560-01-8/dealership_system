@@ -91,31 +91,28 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="inventoryScrollPane" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="styleLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="styleFilterOption" min="-2" pref="150" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="makeLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="makeFilterOption" min="-2" pref="154" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="modelLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="modelFilterOption" min="-2" pref="144" max="-2" attributes="0"/>
+                                  <Component id="styleFilterOption" min="-2" pref="156" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="colorLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="colorFilterOption" pref="167" max="32767" attributes="0"/>
+                                  <Component id="makeFilterOption" min="-2" pref="154" max="-2" attributes="0"/>
+                                  <Component id="makeLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="modelLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="modelFilterOption" min="-2" pref="156" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="24" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="colorLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="colorFilterOption" min="-2" pref="157" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="inventoryScrollPane" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="appointmentAndSaleButton" max="-2" attributes="0"/>

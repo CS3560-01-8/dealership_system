@@ -13,7 +13,7 @@ public class VehicleHandler {
 
     private static ArrayList<Vehicle> loadedVehicles;
     private static int selectedIndex = -1;
-    private static final VehicleFilter filter = new VehicleFilter();
+    private static VehicleFilter filter = new VehicleFilter();
 
     public static void loadVehiclesIntoTable(DefaultTableModel tableModel) {
         loadedVehicles = Vehicle.getAvailableVehicles(filter);
@@ -24,6 +24,7 @@ public class VehicleHandler {
     }
 
     public static void loadStylesIntoComboBox(JComboBox<String> comboBox) {
+        filter = new VehicleFilter(); //reset filter everytime mainframe is loaded
         ArrayList<String> styles = VehicleDB.getStyles();
         styles.add(0, "Any");
         comboBox.setModel(new DefaultComboBoxModel<>(new Vector<>(styles)));

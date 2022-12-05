@@ -4,11 +4,6 @@
  */
 package dealership.ui;
 
-;
-import dealership.controller.AccountHandler;
-
-import java.awt.Point;
-import javax.swing.JOptionPane;
 import dealership.controller.AccountHandler;
 import java.awt.Point;
 import javax.swing.JOptionPane;
@@ -27,7 +22,6 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         this.getRootPane().setDefaultButton(createAccountButton);
     }
 
-    // Gets previous frame's location on screen
     public void getPreviousFrameLocation(Point previous) {
         this.setLocation(previous);
     }
@@ -122,7 +116,6 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         return true;
     }
 
-    // Check first and last names to see if they are valid; true if correct, false otherwise
     private boolean isValidName(String firstName, String lastName) {
         if (!firstName.matches("^(?=.{1,40}$)[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$")) {
             JOptionPane.showMessageDialog(this, "First name contains numbers and/or symbols. Please retype first name.", "Format Error", JOptionPane.ERROR_MESSAGE);
@@ -136,8 +129,6 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         return true;
     }
 
-    // Check phone number; true if correct, false otherwise
-    // Check zip code; true if correct, false otherwise
     private boolean isValidZip(String zip) {
         if (!zip.matches("\\d{5}")) {
             JOptionPane.showMessageDialog(this, "Zip code is not in right format.Please retype zip code.", "Format Error", JOptionPane.ERROR_MESSAGE);
@@ -147,14 +138,11 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         return true;
     }
 
-    // Check zip code; true if correct, false otherwise
     private boolean isValidPhoneNo(String phoneNo) {
         if (!phoneNo.matches("\\d{10}")) {
             JOptionPane.showMessageDialog(this, "Phone number is not in right format. Please retype phone number.", "Format Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-
-
         return true;
     }
 
@@ -191,6 +179,7 @@ public class CreateAccountFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("🚗 Create Account");
+        setResizable(false);
 
         cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cancelButton.setText("Cancel");

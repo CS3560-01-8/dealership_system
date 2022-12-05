@@ -50,7 +50,7 @@ public class LoginFrame extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
         createAccountButton = new javax.swing.JButton();
 
-        setTitle("🚗 Car Dealership");
+        setTitle("🚗 Log In");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Welcome!", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 14))); // NOI18N
