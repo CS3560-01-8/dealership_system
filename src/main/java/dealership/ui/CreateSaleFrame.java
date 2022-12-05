@@ -26,6 +26,7 @@ public class CreateSaleFrame extends javax.swing.JFrame {
         textVehicle.setText(VehicleHandler.getSelectedVehicleDetails());
         textVIN.setText(VehicleHandler.getSelectedVehicleVin());
         textListingPrice.setText(VehicleHandler.getSelectedVehicleListingPrice());
+        textAgreedPrice.setText(textListingPrice.getText());
     }
     
     // Gets previous frame's location on screen
@@ -293,15 +294,24 @@ public class CreateSaleFrame extends javax.swing.JFrame {
             return;
         }
 
-        //TODO more input validation
-
         if (!AccountHandler.customerExists(textCustomerEmail.getText())) {
             JOptionPane.showMessageDialog(this, "A customer with that email does not exist!", "Customer Not Found", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        SaleHandler.startSale(Float.parseFloat(textAgreedPrice.getText()),
-                Float.parseFloat(textAgreedPrice.getText()) * 0.1f,textCardNumber.getText(), textCustomerEmail.getText(), SaleHandler.getEmployeesInSale(panelEmployeeList));
+        if(!textCardNumber.getText().matches("\\d{16}")){
+            JOptionPane.showMessageDialog(this, "Please check your card number!", "Invalid Card Number", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if(!textAgreedPrice.getText().matches("^(\\$)?\\d+(.\\d{1,2})?")){
+            JOptionPane.showMessageDialog(this, "Please check your price!", "Invalid Price", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        float agreedPrice = Float.parseFloat(textAgreedPrice.getText().replace("$", ""));
+
+        SaleHandler.startSale(agreedPrice, agreedPrice * 0.1f,textCardNumber.getText(), textCustomerEmail.getText(), SaleHandler.getEmployeesInSale(panelEmployeeList));
 
         ConfirmSaleDialog employeeSelect = new ConfirmSaleDialog(this, true);
         employeeSelect.getPreviousFrameLocation(this.getLocationOnScreen());
