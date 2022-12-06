@@ -36,12 +36,12 @@ public class Sale {
         }
     }
 
-    public Sale(ArrayList<Commission> commissions, Vehicle vehicle, float agreedPrice, float tax, String cardNumber, Customer customer){
+    public Sale(ArrayList<Commission> commissions, LocalDateTime date, Vehicle vehicle, float agreedPrice, float tax, String cardNumber, Customer customer){
         this.agreedPrice = agreedPrice;
         this.tax = tax;
         this.cardNumber = cardNumber;
         this.vehicle = vehicle;
-        this.date = LocalDateTime.now();
+        this.date = date;
         this.customer = customer;
         this.commissions = commissions;
     }

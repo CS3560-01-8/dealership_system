@@ -7,6 +7,7 @@ import dealership.object.Vehicle;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class SaleDB {
@@ -40,6 +41,7 @@ public class SaleDB {
 
             while (res.next()) {
                 sales.add(new Sale(CommissionDB.getCommissionsByVin(res.getString("vin")),
+                        res.getObject("date", LocalDateTime.class),
                         new Vehicle(res.getString("vin"), res.getString("make"),
                                 res.getString("model"), res.getInt("year"),
                                 res.getString("style"), res.getString("color"),
