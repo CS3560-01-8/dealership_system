@@ -21,6 +21,9 @@ public class VehicleHandler {
         for (Vehicle loadedVehicle : loadedVehicles) {
             tableModel.addRow(loadedVehicle.getRowData());
         }
+        if (loadedVehicles.isEmpty()) {
+            tableModel.addRow(new Object[] {"No results"});
+        }
     }
 
     public static void loadStylesIntoComboBox(JComboBox<String> comboBox) {
