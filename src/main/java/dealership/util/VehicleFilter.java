@@ -2,7 +2,7 @@ package dealership.util;
 
 public class VehicleFilter {
 
-    private int sold;
+    private final int sold;
     private String style;
     private String make;
     private String model;
@@ -17,7 +17,7 @@ public class VehicleFilter {
         this.make = "Any";
         this.model = "Any";
         this.color = "Any";
-        this.sortBy = "make";
+        this.sortBy = "make, model";
         this.ascendingOrder = true;
     }
 
