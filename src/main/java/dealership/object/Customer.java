@@ -1,5 +1,6 @@
 package dealership.object;
 
+import dealership.access.AccountDB;
 import dealership.access.AppointmentDB;
 
 import java.time.LocalDateTime;
@@ -46,5 +47,9 @@ public class Customer extends Account {
             }
         }
         return false;
+    }
+
+    public static boolean exists(String email) {
+        return AccountDB.customerRecordExists(email);
     }
 }

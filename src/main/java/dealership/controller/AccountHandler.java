@@ -14,7 +14,7 @@ public class AccountHandler {
     private static Account loggedInAccount;
 
     public static boolean createCustomerAccount(String email, String password, String firstName, String lastName, String phoneNum, String address) {
-        if (Customer.exists(email)) {
+        if (accountExists(email)) {
             return false;
         }
         //TODO fix direct call to DB with Customer object?
@@ -24,6 +24,10 @@ public class AccountHandler {
 
     public static boolean customerExists(String email) {
         return Customer.exists(email);
+    }
+
+    public static boolean accountExists(String email) {
+        return Account.exists(email);
     }
 
     public static boolean tryLogin(String email, String password) {

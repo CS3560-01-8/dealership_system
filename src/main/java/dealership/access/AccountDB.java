@@ -35,6 +35,10 @@ public class AccountDB {
         return false;
     }
 
+    public static boolean customerRecordExists(String email) {
+        return DatabaseConnector.tableContainsRow("customer", "customer_email", email);
+    }
+
     public static Account getAccount(String email, String password) {
         Account account = null;
         if (accountRecordExists(email, password)) {

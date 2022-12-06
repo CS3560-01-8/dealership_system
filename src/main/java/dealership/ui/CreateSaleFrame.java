@@ -295,7 +295,7 @@ public class CreateSaleFrame extends javax.swing.JFrame {
         }
 
         if (!AccountHandler.customerExists(textCustomerEmail.getText())) {
-            JOptionPane.showMessageDialog(this, "A customer with that email does not exist!", "Customer Not Found", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "A customer account with that email does not exist!", "Customer Not Found", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
