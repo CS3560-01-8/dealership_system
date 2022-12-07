@@ -101,7 +101,7 @@ public class ConfirmSaleDialog extends javax.swing.JDialog {
         textTax.setEnabled(false);
 
         labelTax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelTax.setText("Tax");
+        labelTax.setText("Tax (10%)");
 
         textTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textTotal.setEnabled(false);
@@ -228,6 +228,9 @@ public class ConfirmSaleDialog extends javax.swing.JDialog {
                     .addComponent(textTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
+
+        labelTax.getAccessibleContext().setAccessibleName("Tax (10%)");
+        labelTax.getAccessibleContext().setAccessibleDescription("");
 
         cancelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cancelButton.setText("Cancel");
